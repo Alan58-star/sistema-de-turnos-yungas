@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "prototipo-turnos-web": {
+    "sistema-de-turnos-hdlh": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/prototipo-turnos-web",
+            "outputPath": "dist/sistema-de-turnos-hdlh",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -59,10 +59,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "prototipo-turnos-web:build:production"
+              "buildTarget": "sistema-de-turnos-hdlh:build:production"
             },
             "development": {
-              "buildTarget": "prototipo-turnos-web:build:development"
+              "buildTarget": "sistema-de-turnos-hdlh:build:development"
             }
           },
           "defaultConfiguration": "development"
