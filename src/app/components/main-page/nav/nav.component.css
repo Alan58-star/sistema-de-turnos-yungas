@@ -42,9 +42,11 @@ nav {
 }
 
 .turno-button {
+    border-radius: 15px;
+    
     outline: solid 8px #fff;
     outline-offset: -8px;
-    border-radius: 15px;
+    
     background-color: #ffcd35;
     color: var(--negro);
 }
@@ -101,12 +103,14 @@ nav {
     }
 
     .nav-item{
-        outline: none;
         border-radius: 0;
+
+        outline: none;
     }
 
     nav {
         padding: 5px;
+        
         font-size: 18px;
     }
 }
@@ -125,6 +129,7 @@ nav {
 @media(min-width: 1280px) {
     .nav-item {
         padding: 1.5rem 1.2rem;
+
         font-size: 18px;
     }
 }

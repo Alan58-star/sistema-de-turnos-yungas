@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { OptionCardComponent } from './option-card/option-card.component';
+import { OptionCardComponent } from '../../ui/option-card/option-card.component';
 
 @Component({
   selector: 'app-body',
