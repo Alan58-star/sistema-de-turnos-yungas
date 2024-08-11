@@ -37,11 +37,6 @@ nav {
 }
 
 .turno-button {
-    background-color: #ffcd35;
-    color: var(--negro);
-}
-
-.turno-button {
     border-radius: 15px;
     
     outline: solid 8px #fff;
@@ -54,7 +49,6 @@ nav {
 .turno-button:hover {
     background-color: #ffb235;
 }
-
 /* Estilos exclusivos para el nav en pantallas chicas */
 
 .mobile-nav {

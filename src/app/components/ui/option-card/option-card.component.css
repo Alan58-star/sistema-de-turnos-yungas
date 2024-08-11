@@ -8,6 +8,11 @@
     color: var(--negro);
 }
 
+.option-card:hover{
+    outline: solid 10px;
+    outline-offset: 8px;
+}
+
 .option-title-container{
     background-color: #5001;
     padding: 0.5rem;
