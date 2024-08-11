@@ -1,0 +1,30 @@
+@import '../../../app.component.css';
+
+
+footer{
+    width: 100%;
+    padding: 2rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    align-items: center;
+    
+    background-color: var(--verde);
+    
+    text-align: center;
+}
+
+footer *{
+    color: #fff;
+    padding: .5rem;
+}
+
+
+@media(min-width: 1280px) {
+    footer{
+        padding: 2rem;
+        flex-direction: row;
+        justify-content: space-center;
+        gap: 0;
+    }
+}
