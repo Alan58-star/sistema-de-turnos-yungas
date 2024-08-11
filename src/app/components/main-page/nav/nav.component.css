@@ -1,0 +1,130 @@
+@import '../../../app.component.css';
+
+nav {
+    background-color: #fff;
+    box-shadow: 0 5px 10px #3584;
+}
+
+.nav-items-list {
+    width: 100%;
+}
+
+.nav-item {
+    padding: 1.2rem 1.2rem;
+    width: 100%;
+    outline: solid 8px #fff;
+    outline-offset: -8px;
+    border-radius: 15px;
+
+    background-color: #fff;
+    color: var(--azul);
+
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.nav-item:hover{
+    background-color: #3584;
+}
+
+.login-button {
+    color: var(--verde);
+}
+
+.login-button:hover {
+    background-color: var(--verde);
+    color: var(--negro);
+}
+
+.turno-button {
+    background-color: #ffcd35;
+    color: var(--negro);
+}
+
+.turno-button {
+    outline: solid 8px #fff;
+    outline-offset: -8px;
+    border-radius: 15px;
+    background-color: #ffcd35;
+    color: var(--negro);
+}
+
+.turno-button:hover {
+    background-color: #ffb235;
+}
+
+/* Estilos exclusivos para el nav en pantallas chicas */
+
+.mobile-nav {
+    position: sticky;
+}
+
+.hidden {
+    display: none;
+}
+
+.nav-header {
+    width: 100%;
+}
+
+.menu-button {
+    margin: 5px;
+    padding: 0.8rem 1.3rem;
+    width: auto;
+
+    border: solid 2px var(negro);
+
+    background-color: var(--verde);
+    color: #fff;
+
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 800;
+}
+
+.menu-button:active {
+    background-color: #3584;
+}
+
+/* Estilos exclusivos para el nav en pantallas medianas y grandes */
+.widescreen-nav {
+    gap: 5%;
+}
+
+@media (max-width: 768px) {
+    .widescreen-nav {
+        display: none;
+    }
+
+    .mobile-nav {
+        display: flex;
+    }
+
+    .nav-item{
+        outline: none;
+        border-radius: 0;
+    }
+
+    nav {
+        padding: 5px;
+        font-size: 18px;
+    }
+}
+
+@media(min-width: 768px) {
+    .widescreen-nav {
+        display: flex;
+    }
+
+    .mobile-nav {
+        display: none;
+    }
+}
+
+
+@media(min-width: 1280px) {
+    .nav-item {
+        padding: 1.5rem 1.2rem;
+        font-size: 18px;
+    }
+}

@@ -1,0 +1,26 @@
+<nav>
+    <div class="mobile-nav flex-column">
+        <div class="flex-row nav-header">
+            <div class="logo">Logo del Hospital</div>
+            <button class="menu-button" (click)="toggleMenu()">MENÚ</button>
+        </div>
+        <div class="mobile-menu" [ngClass]="{'hidden': isNavMenuHidden}">
+            <div class="nav-items-list flex-column">
+                <button class="nav-item turno-button">PEDIR TURNO</button>
+                <button class="nav-item">Example Item</button>
+                <button class="nav-item">Example Item</button>
+                <button class="nav-item login-button">Iniciar Sesión</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="widescreen-nav flex-row">
+        <div class="logo">Logo del Hospital</div>
+        <div class="nav-items-list flex-row">
+            <button class="nav-item turno-button">PEDIR TURNO</button>
+            <button class="nav-item">Example Item</button>
+            <button class="nav-item">Example Item</button>
+            <button class="nav-item login-button">Iniciar Sesión</button>
+        </div>
+    </div>
+</nav>
