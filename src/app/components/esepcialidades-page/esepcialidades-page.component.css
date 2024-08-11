@@ -1,0 +1,73 @@
+h1{
+    padding: 2rem 2rem 2rem;
+    margin-top: 2rem;
+
+    font-size: 36px;
+    text-align: center;
+}
+
+.especialidades-container{
+    padding: 1.3rem;
+}
+
+.option-pill{
+    padding: 1.3rem;
+    margin-bottom: 1.3rem;
+
+    background-color: var(--verde);
+    border-radius: 10px;
+
+}
+
+.option-pill:hover{
+    outline: solid 6px var(--verde);
+    outline-offset: 6px;
+}
+
+.return-button{
+    margin: 1.3rem;
+    padding: 1rem;
+    width: 200px;
+
+    background-color: #ff4470;
+    color: #fff;
+
+    font-weight: 800;
+    font-size: 20px;
+}
+
+.return-button:hover{
+    outline-color: #ff4470;
+}
+
+.especialidad-title{
+    color: #fff;
+
+    font-size: 24px;
+    font-weight: 600;
+}
+
+@media (min-width: 768px){
+    .especialidades-container{
+        display:flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        gap: 1rem;
+    }
+    .option-pill{
+        margin-bottom: 0;
+        flex-grow: 1;
+        flex-basis: 40%;
+    }
+}
+
+@media (min-width: 1280px){
+    .especialidades-container{
+        padding: 2rem 16rem 2rem;
+        gap: 2rem;
+    }
+    .option-pill{
+        flex-grow: 2;
+        flex-basis: 20%;
+    }
+}
