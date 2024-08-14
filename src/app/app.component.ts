@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterLink, RouterLinkActive, RouterModule, RouterOutlet } from '@angular/router';
 import { NavComponent } from './components/main-page/nav/nav.component';
 import { FooterComponent } from './components/main-page/footer/footer.component';
 import { BodyComponent } from './components/main-page/body/body.component';
@@ -9,7 +9,10 @@ import { EsepcialidadesPageComponent } from "./components/esepcialidades-page/es
   selector: 'app-root',
   standalone: true,
   imports: [
+    RouterModule,
     RouterOutlet,
+    RouterLink,
+    RouterLinkActive,
     NavComponent,
     BodyComponent,
     FooterComponent,
