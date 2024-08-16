@@ -1,12 +1,14 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NavComponent } from "../main-page/nav/nav.component";
 
 @Component({
   selector: 'app-esepcialidades-page',
   standalone: true,
   imports: [
     CommonModule,
-  ],
+    NavComponent
+],
   templateUrl: './esepcialidades-page.component.html',
   styleUrl: './esepcialidades-page.component.css'
 })

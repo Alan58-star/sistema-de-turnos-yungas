@@ -1,11 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
 
 :root {
-    --celeste: #669fed;
-    --azul: #2f1d89;
-    --amarillo: ##ffcd35;
-    --verde: #27cf67;
     --negro: #232323;
+    --gris: #dadae3;
+    --azul: #2f1d89;
+    --celeste: #669fed;
+    --verde: #27cf67;
+    --amarillo: ##ffcd35;
+    --rojo: #ff4470;
 }
 
 * {
@@ -41,6 +43,94 @@ button {
     align-items: center;
 }
 
+.search-bar{
+    margin: auto;
+    padding: 1rem;
+    width: 50%;
+    gap: 10px;
+}
+
+.search-bar input{
+    padding: .5rem .8rem;
+
+    border: solid 1px var(--gris);
+    border-radius: 10px;
+
+    font-size: 18px;
+}
+
+.search-bar input:hover{
+    outline: solid 3px #eaeaef;
+    outline-offset: -3px;
+}
+
+.search-bar input:focus{
+    outline: solid 3px var(--celeste);
+}
+
+.search-bar button{
+    width: 10%;
+    background-color: var(--celeste);
+}
+
+.admin-page{    
+    margin: auto;
+    width: 60%;
+}
+
+/* Clases para botones genéricos */
+
+.option-pill{
+    padding: 1.3rem;
+    margin-bottom: 1.3rem;
+
+    background-color: var(--gris);
+    border-radius: 10px;
+
+}
+
+.option-pill:hover{
+    outline: solid 6px var(--gris);
+    outline-offset: 6px;
+}
+
+
+.green-button{
+    background-color:var(--verde);
+    color: #fff;
+}
+
+.green-button:hover{
+    outline-color: var(--verde);
+}
+
+.red-button{
+    background-color:var(--rojo);
+    color: #fff;
+}
+
+.red-button:hover{
+    outline-color: var(--rojo);
+}
+
+.blue-button{
+    background-color:var(--celeste);
+}
+
+.blue-button:hover{
+    outline-color: var(--celeste);
+}
+
+.yellow-button{
+    background-color:var(--amarillo);
+}
+
+.yellow-button:hover{
+    outline-color: var(--amarillo);
+}
+
+
+/* Animación de carga (fundido) */
 body * {
     animation: fadeInAnimation cubic-bezier(0.075, 0.82, 0.165, 1) 0.7s;
     animation-iteration-count: 1;
@@ -54,5 +144,12 @@ body * {
 
     100% {
         opacity: 1;
+    }
+}
+
+/* Media queries */
+@media (max-width: 1024px){
+    .admin-page{
+        width: 90%;
     }
 }

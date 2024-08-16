@@ -1,0 +1,49 @@
+@import url(../main-page/nav/nav.component.css);
+
+h1{
+    font-size: 64px;
+    padding: 1rem 0;
+    font-weight: 800;
+}
+
+
+.title-container{
+    padding: 2rem;
+    text-align: center;
+}
+
+.menus{
+    padding: 2rem 0;
+    gap:10%
+}
+
+.menu-box{
+    padding:3rem;
+
+    border: solid 1px var(--gris);
+    border-radius: 10px;
+    box-shadow: 0 0 10px 10px #fafafa;
+}
+
+.menu-title{
+    padding: 0 0 2rem;
+
+    font-size: 36px;
+    font-weight: 800;
+    text-align: center;
+}
+
+.user-label{
+    text-align: center;
+    margin: auto 0;
+}
+
+.flex-row{
+    justify-content: space-between;
+}
+
+.logout-button{
+    width: 30%;
+    background-color: #ffd8df;
+    margin-left: auto;
+}

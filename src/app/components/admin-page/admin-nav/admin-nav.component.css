@@ -1,0 +1,16 @@
+@import url(../../main-page/nav/nav.component.css);
+
+.user-label{
+    text-align: center;
+    margin: auto 0;
+}
+
+.flex-row{
+    justify-content: space-between;
+}
+
+.logout-button{
+    width: 30%;
+    background-color: #ffd8df;
+    margin-left: auto;
+}

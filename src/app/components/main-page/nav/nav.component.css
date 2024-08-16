@@ -1,5 +1,3 @@
-@import '../../../app.component.css';
-
 nav {
     background-color: #fff;
     box-shadow: 0 5px 10px #3584;
@@ -34,6 +32,15 @@ nav {
 .login-button:hover {
     background-color: var(--verde);
     color: var(--negro);
+}
+
+.logout-button {
+    color: var(--rojo);
+}
+
+.logout-button:hover {
+    background-color: var(--rojo);
+    color: #fff;
 }
 
 .turno-button {
