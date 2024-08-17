@@ -49,12 +49,12 @@ nav {
     outline: solid 8px #fff;
     outline-offset: -8px;
     
-    background-color: #ffcd35;
+    background-color: var(--amarillo);
     color: var(--negro);
 }
 
 .turno-button:hover {
-    background-color: #ffb235;
+    background-color: var(--naranja);
 }
 /* Estilos exclusivos para el nav en pantallas chicas */
 

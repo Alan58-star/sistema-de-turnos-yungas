@@ -48,18 +48,6 @@ tr:hover td{
     box-shadow: 0 0 10px 10px #fafafa;
 }
 
-.option-pill{
-    font-weight: 600;
-}
-
-.yellow-button{
-    background-color: #ffcd35;
-}
-
-.yellow-button:hover{
-    outline-color: #ffcd35;
-}
-
 .actions-cell{
     background-color: #fafafa;
     width: 30%;

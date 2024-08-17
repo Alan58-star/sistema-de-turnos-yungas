@@ -1,0 +1,41 @@
+h1{
+    font-size: 48px;
+    margin-top: 2rem;
+    padding: 1rem;
+    font-weight: 800;
+}
+
+form{
+    margin: 2rem auto;
+    padding: 3rem 4rem;
+    width: 70%;
+
+    border: solid 1px var(--gris);
+    border-radius: 10px;
+    box-shadow: 0 0 10px 10px #fafafa;
+}
+
+input{
+    margin: .5rem 0 2rem;
+}
+
+button{
+    margin: 0 auto;
+    width: 200px;
+}
+
+.small-button{
+    margin:3rem 3rem 3rem;
+    margin-left: auto;
+    width: 200px;
+}
+
+@media (max-width:1360px){
+    .admin-page{
+        width: 80%;
+    }
+
+    form{
+        width:62%;
+    }
+}
