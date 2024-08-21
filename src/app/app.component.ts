@@ -9,6 +9,7 @@ import { MedicosListComponent } from "./components/admin-page/medicos-list/medic
 import { UsuariosListComponent } from './components/admin-page/usuarios-list/usuarios-list.component';
 import { OptionCardComponent } from "./components/ui/option-card/option-card.component";
 import { MedicoFormComponent } from "./components/admin-page/medico-form/medico-form.component";
+import { SecretariaPageComponent } from "./components/secretaria-page/secretaria-page.component";
 
 @Component({
   selector: 'app-root',
@@ -26,7 +27,8 @@ import { MedicoFormComponent } from "./components/admin-page/medico-form/medico-
     MedicosListComponent,
     UsuariosListComponent,
     OptionCardComponent,
-    MedicoFormComponent
+    MedicoFormComponent,
+    SecretariaPageComponent
 ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
