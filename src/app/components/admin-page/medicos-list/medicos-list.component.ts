@@ -1,11 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { AdminNavComponent } from "../admin-nav/admin-nav.component";
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-medicos-list',
   standalone: true,
-  imports: [CommonModule, AdminNavComponent],
+  imports: [CommonModule, AdminNavComponent, RouterLink],
   templateUrl: './medicos-list.component.html',
   styleUrl: './medicos-list.component.css'
 })

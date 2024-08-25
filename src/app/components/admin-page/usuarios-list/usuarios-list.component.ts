@@ -1,11 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { AdminNavComponent } from "../admin-nav/admin-nav.component";
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-usuarios-list',
   standalone: true,
-  imports: [CommonModule, AdminNavComponent],
+  imports: [CommonModule, AdminNavComponent, RouterLink],
   templateUrl: './usuarios-list.component.html',
   styleUrl: './usuarios-list.component.css'
 })
