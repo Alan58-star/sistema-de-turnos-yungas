@@ -171,7 +171,7 @@ input::-webkit-inner-spin-button {
 
 /* Animación de carga (fundido) */
 body * {
-    animation: fadeInAnimation cubic-bezier(0.075, 0.82, 0.165, 1) 0.7s;
+    animation: fadeInAnimation cubic-bezier(0.075, 0.82, 0.165, 1) 0.5s;
     animation-iteration-count: 1;
     animation-fill-mode: forwards;
 }
