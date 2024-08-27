@@ -5,6 +5,8 @@ import { AdminPageComponent } from './components/admin-page/admin-page.component
 import { MedicosListComponent } from './components/admin-page/medicos-list/medicos-list.component';
 import { MedicoFormComponent } from './components/admin-page/medico-form/medico-form.component';
 import { UsuariosListComponent } from './components/admin-page/usuarios-list/usuarios-list.component';
+import { LoginComponent } from './components/login/login.component';
+import { RecoverPasswordComponent } from './components/login/recover-password/recover-password.component';
 
 export const routes: Routes = [
     {path: '', component:BodyComponent},
@@ -13,5 +15,6 @@ export const routes: Routes = [
     {path: 'medico-list', component:MedicosListComponent},
     {path: 'medico-form', component:MedicoFormComponent},
     {path: 'usuario-list', component:UsuariosListComponent},
-
+    {path: 'login', component:LoginComponent},
+    {path: 'recover-password', component:RecoverPasswordComponent}
 ];
