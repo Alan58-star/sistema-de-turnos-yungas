@@ -8,6 +8,8 @@ import { UsuariosListComponent } from './components/admin-page/usuarios-list/usu
 import { LoginComponent } from './components/login/login.component';
 import { RecoverPasswordComponent } from './components/login/recover-password/recover-password.component';
 import { SecretariaPageComponent } from './components/secretaria-page/secretaria-page.component';
+import { FormTurnoComponent } from './components/form-turno/form-turno.component';
+import { RegistroComponent } from './components/registro/registro.component';
 
 export const routes: Routes = [
     {path: '', component:BodyComponent},
@@ -19,4 +21,6 @@ export const routes: Routes = [
     {path: 'login', component:LoginComponent},
     {path: 'recover-password', component:RecoverPasswordComponent},
     {path: 'secretaria', component:SecretariaPageComponent},
+    {path: 'form-turno', component:FormTurnoComponent},
+    {path: 'registro', component:RegistroComponent},
 ];

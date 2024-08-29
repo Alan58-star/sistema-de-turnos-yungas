@@ -1,0 +1,29 @@
+<button class="option-pill-access red-button-access return" routerLink="">< Volver al inicio</button>
+
+<div class="login-page">
+    <div class="flex-column">
+        <h1>Crear Cuenta</h1>
+        <span class="subtext">Si ya posee una cuenta, <a href="/login">inicie sesión aquí.</a></span>
+    </div>
+    <form action="#" class="form">
+        <h2>Datos Personales</h2>
+        <label for="user-dni">DNI</label>
+        <input type="number" name="user-dni" id="user-dni" required>
+        <p>hay manera de sacar el nombre completo con el DNI?</p>
+
+        <hr>
+        <h2>Datos de Contacto</h2>
+        <label for="telefono">Número de Teléfono <br><small style="color: var(--verde); font-size: 14px; font-weight: 400;">(Los turnos se notificarán a este número)</small></label>
+        <input type="number" name="telefono" id="telefono" required>
+
+        <hr>
+        <h2>Datos de Usuario</h2>
+        <label for="user-pass">Contraseña</label>
+        <input type="password" name="user-pass" id="user-pass" required>
+        <label for="user-pass">Repita la contraseña</label>
+        <input type="password" name="user-pass" id="user-pass" required>
+        <div class="flex-row">
+            <button class="option-pill-access green-button-access">Crear Cuenta</button>
+        </div>
+    </form>
+</div>

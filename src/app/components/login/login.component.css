@@ -25,6 +25,11 @@ input{
     font-size: 16px;
 }
 
+.subtext{
+    width: 100%;
+    text-align: center;
+}
+
 .form{
     width: 90%;
     padding: 2rem;
@@ -68,7 +73,7 @@ input{
     }
 
     .login-page{
-        margin: 100px 0;
+        margin: 20px 0;
     }
 
     .return{

@@ -6,38 +6,10 @@ h1{
     text-align: center;
 }
 
-.especialidades-container{
-    padding: 1.3rem;
-}
-
-.option-pill{
-    padding: 1.3rem;
-    margin-bottom: 1.3rem;
-
-    background-color: var(--verde);
-    border-radius: 10px;
-
-}
-
-.option-pill:hover{
-    outline: solid 6px var(--verde);
-    outline-offset: 6px;
-}
-
 .return-button{
     margin: 1.3rem;
     padding: 1rem;
     width: 200px;
-
-    background-color: #ff4470;
-    color: #fff;
-
-    font-weight: 800;
-    font-size: 20px;
-}
-
-.return-button:hover{
-    outline-color: #ff4470;
 }
 
 .especialidad-title{

@@ -26,6 +26,11 @@
     transition: all 0.4s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
+a{
+    color: var(--verde);
+    font-weight: 600;
+}
+
 ul li{
     list-style: none;
 }
@@ -57,11 +62,11 @@ button {
 }
 
 
-input{
+input, select{
     margin: .5rem 0 2rem;
 }
 
-input[type=text], input[type=number], input[type=password]{
+input[type=text], input[type=number], input[type=password], select{
     padding: .5rem .8rem;
 
     border: solid 1px var(--gris);
@@ -77,6 +82,10 @@ input[type=text]:hover, input[type=number]:hover, input[type=password]:hover{
 
 input[type=text]:focus, input[type=number]:focus, input[type=password]:focus{
     outline: solid 3px var(--celeste);
+}
+
+select:focus{
+    outline: solid 3px var(--gris);
 }
 
 input[type="date"]{
