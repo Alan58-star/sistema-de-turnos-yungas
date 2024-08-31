@@ -9,8 +9,8 @@
                 <h2>Seleccione un médico</h2>
                 <div class="card-container">
                     <div *ngFor="let medico of medicos" class="card">
-                        <label for="{{medico.id}}">
-                            <input type="radio" name="medico" id="{{medico.id}}" class="card-input-element" />
+                        <label for="medico.{{medico.id}}">
+                            <input type="radio" name="medico" id="medico.{{medico.id}}" class="card-input-element" />
                             <div class="card-input">
                                 <div class="turno-titulo-text">{{medico.genero}} {{medico.nombre}}</div>
                                 <div class="turno-text">
@@ -24,8 +24,8 @@
                 <h2>Seleccione un turno</h2>
                 <div class="card-container">
                     <div *ngFor="let turno of turnos" class="card">
-                        <label for="{{turno.idTurno}}">
-                            <input type="radio" name="turno" id="{{turno.idTurno}}" class="card-input-element" />
+                        <label for="turno.{{turno.idTurno}}">
+                            <input type="radio" name="turno" id="turno.{{turno.idTurno}}" class="card-input-element" />
                             <div class="card-input">
                                 <ul>
                                     <li class="turno-titulo-text"> {{turno.fecha}}, a las {{turno.hora}} </li>

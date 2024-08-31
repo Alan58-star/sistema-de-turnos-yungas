@@ -48,7 +48,7 @@ export class FormTurnoComponent {
       consultorio: 15,
     },
     {
-      idTurno: 1,
+      idTurno: 2,
       fecha: 'DD/MM/AAAA',
       hora: 'HH:MM',
       duracion: 30,
@@ -56,7 +56,7 @@ export class FormTurnoComponent {
       consultorio: 12,
     },
     {
-      idTurno: 1,
+      idTurno: 3,
       fecha: 'DD/MM/AAAA',
       hora: 'HH:MM',
       duracion: 30,
@@ -64,7 +64,7 @@ export class FormTurnoComponent {
       consultorio: 12,
     },
     {
-      idTurno: 1,
+      idTurno: 4,
       fecha: 'DD/MM/AAAA',
       hora: 'HH:MM',
       duracion: 30,
