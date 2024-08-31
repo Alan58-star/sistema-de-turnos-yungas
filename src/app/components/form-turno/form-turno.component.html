@@ -1,37 +1,69 @@
-<app-nav/>
+<app-nav />
 
-<button class="option-pill-access red-button-access return-button" routerLink="/especialidades">< Volver</button>
+<button class="option-pill-access red-button-access return-button" routerLink="/especialidades">
+    < Volver</button>
 
-<div class="login-page">
-    <h1>Sacando turno para MÉDICO</h1>
-    <form action="#" class="form">
-        <div><h2>Seleccione sus Obras Sociales</h2></div>
-        <label for="user-dni">Obra Social 1</label>
-        <select name="obra1" id="obra1" required>
-            <option value="BOREAL">BOREAL</option>
-            <option value="OSDE">OSDE</option>
-            <option value="ISJ">INSTITUTO DE SEGUROS DE JUJUY</option>
-            <option value="PAMI">PAMI</option>
-        </select>
-        <label for="user-dni">Obra Social 2</label>
-        <select name="obra2" id="obra2">
-            <option value="NINGUNA">No tengo segunda obra</option>
-            <option value="BOREAL">BOREAL</option>
-            <option value="OSDE">OSDE</option>
-            <option value="ISJ">INSTITUTO DE SEGUROS DE JUJUY</option>
-            <option value="PAMI">PAMI</option>
-        </select>
-        <label for="user-dni">Obra Social 3</label>
-        <select name="obra2" id="obra2">
-            <option value="NINGUNA">No tengo tercera obra</option>
-            <option value="BOREAL">BOREAL</option>
-            <option value="OSDE">OSDE</option>
-            <option value="ISJ">INSTITUTO DE SEGUROS DE JUJUY</option>
-            <option value="PAMI">PAMI</option>
-        </select>
-        <div class="flex-column">
-            <span><small><b>Al hacer clic en el siguiente botón, el sistema le asignará automáticamente un turno. Se le enviará por WhatsApp la fecha y el horario al que deberá asistir.</b></small></span>
-            <button class="option-pill-access green-button-access">Solicitar Turno</button>
+        <div class="login-page">
+            <h1>Sacando turno para MÉDICO</h1>
+            <form action="#" class="form">
+                <h2>Seleccione un médico</h2>
+                <div class="card-container">
+                    <div *ngFor="let medico of medicos" class="card">
+                        <label for="{{medico.id}}">
+                            <input type="radio" name="medico" id="{{medico.id}}" class="card-input-element" />
+                            <div class="card-input">
+                                <div class="turno-titulo-text">{{medico.genero}} {{medico.nombre}}</div>
+                                <div class="turno-text">
+                                    Turnos Disponibles: {{medico.turnos}}
+                                </div>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <h2>Seleccione un turno</h2>
+                <div class="card-container">
+                    <div *ngFor="let turno of turnos" class="card">
+                        <label for="{{turno.idTurno}}">
+                            <input type="radio" name="turno" id="{{turno.idTurno}}" class="card-input-element" />
+                            <div class="card-input">
+                                <ul>
+                                    <li class="turno-titulo-text"> {{turno.fecha}}, a las {{turno.hora}} </li>
+                                    <li class="turno-text"> Duración: {{turno.duracion}} min </li>
+                                    <li class="turno-text"> Lugar: {{turno.lugar}} </li>
+                                    <li class="turno-text"> <b>Consultorio {{turno.consultorio}} </b> </li>
+                                </ul>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <h2>Seleccione sus Obras Sociales</h2>
+                <label for="user-dni">Obra Social 1</label>
+                <select name="obra1" id="obra1" required>
+                    <option value="BOREAL">BOREAL</option>
+                    <option value="OSDE">OSDE</option>
+                    <option value="ISJ">INSTITUTO DE SEGUROS DE JUJUY</option>
+                    <option value="PAMI">PAMI</option>
+                </select>
+                <label for="user-dni">Obra Social 2</label>
+                <select name="obra2" id="obra2">
+                    <option value="NINGUNA">No tengo segunda obra</option>
+                    <option value="BOREAL">BOREAL</option>
+                    <option value="OSDE">OSDE</option>
+                    <option value="ISJ">INSTITUTO DE SEGUROS DE JUJUY</option>
+                    <option value="PAMI">PAMI</option>
+                </select>
+                <label for="user-dni">Obra Social 3</label>
+                <select name="obra2" id="obra2">
+                    <option value="NINGUNA">No tengo tercera obra</option>
+                    <option value="BOREAL">BOREAL</option>
+                    <option value="OSDE">OSDE</option>
+                    <option value="ISJ">INSTITUTO DE SEGUROS DE JUJUY</option>
+                    <option value="PAMI">PAMI</option>
+                </select>
+                <div class="flex-column">
+                    <button class="option-pill-access green-button-access">Solicitar Turno</button>
+                </div>
+            </form>
         </div>
-    </form>
-</div>

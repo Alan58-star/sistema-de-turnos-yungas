@@ -1,53 +1,145 @@
 @import "../login/login.component.css";
 
-h1{
+h1 {
     font-size: 36px;
 }
 
-h2{
+h2 {
     text-align: center;
     margin: 0 0 2rem;
 }
 
-.return-button{
+.return-button {
     margin: 1.3rem;
     padding: 1rem;
     width: 200px;
 }
 
-@media (min-width:1024px){
-    .form{
-        width: 60%  ;
-    }
-    h1{
-        font-size: 40px;
-    }
-    
+label {
+    width: 100%;
 }
 
-@media (min-width: 1280px){
-    h1{
+/* Radio buttons convertidos en cards (código de Stefan Zweifel en codepen.io, modificado para conveniencia del sitio) */
+.card-container {
+    display: flex;
+    flex-direction: column;
+
+    padding: 10px;
+    margin: 0 0 2rem;
+    max-height: 250px;
+    overflow-y: scroll;
+
+    border: solid 1px var(--gris);
+    border-radius: 10px;
+}
+
+.card-input-element {
+    display: none;
+}
+
+.card-input {
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.card-input:hover {
+    cursor: pointer;
+}
+
+.card-input-element:checked+.card-input {
+    outline: solid 4px var(--verde);
+    background-color: var(--verdeC);
+
+    .turno-titulo-text,
+    .turno-text {
+        color: #058824;
+    }
+}
+
+.turno-titulo-text {
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.turno-text {
+    padding: 10px 0 0;
+
+    font-size: 16px;
+    font-weight: 400;
+}
+
+@media (max-width:480px){
+    .form{
+        width: 95%;
+        padding: 1rem;
+    }
+}
+
+@media (min-width:768px) {
+    .card-container{
+        max-height: 400px;
+    }
+}
+
+@media (min-width:1024px) {
+    .card-container{
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        max-height: 300px;
+    }
+
+    .card{
+        max-width: 50%;
+    }
+
+    .form {
+        width: 60%;
+    }
+
+    h1 {
+        font-size: 40px;
+    }
+
+}
+
+@media (min-width: 1280px) {
+    .card{
+        max-width: 50%;
+    }
+
+    h1 {
         font-size: 46px;
     }
-    
-    input{
-        outline:none;
+
+    input {
+        outline: none;
         padding: 15px;
     }
 
-    input,label{
+    input,
+    label {
         font-size: 20px;
     }
 
-    button{
+    button {
         width: 300px;
     }
 
-    .form{
+    .form {
         width: 50%;
     }
 
-    .return{
+    .return {
         font-size: 20px;
+    }
+}
+
+@media (min-width: 1600px){
+    .card-container{
+        max-height: 500px;
+    }
+    .card{
+        max-width: 30%;
     }
 }
