@@ -59,6 +59,11 @@ tr:hover td{
     margin: auto 0;
 }
 
+i{
+    font-size: 30px;
+    color: #000;
+}
+
 @media (max-width:1360px){
     .admin-page{
         width: 80%;

@@ -49,4 +49,6 @@ export class UsuariosListComponent {
       ultimoAcceso: "DD/MM/AA, HH:MM"
     },    
   ]
+
+  
 }
