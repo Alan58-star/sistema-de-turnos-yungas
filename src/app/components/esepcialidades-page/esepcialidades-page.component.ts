@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NavComponent } from "../main-page/nav/nav.component";
 import { RouterLink } from '@angular/router';
+import { EspecialidadService } from '../../services/especialidad.service';
 
 @Component({
   selector: 'app-esepcialidades-page',
@@ -14,8 +15,38 @@ import { RouterLink } from '@angular/router';
   templateUrl: './esepcialidades-page.component.html',
   styleUrl: './esepcialidades-page.component.css'
 })
-export class EsepcialidadesPageComponent {
-
+export class EsepcialidadesPageComponent implements OnInit {
+  ngOnInit(): void {
+    this.getEspecialidades();
+    //this.getEspecialidad();
+  }
+  constructor(public _especialidadService:EspecialidadService){
+    
+  }
+  getEspecialidad(){
+    this._especialidadService.getEspecialidad('66d7e1d5a93d91e9064ecb3e').subscribe({
+      next:(data) => {
+        console.log(data);
+        
+      },
+      error:(e) => {
+        console.log(e);
+      },
+      
+    })
+  }
+  getEspecialidades() {
+    this._especialidadService.getEspecialidades().subscribe({
+      next:(data) => {
+        this._especialidadService.especialidades=data;
+        
+      },
+      error:(e) => {
+        console.log(e);
+      },
+      
+    })
+  }
   /** Datos placeholder de prueba, posteriormente estos se cargarán dinámicamente desde una API o una base de datos */
   especialidades =
     [

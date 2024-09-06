@@ -3,8 +3,8 @@
     <button routerLink="/main-page" routerLinkActive="active" ariaCurrentWhenActive="page" class="option-pill-access red-button-access return-button" routerLink="">< Volver</button>
     <h1>Seleccione una especialidad</h1>
     <div class="especialidades-container">
-        <button class="option-pill-access green-button-access" *ngFor="let especialidad of especialidades" routerLink="/form-turno">
-            {{ especialidad.titulo }}
+        <button class="option-pill-access green-button-access" *ngFor="let especialidad of _especialidadService.especialidades" routerLink="/form-turno">
+            {{ especialidad.nombreEsp }}
         </button>
     </div>
 </div>

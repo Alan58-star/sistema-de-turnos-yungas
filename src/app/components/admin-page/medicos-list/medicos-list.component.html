@@ -17,14 +17,14 @@
                     <th>Nombres</th>
                     <th>Acciones</th>
                 </tr>
-                <tr *ngFor="let medico of medicos">
+                <tr *ngFor="let medico of _medicoService.medicos">
                     <td>{{ medico.legajo }}</td>
                     <td>{{ medico.apellido }}</td>
-                    <td>{{ medico.nombres }}</td>
+                    <td>{{ medico.nombre }}</td>
                     <td class="actions-cell">
                         <div class="flex-row buttons-container">
                             <button class="option-pill blue-button">Actualizar</button>
-                            <button class="option-pill red-button">Dar de Baja</button>
+                            <button class="option-pill red-button" type="button" (click)="deleteMedico(medico._id)">Dar de Baja</button>
                         </div>
                     </td>
                 </tr>

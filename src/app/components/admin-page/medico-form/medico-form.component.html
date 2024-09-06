@@ -4,13 +4,13 @@
         <h1>Alta de Nuevo Médico</h1>
         <button class="option-pill small-button" routerLink="/admin">Volver al Inicio</button>
     </div>
-    <form action="#" method="post" class="form">
+    <form action="#" method="post" class="form" [formGroup]="medicoForm" (ngSubmit)="agregarMedico()">
         <label for="legajo">Legajo <small style="color: var(--verde);">Sólo números</small></label>
-        <input type="number" name="legajo" id="legajo" inputmode="numeric">
+        <input type="number" formControlName="legajo" name="legajo" id="legajo" inputmode="numeric">
         <label for="apellido">Apellido</label>
-        <input type="text" name="apellido" id="apellido">
+        <input type="text" formControlName="apellido" name="apellido" id="apellido">
         <label for="nombres">Nombres</label>
-        <input type="text" name="nombres" id="nombres">
+        <input type="text" formControlName="nombre" name="nombres" id="nombres">
         <div class="flex-row">
             <button type="submit" class="option-pill green-button">
                 + Dar de Alta
