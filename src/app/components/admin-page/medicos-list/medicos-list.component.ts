@@ -55,42 +55,4 @@ export class MedicosListComponent implements OnInit {
       
     })
   }
-medicos = [
-    {
-      id: 1,
-      apellido: "Apellido",
-      nombres: "Nombre completo",
-      legajo: "12345"
-    },
-    {
-      id: 2,
-      apellido: "Apellido",
-      nombres: "Nombre completo",
-      legajo: "12345"
-    },
-    {
-      id: 3,
-      apellido: "Apellido",
-      nombres: "Nombre completo",
-      legajo: "12345"
-    },
-    {
-      id: 4,
-      apellido: "Apellido",
-      nombres: "Nombre completo",
-      legajo: "12345"
-    },
-    {
-      id: 5,
-      apellido: "Apellido",
-      nombres: "Nombre completo",
-      legajo: "12345"
-    },
-    {
-      id: 6,
-      apellido: "Apellido",
-      nombres: "Nombre completo",
-      legajo: "12345"
-    },    
-  ]
 }

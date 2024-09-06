@@ -20,6 +20,9 @@ export class MedicoService {
   getMedico(id:any){
     return this.http.get<Medico>(`${this.url}/${id}`);
   }
+  getEspecialidades(id:any){
+    return this.http.get<Medico>(`${this.url}/especialidad/${id}`);
+  }
   postMedico(medico: Medico){
     return this.http.post<any>(this.url, medico);
   }

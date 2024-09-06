@@ -1,0 +1,47 @@
+h1 {
+    font-size: 48px;
+    margin-top: 2rem;
+    padding: 1rem;
+    font-weight: 800;
+}
+
+input {
+    margin: .5rem 0 2rem;
+}
+
+button {
+    margin: 0 auto;
+    width: 200px;
+}
+
+.small-button {
+    margin: 3rem 3rem 3rem;
+    margin-left: auto;
+    width: 200px;
+}
+
+input[type="datetime-local"] {
+    width: 100%;
+    padding: 10px;
+
+    border: solid 1px var(--gris);
+    border-radius: 10px;
+
+    font-size: 16px;
+    cursor: pointer;
+}
+
+input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+}
+
+
+@media (max-width:1360px) {
+    .admin-page {
+        width: 80%;
+    }
+
+    form {
+        width: 62%;
+    }
+}

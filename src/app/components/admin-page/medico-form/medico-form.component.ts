@@ -4,6 +4,7 @@ import { RouterLink } from '@angular/router';
 import { Medico } from '../../../models/medico';
 import { MedicoService } from '../../../services/medico.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validator, Validators } from '@angular/forms';
+import { Especialidad } from '../../../models/especialidad';
 
 @Component({
   selector: 'app-medico-form',
@@ -31,6 +32,7 @@ export class MedicoFormComponent implements OnInit {
       legajo: this.medicoForm.get('legajo')?.value,
       nombre: this.medicoForm.get('nombre')?.value,
       apellido: this.medicoForm.get('apellido')?.value,
+      especialidades: new Array<Especialidad>
     }
     
     this._medicoService.postMedico(MEDICO).subscribe({

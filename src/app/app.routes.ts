@@ -10,17 +10,19 @@ import { RecoverPasswordComponent } from './components/login/recover-password/re
 import { SecretariaPageComponent } from './components/secretaria-page/secretaria-page.component';
 import { FormTurnoComponent } from './components/form-turno/form-turno.component';
 import { RegistroComponent } from './components/registro/registro.component';
+import { FormNuevoTurnoComponent } from './components/secretaria-page/form-nuevo-turno/form-nuevo-turno.component';
 
 export const routes: Routes = [
     {path: '', component:BodyComponent},
     {path: 'admin', component:AdminPageComponent},
     {path: 'especialidades', component:EsepcialidadesPageComponent},
-    {path: 'medico-list', component:MedicosListComponent},
-    {path: 'medico-form', component:MedicoFormComponent},
+    {path: 'admin/medico-list', component:MedicosListComponent},
+    {path: 'admin/medico-form', component:MedicoFormComponent},
     {path: 'usuario-list', component:UsuariosListComponent},
     {path: 'login', component:LoginComponent},
     {path: 'recover-password', component:RecoverPasswordComponent},
     {path: 'secretaria', component:SecretariaPageComponent},
     {path: 'form-turno', component:FormTurnoComponent},
     {path: 'registro', component:RegistroComponent},
+    {path: 'secretaria/nuevo-turno', component:FormNuevoTurnoComponent},
 ];

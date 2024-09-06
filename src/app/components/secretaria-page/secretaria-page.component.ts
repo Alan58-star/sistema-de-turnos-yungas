@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { AdminNavComponent } from "../admin-page/admin-nav/admin-nav.component";
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-secretaria-page',
   standalone: true,
-  imports: [AdminNavComponent, CommonModule],
+  imports: [AdminNavComponent, CommonModule, RouterLink],
   templateUrl: './secretaria-page.component.html',
   styleUrl: './secretaria-page.component.css'
 })
