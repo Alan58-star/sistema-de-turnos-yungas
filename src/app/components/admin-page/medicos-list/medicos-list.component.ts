@@ -16,15 +16,15 @@ export class MedicosListComponent {
   medicos = [
     {
       id: 1,
-      apellido: "Apellido",
-      nombres: "Nombre completo",
+      apellido: "Coraite Beltran",
+      nombres: "Facundo Leonel",
       legajo: "12345",
       telefono: '543884480836'
     },
     {
       id: 2,
-      apellido: "Apellido",
-      nombres: "Nombre completo",
+      apellido: "Martinez",
+      nombres: "Benjamin Alan",
       legajo: "12345",
       telefono: '543884635285'
     },
@@ -61,8 +61,10 @@ export class MedicosListComponent {
   // private wppService = inject(WhatsappService);
   constructor(private wppService: WhatsappService){}
 
-  public sendMesagge(phone:string){
-    this.wppService.sendMessage(phone).subscribe((result) => {
+  public sendMesagge(phone:string, name:string){
+    console.log(name);
+    
+    this.wppService.sendMessage(phone, name).subscribe((result) => {
         console.log(result);
       
     })
