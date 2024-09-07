@@ -1,5 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 
+@import "../node_modules/ngx-toastr/toastr.css";
+
 :root {
     --negro: #343434;
     --gris: #dadae3;
@@ -61,6 +63,25 @@ button {
     gap: 10px;
 }
 
+/* Colores personalizados para los toast */
+.toast-success {
+  background-color: var(--verde);
+}
+.toast-error {
+  background-color: var(--rojo);
+}
+.toast-info {
+  background-color: var(--celeste);
+}
+.toast-warning {
+  background-color: var(--amarillo);
+}
+
+.toast-success, .toast-error, .toast-info{
+    *{
+        color:#fff;
+    }
+}
 
 input, select{
     margin: .5rem 0 2rem;

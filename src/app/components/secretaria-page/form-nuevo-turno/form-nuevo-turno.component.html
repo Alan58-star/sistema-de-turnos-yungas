@@ -4,7 +4,7 @@
         <h1>Creando un Nuevo Turno</h1>
         <button class="option-pill small-button" routerLink="/secretaria">Volver al Inicio</button>
     </div>
-    <form action="#" method="post" class="form">
+    <form action="#" method="" class="form">
         <label for="especialidad">Especialidad</label>
         <select name="especialidad" id="especialidad" (change)="cargarMedicos($event)">
             <option value="{{especialidad._id}}" *ngFor="let especialidad of _especialidadService.especialidades" > {{especialidad.nombreEsp}} </option>
@@ -21,7 +21,7 @@
         <label for="consultorio">Consultorio</label>
         <input type="number" formControlName="consultorio" name="consultorio" id="consultorio">
         <div class="flex-row">
-            <button type="submit" class="option-pill green-button">
+            <button type="sumbit" class="option-pill green-button" (click) = "mostrarToast()">
                 + Crear Turno
             </button>
         </div>

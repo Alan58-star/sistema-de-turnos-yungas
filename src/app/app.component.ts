@@ -29,8 +29,6 @@ import { SecretariaPageComponent } from "./components/secretaria-page/secretaria
     OptionCardComponent,
     MedicoFormComponent,
     SecretariaPageComponent
-    
-
 ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
