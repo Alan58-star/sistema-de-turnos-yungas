@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';   
 import { BodyComponent } from './components/main-page/body/body.component';
-import { EsepcialidadesPageComponent } from './components/esepcialidades-page/esepcialidades-page.component';
+import { EsepcialidadesPageComponent } from './components/esepcialidades-page/esepcialidades-page.component'; 
 import { AdminPageComponent } from './components/admin-page/admin-page.component';
 import { MedicosListComponent } from './components/admin-page/medicos-list/medicos-list.component';
 import { MedicoFormComponent } from './components/admin-page/medico-form/medico-form.component';
