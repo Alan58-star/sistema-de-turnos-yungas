@@ -35,4 +35,7 @@ export class MedicoService {
   getTurnosMedico(id:any){
     return this.http.get<Turno[]>(`${this.url}turnos/${id}`);
   }
+  getTurnosMedicoEsp(idMedico:any,idEspecialidad:any){
+    return this.http.get<Turno[]>(`${this.url}turnosdisp/${idMedico}/especialidad/${idEspecialidad}`);
+  }
 }

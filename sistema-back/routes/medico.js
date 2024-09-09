@@ -13,5 +13,6 @@ router.delete('/:id', medicoController.eliminarMedico);
 router.get('/especialidad/:especialidad_id',medicoController.obtenerMedicosporEspecialidad);
 router.get('/turnos/:medicoId',medicoController.obtenerTurnosDelMedico);
 router.get('/turnosdisp/:medicoId',medicoController.obtenerTurnosDelMedicoDisp);
-
+router.get('/turnos/:medicoId/especialidad/:especialidadId',medicoController.obtenerTurnosMedicoEsp);
+router.get('/turnosdisp/:medicoId/especialidad/:especialidadId',medicoController.obtenerTurnosMedicoEspDisponibles);
 module.exports = router;

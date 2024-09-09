@@ -153,14 +153,14 @@ exports.obtenerTurnosDelMedicoDisp = async (req, res) => {
     try {
         const medicoId = req.params.medicoId;
 
-        // Verificar si el paciente existe (opcional, si quieres asegurarte de que el medico exista)
+        // Verificar si el medico existe (opcional, si quieres asegurarte de que el medico exista)
         let medico = await Medico.findById(medicoId);
         if (!medico) {
              return res.status(404).json({ msg: 'No existe el medico' });
         }
 
-        // Obtener turnos del paciente
-        let turnos = await Turno.find({ medico_id: medicoId, disponible:"Disponible" })
+        // Obtener turnos del medico
+        let turnos = await Turno.find({ medico_id: medicoId, estado:"Disponible" })
             .populate('paciente_id', 'dni nombre') // Opcional: Poblar detalles del médico
             .populate('obras_sociales', 'nombreOS') // Opcional: Poblar detalles de las obras sociales
             .exec();
@@ -175,34 +175,44 @@ exports.obtenerTurnosDelMedicoDisp = async (req, res) => {
         res.status(500).send('Hubo un error al obtener los turnos');
     }
 }
-// Obtener médicos por especialidad junto con sus turnos disponibles
-exports.getMedicosByEspecialidadConTurnosDisponibles = async (req, res) => {
+exports.obtenerTurnosMedicoEsp= async (req,res) => {
     try {
-        const { especialidad_id } = req.params;
+        let medicoId=req.params.medicoId;
+        let especialidadId=req.params.especialidadId;
+        // Buscar los turnos que coincidan con el ID del médico y el ID de la especialidad
+        let turnos = await Turno.find({medico_id: medicoId,especialidad_id: especialidadId}) 
+        .populate('paciente_id', 'dni nombre') // Opcional: Poblar detalles del médico
+        .populate('obras_sociales', 'nombreOS') // Opcional: Poblar detalles de las obras sociales
+        .exec();
 
-        // Encontrar médicos que tienen la especialidad especificada
-        const medicos = await Medico.find({ 'especialidades.especialidad_id': especialidad_id });
-        
-        // Si no se encuentran médicos para la especialidad dada
-        if (!medicos || medicos.length === 0) {
-            return res.status(404).send({ message: "No se encontraron médicos para esta especialidad." });
+        if (turnos.length === 0) {
+            return res.status(404).json({ msg: 'No se encontraron turnos para el médico con la especialidad especificada' });
         }
-        
-        // Obtener turnos disponibles para cada médico
-        const medicosConTurnos = await Promise.all(medicos.map(async (medico) => {
-            const turnos = await Turno.find({ 
-                medico_id: medico._id
-            });
-            return {
-                
-                medico,
-                turnos
-            };
-        }));
-        
-        res.send(medicosConTurnos);
+
+        res.json(turnos);
     } catch (error) {
+        console.error(error);
         res.status(500).send('Hubo un error');
     }
-}
+};
 
+exports.obtenerTurnosMedicoEspDisponibles = async (req,res) => {
+    try {
+        let medicoId=req.params.medicoId;
+        let especialidadId=req.params.especialidadId;
+        // Buscar los turnos que coincidan con el ID del médico y el ID de la especialidad
+        let turnos = await Turno.find({medico_id: medicoId,especialidad_id: especialidadId,estado:"Disponible"}) 
+        .populate('paciente_id', 'dni nombre') // Opcional: Poblar detalles del médico
+        .populate('obras_sociales', 'nombreOS') // Opcional: Poblar detalles de las obras sociales
+        .exec();
+
+        if (turnos.length === 0) {
+            return res.status(404).json({ msg: 'No se encontraron turnos para el médico con la especialidad especificada' });
+        }
+
+        res.json(turnos);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Hubo un error');
+    }
+};

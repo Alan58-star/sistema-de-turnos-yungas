@@ -20,11 +20,12 @@ import { Turno } from '../../models/turno';
 export class FormTurnoComponent implements OnInit{
   turnoForm:FormGroup;
   turno:TurnoServ;
+  disponible:number;
   ngOnInit(): void {
     this._medicoService.medicos=[];
     this.cargarObras();
     this._medicoService.turnos=[];
-   
+    
     this.activatedRoute.params.subscribe(
       params=>{
         this.cargarMedicos(params['id']);
@@ -38,11 +39,13 @@ export class FormTurnoComponent implements OnInit{
           
     })
     this.turno=new TurnoServ("0","0","0","0","0",0);
+    this.disponible=0;
   }
   agregarTurno(turno:TurnoServ){
     console.log(this.turno);
     this.turno.obras_sociales=[this.turnoForm.get('obra')?.value];
     this.turno.paciente_id="66dbe2eecf2ded2f7d2fc25a";
+    this.turno.estado="Ocupado"
     this._turnoService.putTurno(this.turno).subscribe({
       next:(data) => {
         console.log(data);
@@ -68,14 +71,7 @@ export class FormTurnoComponent implements OnInit{
       },
       
     })
-   /* const Turno: TurnoServ ={
-      legajo: this.medicoForm.get('legajo')?.value,
-      nombre: this.medicoForm.get('nombre')?.value,
-      apellido: this.medicoForm.get('apellido')?.value,
-      especialidades: new Array<Especialidad>
-    }*/
-    console.log( this.turnoForm.get('turno')?.value)
-    console.log( this.turnoForm.get('obra')?.value)
+   
   }
   cargarObras(){
     
@@ -90,12 +86,12 @@ export class FormTurnoComponent implements OnInit{
       
     })
   }
-  cargarMedicos = (id:any) => {
+  cargarMedicos(id:any) {
     
     this._medicoService.getEspecialidades(id).subscribe({
       next:(data) => {
         this._medicoService.medicos=data;
-        
+        this.disponible=this._medicoService.medicos.length;
         
       },
       error:(e) => {
@@ -104,12 +100,19 @@ export class FormTurnoComponent implements OnInit{
       },
       
     })
+    
   }
   cargarTurnos = (id: any) => {
     
     const idMedico = id;
+    let idEspecialidad="";
+    this.activatedRoute.params.subscribe(
+      params=>{
+        idEspecialidad=params['id'];
+      }
+    )
     
-    this._medicoService.getTurnosMedico(id).subscribe({
+    this._medicoService.getTurnosMedicoEsp(idMedico,idEspecialidad).subscribe({
       next:(data) => {
         this._medicoService.turnos=data;
       },
