@@ -1,6 +1,7 @@
 const mongoose = require ('mongoose');
 const Especialidad = require('./Especialidad');
-const {Schema} = mongoose;
+const {Schema, Document} = mongoose;
+
 const MedicoSchema = mongoose.Schema({
     legajo:{
         type: Number,
@@ -14,10 +15,7 @@ const MedicoSchema = mongoose.Schema({
         type: String,
         required:true
     },
-    especialidades:[{
-        especialidad_id:{type:Schema.Types.ObjectId, ref:'Especialidad'},
-        nombre:String
-    }]
+    especialidades:[{type:Schema.Types.ObjectId, ref:'Especialidad'}]
 });
 
 module.exports = mongoose.model('Medico',MedicoSchema);

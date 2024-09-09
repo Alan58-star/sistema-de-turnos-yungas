@@ -17,10 +17,10 @@
                     <th>Último Acceso</th>
                     <th>Acciones</th>
                 </tr>
-                <tr *ngFor="let usuario of usuarios">
-                    <td>{{ usuario.nombre }}</td>
-                    <td>{{ usuario.datos }}</td>
-                    <td>{{ usuario.ultimoAcceso }}</td>
+                <tr *ngFor="let paciente of _pacienteService.pacientes">
+                    <td>{{ paciente.nombre }}</td>
+                    <td>{{ paciente.dni }}</td>
+                    <td>{{ paciente.strikes }}</td>
                     <td class="actions-cell">
                         <div class="flex-row buttons-container">
                             <button class="option-pill blue-button">Desbloquear</button>

@@ -4,11 +4,11 @@ const PacienteSchema = mongoose.Schema({
         type: Number,
         required:true
     },
-    telefono:{
+    nombre:{
         type: String,
         required:true
     },
-    nombre:{
+    telefono:{
         type: String,
         required:true
     },
@@ -18,7 +18,8 @@ const PacienteSchema = mongoose.Schema({
     },
     strikes:{
         type: Number,
-        required:false
+        required:false,
+        default:0
     }
 });
 

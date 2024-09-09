@@ -31,6 +31,7 @@ export class RegistroComponent implements OnInit{
       nombre: this.pacienteForm.get('nombre')?.value,
       telefono: this.pacienteForm.get('telefono')?.value,
       passw: this.pacienteForm.get('passw')?.value,
+      strikes:0
     }
     
     this._pacienteService.postPaciente(PACIENTE).subscribe({

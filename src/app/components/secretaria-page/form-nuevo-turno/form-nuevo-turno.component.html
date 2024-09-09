@@ -4,22 +4,21 @@
         <h1>Creando un Nuevo Turno</h1>
         <button class="option-pill small-button" routerLink="/secretaria">Volver al Inicio</button>
     </div>
-    <form action="#" method="post" class="form">
+    <form action="#" method="post" class="form"  [formGroup]="turnoForm" (ngSubmit)="agregarTurno()">
         <label for="especialidad">Especialidad</label>
-        <select name="especialidad" id="especialidad" (change)="cargarMedicos($event)">
+        <select name="especialidad" id="especialidad" formControlName="especialidad" (change)="cargarMedicos($event)">
             <option value="{{especialidad._id}}" *ngFor="let especialidad of _especialidadService.especialidades" > {{especialidad.nombreEsp}} </option>
         </select>
         <label for="medico">Médico</label>
-        <select name="medico" id="medico">
-            <option value="idmedico1">Médico 1</option>
-            <option value="idmedico2">Médico 2</option>
+        <select name="medico" formControlName="medico" id="medico">
+            <option value="{{medico._id}}" *ngFor="let medico of _medicoService.medicos" >{{medico.nombre}}</option>
         </select>
         <label for="fecha">Fecha y hora del Turno<small style="color: var(--verde);"> (Clic en el ícono para abrir el calendario)</small></label>
-        <input type="datetime-local" name="fecha" id="fecha">
+        <input type="datetime-local" name="fecha" id="fecha" formControlName="fecha">
         <label for="duracion">Duración<small style="color: var(--verde);"> En minutos</small></label>
         <input type="number" formControlName="duracion" name="duracion" id="duracion">
-        <label for="consultorio">Consultorio</label>
-        <input type="number" formControlName="consultorio" name="consultorio" id="consultorio">
+        <label for="consultorio">Lugar</label>
+        <input type="text" formControlName="consultorio" name="consultorio" id="consultorio">
         <div class="flex-row">
             <button type="submit" class="option-pill green-button">
                 + Crear Turno

@@ -23,6 +23,7 @@ export const routes: Routes = [
     {path: 'recover-password', component:RecoverPasswordComponent},
     {path: 'secretaria', component:SecretariaPageComponent},
     {path: 'form-turno', component:FormTurnoComponent},
+    {path: 'form-turno/:id', component:FormTurnoComponent},
     {path: 'registro', component:RegistroComponent},
     {path: 'secretaria/nuevo-turno', component:FormNuevoTurnoComponent},
 ];

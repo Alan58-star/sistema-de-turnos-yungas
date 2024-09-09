@@ -24,4 +24,7 @@ export class PacienteService {
   deletePaciente(id:any){
     return this.http.delete<any>(`${this.url}/${id}`);
   }
+  getTurnosPaciente(id:any){
+    return this.http.delete<any>(`${this.url}/turnos/${id}`);
+  }
 }

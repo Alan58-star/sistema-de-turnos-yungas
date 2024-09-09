@@ -27,7 +27,7 @@ exports.actualizarEspecialidad = async(req,res) => {
         const{nombreEsp}= req.body;
         let especialidad =  await Especialidad.findById(req.params.id);
         if(!especialidad){
-            res.status(404).json({msg: 'No existe la especialidad'});
+           return res.status(404).json({msg: 'No existe la especialidad'});
         }
 
         especialidad.nombreEsp = nombreEsp;
@@ -35,7 +35,13 @@ exports.actualizarEspecialidad = async(req,res) => {
         res.json(especialidad);
 
     }catch(error){
-        console.log(error);
+        console.error('Error al obtener la especialidad:', error.message);
+
+        if (error.name === 'CastError') {
+            // Error de formato de ObjectId
+            return res.status(400).json({ msg: 'Formato de ID no válido' });
+        }
+
         res.status(500).send('Hubo un error');
     }
 }
@@ -44,12 +50,18 @@ exports.obtenerEspecialidad = async(req,res) => {
     try{
         let especialidad =  await Especialidad.findById(req.params.id);
         if(!especialidad){
-            res.status(404).json({msg: 'No existe la especialidad'});
+           return res.status(404).json({msg: 'No existe la especialidad'});
         }
         res.json(especialidad);
 
     }catch(error){
-        console.log(error);
+        console.error('Error al obtener la especialidad:', error.message);
+
+        if (error.name === 'CastError') {
+            // Error de formato de ObjectId
+            return res.status(400).json({ msg: 'Formato de ID no válido' });
+        }
+
         res.status(500).send('Hubo un error');
     }
 }
@@ -57,13 +69,19 @@ exports.eliminarEspecialidad = async(req,res) => {
     try{
         let especialidad =  await Especialidad.findById(req.params.id);
         if(!especialidad){
-            res.status(404).json({msg: 'No existe la especialidad'});
+            return res.status(404).json({msg: 'No existe la especialidad'});
         }
         await Especialidad.deleteOne({_id:req.params.id});
         res.json({msg: ' Especialidad eliminado'});
 
     }catch(error){
-        console.log(error);
+        onsole.error('Error al obtener la especialidad:', error.message);
+
+        if (error.name === 'CastError') {
+            // Error de formato de ObjectId
+            return res.status(400).json({ msg: 'Formato de ID no válido' });
+        }
+
         res.status(500).send('Hubo un error');
     }
 }

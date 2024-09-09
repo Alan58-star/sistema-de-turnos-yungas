@@ -13,12 +13,19 @@ const TurnoSchema = mongoose.Schema({
         required:true
     },
     especialidad_id:{type: Schema.Types.ObjectId, ref:'Especialidad'},
-    obras_sociales:[{
-        obrasocial_id:{type:Schema.Types.ObjectId, ref:'ObraSocial'},
-        nombre:String
-    }],
+    obras_sociales:[{type:Schema.Types.ObjectId, ref:'ObraSocial'}],
     estado:{
         type:String,
+        enum:['Disponible','Ocupado','Cancelado'],
+        default:'Disponible',
+        require:true
+    },
+    consultorio:{
+        type:String,
+        require:true
+    },
+    duracion:{
+        type:Number,
         require:true
     }
 });

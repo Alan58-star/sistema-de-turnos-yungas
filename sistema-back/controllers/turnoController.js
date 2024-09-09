@@ -10,6 +10,25 @@ exports.crearTurno = async (req, res) => {
     }
 };
 
+exports.obtenerTurno = async(req,res) => {
+    try{
+        let turno =  await Turno.findById(req.params.id);
+        if(!turno){
+            res.status(404).json({msg: 'No existe el paciente'});
+        }
+        res.json(turno);
+
+    }catch(error){
+        console.error('Error al obtener la Espe:', error.message);
+
+        if (error.name === 'CastError') {
+            // Error de formato de ObjectId
+            return res.status(400).json({ msg: 'Formato de ID no válido' });
+        }
+
+        res.status(500).send('Hubo un error');
+    }
+}
 // Obtener Todos los Turnos
 exports.obtenerTurnos = async (req, res) => {
     try {

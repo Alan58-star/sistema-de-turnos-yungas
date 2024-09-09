@@ -9,5 +9,6 @@ router.get('/',pacienteController.obtenerPacientes);
 router.put('/:id', pacienteController.actualizarPaciente);
 router.get('/:id', pacienteController.obtenerPaciente);
 router.delete('/:id', pacienteController.eliminarPaciente);
+router.get('/turnos/:pacienteId', pacienteController.obtenerTurnosDelPaciente);
 
 module.exports = router;

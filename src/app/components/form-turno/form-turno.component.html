@@ -5,16 +5,16 @@
 
         <div class="login-page">
             <h1>Sacando turno para MÉDICO</h1>
-            <form action="#" class="form">
+            <form action="#" class="form" [formGroup]="turnoForm" (ngSubmit)="finalizarTurno()">
                 <h2>Seleccione un médico</h2>
                 <div class="card-container">
-                    <div *ngFor="let medico of medicos" class="card">
-                        <label for="medico.{{medico.id}}">
-                            <input type="radio" name="medico" id="medico.{{medico.id}}" class="card-input-element" />
+                    <div *ngFor="let medico of _medicoService.medicos" class="card" (click)="cargarTurnos(medico._id)">
+                        <label for="{{medico._id}}">
+                            <input type="radio" name="medico" id="{{medico._id}}" class="card-input-element" />
                             <div class="card-input">
-                                <div class="turno-titulo-text">{{medico.genero}} {{medico.nombre}}</div>
+                                <div class="turno-titulo-text">{{medico.nombre}} {{medico.nombre}}</div>
                                 <div class="turno-text">
-                                    Turnos Disponibles: {{medico.turnos}}
+                                    Turnos Disponibles: {{medico.apellido}}
                                 </div>
                             </div>
                         </label>
@@ -23,14 +23,14 @@
 
                 <h2>Seleccione un turno</h2>
                 <div class="card-container">
-                    <div *ngFor="let turno of turnos" class="card">
-                        <label for="turno.{{turno.idTurno}}">
-                            <input type="radio" name="turno" id="turno.{{turno.idTurno}}" class="card-input-element" />
+                    <div *ngFor="let turno of _medicoService.turnos" class="card">
+                        <label for="{{turno._id}}">
+                            <input formControlName="turno"  type="radio" value="{{turno._id}}" name="turno" id="{{turno._id}}" class="card-input-element" />
                             <div class="card-input">
                                 <ul>
-                                    <li class="turno-titulo-text"> {{turno.fecha}}, a las {{turno.hora}} </li>
+                                    <li class="turno-titulo-text"> {{turno.fecha}}, a las {{turno.fecha}} </li>
                                     <li class="turno-text"> Duración: {{turno.duracion}} min </li>
-                                    <li class="turno-text"> Lugar: {{turno.lugar}} </li>
+                                    <li class="turno-text"> Lugar: {{turno.consultorio}} </li>
                                     <li class="turno-text"> <b>Consultorio {{turno.consultorio}} </b> </li>
                                 </ul>
                             </div>
@@ -40,11 +40,8 @@
 
                 <h2>Seleccione sus Obras Sociales</h2>
                 <label for="user-dni">Obra Social 1</label>
-                <select name="obra1" id="obra1" required>
-                    <option value="BOREAL">BOREAL</option>
-                    <option value="OSDE">OSDE</option>
-                    <option value="ISJ">INSTITUTO DE SEGUROS DE JUJUY</option>
-                    <option value="PAMI">PAMI</option>
+                <select name="obra" id="obra" formControlName="obra" required >
+                    <option value="{{obra._id}}" *ngFor="let obra of _obraService.obras" >{{obra.nombreOS}}</option>
                 </select>
                 <label for="user-dni">Obra Social 2</label>
                 <select name="obra2" id="obra2">

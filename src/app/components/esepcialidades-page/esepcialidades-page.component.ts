@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NavComponent } from "../main-page/nav/nav.component";
-import { RouterLink } from '@angular/router';
+import { RouterLink, Router} from '@angular/router';
 import { EspecialidadService } from '../../services/especialidad.service';
-
+ 
 @Component({
   selector: 'app-esepcialidades-page',
   standalone: true,
@@ -20,7 +20,7 @@ export class EsepcialidadesPageComponent implements OnInit {
     this.getEspecialidades();
     //this.getEspecialidad();
   }
-  constructor(public _especialidadService:EspecialidadService){
+  constructor(public _especialidadService:EspecialidadService, private route:Router){
     
   }
   getEspecialidad(){
@@ -46,6 +46,9 @@ export class EsepcialidadesPageComponent implements OnInit {
       },
       
     })
+  }
+  ToMedicos(id:any){
+    this.route.navigate(['form-turno/',id]);
   }
   /** Datos placeholder de prueba, posteriormente estos se cargarán dinámicamente desde una API o una base de datos */
   especialidades =
