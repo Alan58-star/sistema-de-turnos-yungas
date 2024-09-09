@@ -6,6 +6,7 @@ export class Medico {
     legajo: number;
     nombre: String;
     apellido: String;
+    tdisponible?: number;
     especialidades:Array<Especialidad>;
     constructor(legajo:number,nombre:String,apellido:String,especialidades:Array<Especialidad>){
         this.legajo=legajo;

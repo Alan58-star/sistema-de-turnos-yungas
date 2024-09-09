@@ -15,6 +15,9 @@ const MedicoSchema = mongoose.Schema({
         type: String,
         required:true
     },
+    tdisponibles:{
+        type: Number
+    },
     especialidades:[{type:Schema.Types.ObjectId, ref:'Especialidad'}]
 });
 
