@@ -22,7 +22,7 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: Montserrat, Tahoma, Geneva, Verdana, sans-serif;
+    font-family: "League Spartan", Tahoma, Geneva, Verdana, sans-serif;
     color: var(--negro);
     width: 100%;
     transition: all 0.4s cubic-bezier(0.075, 0.82, 0.165, 1);
@@ -212,7 +212,7 @@ input[type="date"]{
     padding: 1rem;
     margin-bottom: 1.3rem;
 
-    font-weight: 800;
+    font-weight: 600;
     font-size: 20px;
 
     background-color: var(--gris);
