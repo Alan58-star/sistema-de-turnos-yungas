@@ -7,15 +7,16 @@ footer{
     gap: 3rem;
     align-items: center;
     
-    background-color: var(--verde);
+    background-color: var(--azul);
     
     text-align: center;
 }
 
 footer *{
-    color: #fff;
+    color: var(--celeste);
     padding: .5rem;
 }
+
 
 
 @media(min-width: 1280px) {

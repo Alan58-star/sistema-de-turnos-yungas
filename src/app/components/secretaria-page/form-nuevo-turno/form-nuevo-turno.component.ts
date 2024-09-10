@@ -3,7 +3,6 @@ import { AdminNavComponent } from "../../admin-page/admin-nav/admin-nav.componen
 import { RouterLink } from '@angular/router';
 import { EspecialidadService } from '../../../services/especialidad.service';
 import { CommonModule } from '@angular/common';
-<<<<<<< HEAD
 import { MedicoService } from '../../../services/medico.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validator, Validators  } from '@angular/forms';
 import { Turno } from '../../../models/turno';
@@ -11,22 +10,11 @@ import { Paciente } from '../../../models/paciente';
 import { ObraSocial } from '../../../models/obraSocial';
 import { TurnoService } from '../../../services/turno.service';
 import { TurnoServ } from '../../../models/turnoServ';
+import { Toast, ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-form-nuevo-turno',
   standalone: true,
   imports: [AdminNavComponent, RouterLink, CommonModule,ReactiveFormsModule],
-=======
-import { MedicoService } from '../../../services/medico.service'; 
-import { ToastrService } from 'ngx-toastr';
-@Component({
-  selector: 'app-form-nuevo-turno',
-  standalone: true,
-  imports: [
-            AdminNavComponent, 
-            RouterLink, 
-            CommonModule,
-          ],
->>>>>>> toastr
   templateUrl: './form-nuevo-turno.component.html',
   styleUrl: './form-nuevo-turno.component.css'
 })
@@ -35,10 +23,16 @@ export class FormNuevoTurnoComponent implements OnInit{
   
   ngOnInit(): void {
     this.getEspecialidades();
-<<<<<<< HEAD
     
   }
-  constructor(private fb:FormBuilder,public _especialidadService:EspecialidadService, public _medicoService:MedicoService, public _turnoService:TurnoService){
+  constructor(
+    private fb:FormBuilder,
+    public _especialidadService:EspecialidadService, 
+    public _medicoService:MedicoService, 
+    public _turnoService:TurnoService,
+    private toastr: ToastrService
+  ){
+
     this.turnoForm = this.fb.group({
       especialidad: ['',Validators.required],
       medico: ['',Validators.required],
@@ -70,15 +64,6 @@ export class FormNuevoTurnoComponent implements OnInit{
       
     })
   }
-=======
-    //this.getEspecialidad();
-  }
-
-  constructor(public _especialidadService:EspecialidadService, public _medicoService:MedicoService, private toastr: ToastrService){
-    
-  }
-
->>>>>>> toastr
   getEspecialidad(){
     this._especialidadService.getEspecialidad('66d7e1d5a93d91e9064ecb3e').subscribe({
       next:(data) => {

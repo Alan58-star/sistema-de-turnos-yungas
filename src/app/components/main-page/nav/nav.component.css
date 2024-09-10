@@ -1,28 +1,33 @@
 nav {
-    background-color: #fff;
-    box-shadow: 0 5px 10px #3584;
+    background-color: var(--azul);
+    padding: 10px;
+}
+
+.logo{
+    max-height: 70px;
+    width: auto;
 }
 
 .nav-items-list {
     width: 100%;
+    gap: 1rem;
 }
 
 .nav-item {
-    padding: 1.2rem 1.2rem;
+    padding: 1rem;
     width: 100%;
-    outline: solid 8px #fff;
-    outline-offset: -8px;
     border-radius: 15px;
 
-    background-color: #fff;
-    color: var(--azul);
+    background-color: var(--azul);
+    color: var(--gris);
 
-    font-size: 16px;
+    font-size: 20px;
     font-weight: 600;
 }
 
 .nav-item:hover{
-    background-color: #3584;
+    background-color: var(--azulO);
+    color: #fff;
 }
 
 .login-button {
@@ -31,7 +36,7 @@ nav {
 
 .login-button:hover {
     background-color: var(--verde);
-    color: var(--negro);
+    color: var(--blanco);
 }
 
 .logout-button {
@@ -44,17 +49,13 @@ nav {
 }
 
 .turno-button {
-    border-radius: 15px;
-    
-    outline: solid 8px #fff;
-    outline-offset: -8px;
-    
-    background-color: var(--amarillo);
-    color: var(--negro);
+    background-color: var(--cian);
+    color: var(--cianO);
 }
 
 .turno-button:hover {
-    background-color: var(--naranja);
+    background-color: var(--cianC);
+    color: var(--cianO);
 }
 /* Estilos exclusivos para el nav en pantallas chicas */
 
@@ -124,12 +125,21 @@ nav {
     .mobile-nav {
         display: none;
     }
+
+    .nav-items-list {
+        width: 40%;
+        gap: 1.4rem;
+    }
 }
 
 
 @media(min-width: 1280px) {
+    .nav-items-list {
+        width: 30%;
+        gap: 1.4rem;
+    }
+
     .nav-item {
-        padding: 1.5rem 1.2rem;
 
         font-size: 18px;
     }

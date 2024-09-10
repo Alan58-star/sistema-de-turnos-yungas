@@ -4,18 +4,28 @@
 
 :root {
     --negro: #343434;
-    --gris: #dadae3;
-    --azul: #2f1d89;
-    --celeste: #669fed;
-    --verde: #16bf57;
-    --amarillo: #ffcd35;
+    --gris: #d8daec;
+    --azul: #252C61;
+    --celeste: #85A8CF;
+    --cian: #99E1DE;
+    --verde: #11b67c;
+    --amarillo: #eec937;
     --naranja: #e89b0b;
     --rojo: #ff4470;
     
+    --cianC: #a3ffe3;
     --celesteC: #c1ebff;
     --verdeC: #dfffdd;
     --amarilloC: #fffccd;
     --rojoC: #ffd8df;
+        
+    --azulO: #1b214b;
+    --grisO: #898DA9;
+    --celesteO: #4c63a9;
+    --cianO: #046068;
+    --verdeO: #109f51;
+    --amarilloO: #fffccd;
+    --rojoO: #ffd8df;
 }
 
 * {
@@ -294,7 +304,7 @@ input::-webkit-inner-spin-button {
 
 /* Animación de carga (fundido) */
 body * {
-    animation: fadeInAnimation cubic-bezier(0.075, 0.82, 0.165, 1) 0.5s;
+    animation: fadeInAnimation cubic-bezier(0.075, 0.82, 0.165, 1) 0.4s;
     animation-iteration-count: 1;
     animation-fill-mode: forwards;
 }

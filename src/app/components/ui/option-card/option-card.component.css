@@ -1,5 +1,11 @@
+h3{
+    font-size: 2rem;
+    padding: 20px;
+}
+
 .option-card{
     margin: 1rem 0;
+    min-height: 300px;
     height: 100%;
 
     display: flex;
@@ -14,7 +20,7 @@
 }
 
 .option-title-container{
-    background-color: #5001;
+    background-color: #5031;
     padding: 0.5rem;
 }
 
@@ -25,10 +31,11 @@
 }
 
 .option-description{
+    margin: auto;
     padding: 2rem;
 
     font-weight: 500;
-    font-size: 18px;    
+    font-size: 22px;    
 }
 
 

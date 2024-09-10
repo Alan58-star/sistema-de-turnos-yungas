@@ -1,23 +1,21 @@
 <app-nav></app-nav>
 <div id="main-page">
-    <h1>Bienvenidos al Hospital Distrital Las Heras</h1>
+    <div class="title">
+        <h1>Bienvenidos al Hospital Distrital Las Heras</h1>
+    </div>
 
+    <h2>Autogestión</h2>
     <div class="options">
         <app-option-card
             accion="especialidades"
             titulo="Sacar Turno"
             descripcion="Haga clic aquí para sacar un turno con un médico especializado y bla bla bla. Asegúrese de Iniciar Sesión primero (igual si no lo hace saldrá el dialog para iniciar sesión automáticamente por lo que no sirve esta advertencia jajsj )"
-            color="#ffcd35"
+            color="var(--cian)"
         ></app-option-card>
         <app-option-card
             titulo="Mis Turnos Pendientes"
             descripcion="Haga clic aquí para gestionar los turnos que tiene pendiente con sus médicos. Desde acá puede revisarlos y cancelarlos en caso de que no pueda asistir."
             color="#82f8b5"
-        ></app-option-card>
-        <app-option-card
-            titulo="Opción 3"
-            descripcion="Holaa, soy una tercera opción y estoy de color verde, estoy usando distintos colores para las opciones para que sea más fácil distinguirlas. Debido a que son turnos médicos, me imagino q habrá un buen número de gente mayor que quiera usar el sistema, si esto sirve para mejorar la accesibilidad sería perfecto :D"
-            color="#b7ef77"
         ></app-option-card>
     </div>
 </div>

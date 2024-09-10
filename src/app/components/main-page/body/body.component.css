@@ -1,13 +1,24 @@
 h1{
     padding: 2rem;
-    color: var(--negro);
+    color: #fff;
 
     font-size: 3.2rem;
     font-weight: 800;
     text-align: center;
 }
 
+.title{    
+    background: linear-gradient(90deg, #066c8b, #04597b);
+}
+
+h2{
+    padding: 3rem;
+    font-size: 2.8rem;
+    text-align: center;
+}
+
 .options{
+
     margin-bottom: 2rem;
     padding: 2rem;
 
@@ -25,12 +36,13 @@ h1{
 
 @media(min-width: 1280px) {
     h1{
-        margin: 5rem 0;
+        padding: 8rem 0;
         font-size: 74px;
     }
 
     .options{
+        padding: 3rem 8rem;
         flex-direction: row;
-        gap: 2rem;
+        gap: 5rem;
     }
 }
