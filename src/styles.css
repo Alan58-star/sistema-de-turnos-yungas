@@ -295,6 +295,10 @@ input[type="date"]{
     outline-color: var(--amarillo);
 }
 
+.hidden{
+    display: none;
+}
+
 /* Oculta los botones de scroll  lateral para inputs de tipo numérico */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {

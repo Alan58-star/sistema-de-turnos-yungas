@@ -1,0 +1,91 @@
+h1{
+    font-size: 36px;
+}
+
+span{
+    font-size: 18px;
+}
+
+button{
+    margin-bottom: 0;
+}
+
+.turnos-section{
+    width: 100%;
+    padding: 0 2rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.title{
+    width: 100%;
+    margin: 2rem 0;
+    padding: 0 1rem;
+    gap: 1rem;
+}
+
+.title *{
+    text-align: center;
+}
+
+.turno-card {
+    display: flex;
+    flex-direction: column;
+
+    padding: 20px;
+    margin: 0 0 2rem;
+    max-height: 250px;
+
+    border: solid 1px var(--gris);
+    border-radius: 10px;
+}
+
+.turno-card:hover{
+    box-shadow: 10px 10px 0 0 var(--gris);
+}
+
+.turno-titulo-text {
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.turno-text {
+    padding: 10px 0 0;
+
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.turno-info{    
+    margin: 0 0 2rem;
+}
+
+.option-pill-access{
+    font-size: 16px;
+}
+
+.option-pill-access:hover{
+    outline-width: 3px;
+    outline-offset: 3px;
+}
+
+@media(min-width:768px){
+    .turno-card{
+        width: 70%;
+        margin: 0 auto 2rem;
+    }
+}
+
+@media(min-width:1280px){
+    .turnos-section{
+        padding: 0 5rem;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+
+    .turno-card{
+        max-width: 400px;
+        margin: 0 auto 2rem;
+    }
+}

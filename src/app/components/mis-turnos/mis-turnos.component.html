@@ -1,0 +1,28 @@
+<app-nav />
+<div class="title flex-column">
+    <h1>Turnos Pendientes</h1>
+    <span>Estos son los turnos que tiene usted pendiente. Puede <b>cancelarlos</b> si desea.</span>
+</div>
+
+<div class="turnos-section">
+    <div class="turno-card" *ngFor="let turno of turnos">
+        <ul class="turno-info">
+            <li class="turno-titulo-text"> DD/MM, a las HH:MM </li>
+            <li class="turno-text"> Duración: MM min </li>
+            <li class="turno-text"> Lugar: lugar </li>
+            <li class="turno-text"> <b>Consultorio consultorio </b></li>
+        </ul>
+        <div class="flex-row">
+            <button class="option-pill-access red-button-access">Cancelar Turno</button>
+        </div>
+
+       <!--  <div [ngClass]="{'hidden': isMenuHidden}">
+            <p>¿Desea cancelar el turno?</p>
+            <div class="flex-row">
+                <button class="option-pill-access green-button-access">Sí</button>
+                <button class="option-pill-access red-button-access" (click)="toggleMenu()">No</button>
+            </div>
+        </div> -->
+
+    </div>
+</div>

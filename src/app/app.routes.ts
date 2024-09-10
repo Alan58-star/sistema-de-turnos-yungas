@@ -11,6 +11,7 @@ import { SecretariaPageComponent } from './components/secretaria-page/secretaria
 import { FormTurnoComponent } from './components/form-turno/form-turno.component';
 import { RegistroComponent } from './components/registro/registro.component';
 import { FormNuevoTurnoComponent } from './components/secretaria-page/form-nuevo-turno/form-nuevo-turno.component';
+import { MisTurnosComponent } from './components/mis-turnos/mis-turnos.component';
 
 export const routes: Routes = [
     {path: '', component:BodyComponent},
@@ -26,4 +27,5 @@ export const routes: Routes = [
     {path: 'form-turno/:id', component:FormTurnoComponent},
     {path: 'registro', component:RegistroComponent},
     {path: 'secretaria/nuevo-turno', component:FormNuevoTurnoComponent},
+    {path: 'mis-turnos', component:MisTurnosComponent},
 ];
