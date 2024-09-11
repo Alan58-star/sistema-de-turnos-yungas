@@ -1,6 +1,7 @@
 const Paciente = require('../models/Paciente');
 const Turno = require('../models/Turno');
-
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 exports.crearPaciente = async(req,res) => {
    try{     
     let log = await Paciente.find().where('dni').equals(req.body.dni)
@@ -122,4 +123,92 @@ exports.obtenerTurnosDelPaciente = async (req, res) => {
         console.error('Error al obtener los turnos del paciente:', error.message);
         res.status(500).send('Hubo un error al obtener los turnos');
     }
+}
+//LOGIN
+
+exports.register = async(req,res) => {
+    try{     
+     let log = await Paciente.find().where('dni').equals(req.body.dni)
+         if(log[0]==null){
+             try{
+ 
+                 let paciente;
+                 //Creamos Paciente
+                 req.body.passw = bcrypt.hashSync(req.body.passw,12);
+                 paciente = new Paciente(req.body);
+                 await paciente.save();
+                 //res.send(paciente);
+                 res.json({
+                    'status': '1',
+                    'msg': 'Paciente guardado.'
+                })
+ 
+             }catch(error){
+                 console.log(error);
+                 res.json({
+                    'status': '0',
+                    'msg': 'Error procesando operacion.'
+                })
+             }
+         }else{
+             res.json({
+                 'status': '2',
+                 'msg': 'Medico Dni, Con el mismo dni'
+             })
+         }
+     }catch(error){
+         console.log(error);
+         res.json({
+            'status': '0',
+            'msg': 'Error procesando operacion.'
+        })
+     }
+ }
+ exports.login = async(req,res) => {
+    try{
+     const paciente = await Paciente.findOne({dni: req.body.dni});
+     if(!paciente){
+        return res.json({
+            'status': '2',
+            'msg': 'Error en el DNI o contraseña'
+        }) 
+     }
+     else{
+        const eq = bcrypt.compareSync(req.body.passw, paciente.passw);
+      
+        if(!eq){
+            return res.json({
+                'status': '3',
+                'msg': 'Error en el DNI o contraseña',
+                
+            }) 
+        }
+        else{
+            return res.json({
+                'status': '1',
+                'msg': 'Login correcto.',
+                'token': createToken(paciente),
+                'dni': paciente.dni,
+                'telefono': paciente.telefono,
+                'id': paciente._id,
+                'rol':paciente.rol,
+                'nombre':paciente.nombre
+            })
+        }
+     }
+    }catch(error){
+            console.log(error);
+            return res.json({
+               'status': '0',
+               'msg': 'Error procesando operacion.'
+           })
+        }
+}
+
+function createToken(paciente){
+    const payload={
+        paciente_id:paciente._id,
+        paciente_rol:paciente.rol
+    }
+    return jwt.sign(payload,'en un lugar de las Heras');
 }

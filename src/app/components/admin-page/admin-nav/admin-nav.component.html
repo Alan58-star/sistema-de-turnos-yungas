@@ -1,9 +1,9 @@
 <nav>    
     <div class="flex-row">
         <div class="logo">Logo del Hospital</div>
-        <span class="user-label">Usuario: NOMBRE USUARIO</span>
+        <span class="user-label text-white">Usuario: {{_loginService.userLogged()}}</span>
         <div class="nav-items-list flex-row">
-            <button class="nav-item logout-button">Cerrar Sesión</button>
+            <button class="nav-item logout-button" (click)="logout()">Cerrar Sesión</button>
         </div>
     </div>
 </nav>

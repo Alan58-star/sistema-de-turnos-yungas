@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { LoginService } from '../../../services/login.service';
 
 @Component({
   selector: 'app-nav',
@@ -11,8 +12,13 @@ import { RouterLink } from '@angular/router';
 })
 export class NavComponent {
   isNavMenuHidden: boolean = true;
+  constructor(public _loginService:LoginService){
 
+  }
   toggleMenu = () => {
     this.isNavMenuHidden = ! this.isNavMenuHidden;
+  }
+  public logout() {
+    this._loginService.logout();
   }
 }

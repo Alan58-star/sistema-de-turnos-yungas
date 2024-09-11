@@ -1,4 +1,4 @@
-const mongoose = require ('mongoose');
+const {mongoose, Schema} = require ('mongoose');
 const PacienteSchema = mongoose.Schema({
     dni:{
         type: Number,
@@ -20,6 +20,11 @@ const PacienteSchema = mongoose.Schema({
         type: Number,
         required:false,
         default:0
+    },
+    rol:{
+        type: String,
+        required:false,
+        default: 'paciente'
     }
 });
 

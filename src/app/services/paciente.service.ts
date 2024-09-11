@@ -19,7 +19,10 @@ export class PacienteService {
     return this.http.get<Paciente>(`${this.url}/${id}`);
   }
   postPaciente(paciente: Paciente){
-    return this.http.post<any>(this.url, paciente);
+    return this.http.post<any>(this.url+'/register', paciente);
+  }
+  loginUsuario(formulario: any){
+    return this.http.post<any>(this.url+'/login', formulario);
   }
   deletePaciente(id:any){
     return this.http.delete<any>(`${this.url}/${id}`);

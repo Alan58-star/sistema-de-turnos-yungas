@@ -9,9 +9,13 @@
         <div class="mobile-menu" [ngClass]="{'hidden': isNavMenuHidden}">
             <div class="nav-items-list flex-column">
                 <button class="nav-item turno-button" routerLink="/especialidades">SACAR TURNO</button>
-                <button class="nav-item login-button" routerLink="/login">Iniciar Sesión</button>
+                <button *ngIf="!_loginService.userLoggedIn()" class="nav-item login-button" routerLink="/login">Iniciar Sesión</button>
+                <button *ngIf="_loginService.userLoggedIn()" class="nav-item login-button" routerLink="/login" (click)="logout()">Cerrar Sesión</button>
+                
+                
             </div>
         </div>
+        <div *ngIf="_loginService.rolLogged()=='paciente'">Holaa</div>
     </div>
 
     <div class="widescreen-nav flex-row">
@@ -20,7 +24,9 @@
         </div>
         <div class="nav-items-list flex-row">
             <button class="nav-item turno-button" routerLink="/especialidades">SACAR TURNO</button>
-            <button class="nav-item login-button" routerLink="/login">Iniciar Sesión</button>
+            <button *ngIf="!_loginService.userLoggedIn()" class="nav-item login-button" routerLink="/login">Iniciar Sesión</button>
+            <button *ngIf="_loginService.userLoggedIn()" class="nav-item login-button" routerLink="/login" (click)="logout()">Cerrar Sesión</button>
+                
         </div>
     </div>
 </nav>
