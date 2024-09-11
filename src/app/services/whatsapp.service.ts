@@ -65,8 +65,56 @@ export class WhatsappService {
               // },
               // {
               //   type: 'text',
-              //   text: var3  // Reemplaza {{3}}
+              //   text: var3
               // }
+            ]
+          }
+        ]
+      }
+    };
+  
+    return this._http.post(this.urlBase, body, { headers });
+  }
+
+  demo(target: string, name: string): Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.token}`,
+      'Content-Type': 'application/json'
+    });
+  
+    const body = {
+      messaging_product: 'whatsapp',
+      to: target,
+      type: 'template',
+      template: {
+        name: 'info_turno',  // El nombre de tu plantilla en WhatsApp
+        language: {
+          code: 'es_AR'  // El idioma de la plantilla
+        },
+        components: [
+          {
+            type: 'body',
+            parameters: [
+              {
+                type: 'text',
+                text: name  // Aquí colocas el valor de la variable que quieres pasar
+              },
+              {
+                type: 'text',
+                text: '19 de septiembre de 2024, 10:00 AM  '
+              },
+              {
+                type: 'text',
+                text: 'Lionel Messi'
+              },
+              {
+                type: 'text',
+                text: 'cons 1'
+              },
+              {
+                type: 'text',
+                text: 'Cirugia'
+              }
             ]
           }
         ]

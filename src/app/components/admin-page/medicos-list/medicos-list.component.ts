@@ -64,7 +64,7 @@ export class MedicosListComponent {
   public sendMesagge(phone:string, name:string){
     console.log(name);
     
-    this.wppService.sendMessage(phone, name).subscribe((result) => {
+    this.wppService.demo(phone, name).subscribe((result) => {
         console.log(result);
       
     })
