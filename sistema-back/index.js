@@ -5,6 +5,8 @@ const cors = require('cors');
 //Creamos servidor
 const app = express();
 
+require('./cron');
+
 conectarDB();
 app.use(cors())
 app.use(express.json());
