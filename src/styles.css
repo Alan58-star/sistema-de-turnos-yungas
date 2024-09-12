@@ -6,7 +6,7 @@
     --negro: #343434;
     --gris: #d8daec;
     --azul: #252C61;
-    --celeste: #85A8CF;
+    --celeste: #7ca5dc;
     --cian: #99E1DE;
     --verde: #11b67c;
     --amarillo: #eec937;
@@ -20,12 +20,12 @@
     --rojoC: #ffd8df;
         
     --azulO: #1b214b;
-    --grisO: #898DA9;
+    --grisO: #9ca0c1;
     --celesteO: #4c63a9;
     --cianO: #046068;
     --verdeO: #109f51;
     --amarilloO: #fffccd;
-    --rojoO: #ffd8df;
+    --rojoO: #411d1d;
 }
 
 * {
@@ -39,7 +39,7 @@
 }
 
 a{
-    color: var(--verde);
+    color: var(--celeste);
     font-weight: 600;
 }
 
@@ -198,7 +198,7 @@ input[type="date"]{
 
 .blue-button{
     background-color:var(--celesteC);
-    color: var(--celeste);
+    color: var(--azul);
 }
 
 .blue-button:hover{
@@ -278,12 +278,12 @@ input[type="date"]{
 }
 
 .blue-button-access{
-    background-color:var(--celeste);
+    background-color:var(--azul);
     color: #fff;
 }
 
 .blue-button-access:hover{
-    outline-color: var(--celeste);
+    outline-color: var(--azul);
 }
 
 .yellow-button-access{
@@ -293,6 +293,15 @@ input[type="date"]{
 
 .yellow-button-access:hover{
     outline-color: var(--amarillo);
+}
+
+.gray-button-access{
+    background-color:var(--grisO);
+    color: #fff;
+}
+
+.gray-button-access:hover{
+    outline-color: var(--grisO);
 }
 
 .hidden{

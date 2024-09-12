@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { NavComponent } from "../main-page/nav/nav.component";
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-mis-turnos',
   standalone: true,
-  imports: [NavComponent, CommonModule],
+  imports: [NavComponent, CommonModule, RouterLink],
   templateUrl: './mis-turnos.component.html',
   styleUrl: './mis-turnos.component.css'
 })

@@ -10,15 +10,14 @@
         <input type="number" name="user-dni" id="user-dni" formControlName="dni" required>
        <div>
         <label for="user-pass">Contraseña</label>
-        <input [type]="passwd ? 'text' : 'password'" name="user-pass" id="user-pass" formControlName="passw" required>
-        
-        <div class="form-check form-switch text-white mt-2 mb-3">
-           <input type="checkbox" class="form-check-input" id="showPwd" (click)="showHidePwd()">
-           <label for="showPwd" class="form-check-label"><small>Mostrar contraseña</small></label>
-        </div>
+        <input [type]="passwd ? 'text' : 'password'" name="user-pass" id="user-pass" formControlName="passw" required>        
     </div>
         <div class="flex-row">
-            <button class="option-pill-access green-button-access">Ingresar</button>
+            <button type="button" class="option-pill-access" style="margin-bottom: 2rem" (click)="showHidePwd()" [ngClass]="{hidden: passwd}">Mostrar Contraseña</button>
+            <button type="button" class="option-pill-access gray-button-access" style="margin-bottom: 2rem" (click)="showHidePwd()" [ngClass]="{hidden: !passwd}">Ocultar Contraseña</button>
+        </div>
+        <div class="flex-row">
+            <button class="option-pill-access blue-button-access">Ingresar</button>
         </div>
     </form>
     

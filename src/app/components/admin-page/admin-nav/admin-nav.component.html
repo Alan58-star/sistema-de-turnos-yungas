@@ -1,9 +1,16 @@
 <nav>    
-    <div class="flex-row">
-        <div class="logo">Logo del Hospital</div>
-        <span class="user-label text-white">Usuario: {{_loginService.userLogged()}}</span>
+    <div class="widescreen-nav flex-row">
+        <div class="logo">
+            <img src="logos/logo-lg-transp.png" alt="Logo del Hospital Distrital Las Heras" class="logo">
+        </div>
         <div class="nav-items-list flex-row">
-            <button class="nav-item logout-button" (click)="logout()">Cerrar Sesión</button>
+            <div class="logged-user-info nav-item">
+                <span style="margin-right: 1rem;">Sesión iniciada como: </span>
+                <span class="usertype">TIPO USUARIO </span>
+                <span class="username">Nombre Usuario</span>
+            </div>
+            <button class="nav-item logout-button" routerLink="/login" (click)="logout()">Cerrar Sesión</button>
+                
         </div>
     </div>
 </nav>
