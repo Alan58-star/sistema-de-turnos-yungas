@@ -9,8 +9,31 @@
     justify-content: space-between;
 }
 
+.nav-items-list{
+    width: 50%;
+}
+
+.logged-user-info{
+    background-color: var(--azulO);
+    align-self: center;
+
+    *{
+        color: #fff;
+        font-size: 14px;
+        font-weight: 200;
+    }
+    .usertype{
+        font-size: 18px;
+        font-weight: 600;
+        color:var(--cian);
+        text-transform: capitalize;
+    }
+    .username{
+        font-size: 16px;
+        font-weight: 400;
+    }
+}
+
 .logout-button{
     width: 30%;
-    background-color: var(--rojoC);
-    margin-left: auto;
 }

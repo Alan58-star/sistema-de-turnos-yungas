@@ -29,8 +29,12 @@ tr:hover td{
     background-color: #efeff3;
 }
 
+input{
+    margin-bottom: 1rem;
+}
+
 .small-button{
-    margin:3rem 3rem 3rem;
+    margin:3rem 3rem 0;
     margin-left: auto;
     width: 200px;
 }

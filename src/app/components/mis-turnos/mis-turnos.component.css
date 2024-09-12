@@ -10,6 +10,12 @@ button{
     margin-bottom: 0;
 }
 
+.return-button{
+    margin: 1.3rem;
+    padding: 1rem;
+    width: 200px;
+}
+
 .turnos-section{
     width: 100%;
     padding: 0 2rem;
@@ -60,11 +66,11 @@ button{
     margin: 0 0 2rem;
 }
 
-.option-pill-access{
+.cancel-turno{
     font-size: 16px;
 }
 
-.option-pill-access:hover{
+.cancel-turno:hover{
     outline-width: 3px;
     outline-offset: 3px;
 }

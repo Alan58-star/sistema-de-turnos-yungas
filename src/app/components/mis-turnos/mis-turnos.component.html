@@ -1,4 +1,6 @@
 <app-nav />
+<button routerLink="/main-page" routerLinkActive="active" ariaCurrentWhenActive="page" class="option-pill-access blue-button-access return-button" routerLink="">< Volver</button>
+
 <div class="title flex-column">
     <h1>Turnos Pendientes</h1>
     <span>Estos son los turnos que tiene usted pendiente. Puede <b>cancelarlos</b> si desea.</span>
@@ -13,7 +15,7 @@
             <li class="turno-text"> <b>Consultorio consultorio </b></li>
         </ul>
         <div class="flex-row">
-            <button class="option-pill-access red-button-access">Cancelar Turno</button>
+            <button class="option-pill-access red-button-access cancel-turno">Cancelar Turno</button>
         </div>
 
        <!--  <div [ngClass]="{'hidden': isMenuHidden}">
