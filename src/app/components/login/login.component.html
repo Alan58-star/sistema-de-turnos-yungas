@@ -9,14 +9,13 @@
         <label for="user-dni">DNI</label>
         <input type="number" name="user-dni" id="user-dni" formControlName="dni" required>
        <div>
-        <label for="user-pass">Contraseña</label>
-        <input [type]="passwd ? 'text' : 'password'" name="user-pass" id="user-pass" formControlName="passw" required>
-        
-        <div class="form-check form-switch text-white mt-2 mb-3">
-           <input type="checkbox" class="form-check-input" id="showPwd" (click)="showHidePwd()">
-           <label for="showPwd" class="form-check-label"><small>Mostrar contraseña</small></label>
+            <label for="user-pass">Contraseña</label>
+            <input [type]="passwd ? 'text' : 'password'" name="user-pass" id="user-pass" formControlName="passw" required>
+            
+            <input type="checkbox" class="form-check-input" id="showPwd" (click)="showHidePwd()">
+            <label for="showPwd" class="form-check-label"><small>Mostrar contraseña</small></label>
+            
         </div>
-    </div>
         <div class="flex-row">
             <button class="option-pill-access green-button-access">Ingresar</button>
         </div>

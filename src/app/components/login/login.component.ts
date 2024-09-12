@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Injectable, OnInit } from '@angular/core';
 import { RouterLink,Router,ActivatedRoute } from '@angular/router';
 
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validator, Validators } from '@angular/forms';
@@ -13,6 +13,7 @@ import { LoginService } from '../../services/login.service';
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
+
 export class LoginComponent implements OnInit{
   pacienteForm:FormGroup;
   passwd: boolean = false;
