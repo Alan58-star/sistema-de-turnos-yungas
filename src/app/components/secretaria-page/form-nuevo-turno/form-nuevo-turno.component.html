@@ -13,14 +13,14 @@
         <select name="medico" formControlName="medico" id="medico">
             <option value="{{medico._id}}" *ngFor="let medico of _medicoService.medicos" >{{medico.nombre}}</option>
         </select>
-        <label for="fecha">Fecha y hora del Turno<small style="color: var(--verde);"> (Clic en el ícono para abrir el calendario)</small></label>
+        <label for="fecha">Fecha y hora del Turno<small style="color: var(--celeste);"> (Clic en el ícono para abrir el calendario)</small></label>
         <input type="datetime-local" name="fecha" id="fecha" formControlName="fecha">
-        <label for="duracion">Duración<small style="color: var(--verde);"> En minutos</small></label>
+        <label for="duracion">Duración<small style="color: var(--celeste);"> En minutos</small></label>
         <input type="number" formControlName="duracion" name="duracion" id="duracion">
         <label for="consultorio">Lugar</label>
         <input type="text" formControlName="consultorio" name="consultorio" id="consultorio">
         <div class="flex-row">
-            <button type="sumbit" class="option-pill green-button" (click) = "mostrarToast()">
+            <button type="sumbit" class="option-pill blue-button" (click) = "mostrarToast()">
                 + Crear Turno
             </button>
         </div>

@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validator, Validators } from '@angular/forms';
 import { PacienteService } from '../../services/paciente.service';
 import {Paciente} from '../../models/paciente'
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-registro',
   standalone: true,
@@ -13,7 +14,7 @@ import {Paciente} from '../../models/paciente'
 export class RegistroComponent implements OnInit{
   pacienteForm:FormGroup;
   
-  constructor(private fb:FormBuilder, public _pacienteService: PacienteService){
+  constructor(private fb:FormBuilder, public _pacienteService: PacienteService,private toastr: ToastrService,private router:Router){
     this.pacienteForm = this.fb.group({
       dni: ['',Validators.required],
       nombre: ['',Validators.required],
@@ -36,11 +37,22 @@ export class RegistroComponent implements OnInit{
     
     this._pacienteService.postPaciente(PACIENTE).subscribe({
       next:(data) => {
-        console.log(data);
+        if(data.status=='1'){
+          this.toastr.success("Cuenta creada con exito")
+          this.router.navigateByUrl('/login');
+        }
+        
+        if(data.status=='2'){
+          this.toastr.error("El DNI ya esta registrado")
+        }
+        
+        if(data.status=='0'){
+          this.toastr.error(data.msg)
+        }
         
       },
       error:(e) => {
-        console.log(e);
+        this.toastr.success(e);
       },
       
     })

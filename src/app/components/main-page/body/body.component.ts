@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { OptionCardComponent } from '../../ui/option-card/option-card.component';
 import { NavComponent } from '../nav/nav.component';
+import { LoginService } from '../../../services/login.service';
 
 @Component({
   selector: 'app-body',
@@ -10,5 +11,8 @@ import { NavComponent } from '../nav/nav.component';
   styleUrl: './body.component.css'
 })
 export class BodyComponent {
+  constructor(public _loginService:LoginService){
+
+  }
 
 }

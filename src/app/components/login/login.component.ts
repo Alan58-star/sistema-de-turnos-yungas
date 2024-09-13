@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Injectable, OnInit } from '@angular/core';
 import { RouterLink,Router,ActivatedRoute } from '@angular/router';
 
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validator, Validators } from '@angular/forms';
@@ -6,13 +6,15 @@ import { PacienteService } from '../../services/paciente.service';
 import { Paciente } from '../../models/paciente';
 import { Toast, ToastrService } from 'ngx-toastr';
 import { LoginService } from '../../services/login.service';
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [RouterLink,ReactiveFormsModule],
+  imports: [RouterLink,ReactiveFormsModule, CommonModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
+
 export class LoginComponent implements OnInit{
   pacienteForm:FormGroup;
   passwd: boolean = false;
@@ -22,7 +24,7 @@ export class LoginComponent implements OnInit{
       passw: new FormControl(),
       
     });
-    
+    this.passwd = false;    
   }
   ngOnInit(): void {
     
@@ -68,7 +70,7 @@ export class LoginComponent implements OnInit{
   }
 showHidePwd(){
   this.passwd = !this.passwd;
-  console.log(this.passwd)
+  console.log(this.passwd);
 }
   
 }
