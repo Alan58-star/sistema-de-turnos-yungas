@@ -13,10 +13,13 @@ import { CommonModule } from '@angular/common';
   styleUrl: './registro.component.css'
 })
 export class RegistroComponent implements OnInit{
+  //Variables condicionales.
   pacienteForm:FormGroup;
   passwordMismatch: boolean = false;
   dniInvalid: boolean = false;
   passwd: boolean = false;
+
+  //Inicio
   constructor(private fb:FormBuilder, public _pacienteService: PacienteService,private toastr: ToastrService,private router:Router){
     this.pacienteForm = this.fb.group({
       dni: ['',
@@ -33,6 +36,7 @@ export class RegistroComponent implements OnInit{
       passw2: ['',Validators.required],
       
     });
+
     // Monitorear cambios en tiempo real
     this.pacienteForm.get('passw2')?.valueChanges.subscribe(() => {
       this.checkPasswords();
@@ -41,8 +45,7 @@ export class RegistroComponent implements OnInit{
     this.pacienteForm.get('passw1')?.valueChanges.subscribe(() => {
       this.checkPasswords();
     });
-    this.pacienteForm.get('dni')?.valueChanges.subscribe(() => {
-      
+    this.pacienteForm.get('dni')?.valueChanges.subscribe(() => {  
       this.checkDni();
     });
   }
@@ -93,6 +96,9 @@ export class RegistroComponent implements OnInit{
         
         if(data.status=='0'){
           this.toastr.error(data.msg)
+        }
+        if(data.status=='3'){
+          this.toastr.error("El telefono ya esta registrado")
         }
         
       },

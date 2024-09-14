@@ -129,7 +129,8 @@ exports.obtenerTurnosDelPaciente = async (req, res) => {
 exports.register = async(req,res) => {
     try{     
      let log = await Paciente.find().where('dni').equals(req.body.dni)
-         if(log[0]==null){
+     let tel = await Paciente.find().where('telefono').equals(req.body.telefono)
+         if(log[0]==null && tel[0]==null){
              try{
  
                  let paciente;
@@ -151,10 +152,19 @@ exports.register = async(req,res) => {
                 })
              }
          }else{
-             res.json({
-                 'status': '2',
-                 'msg': 'Medico Dni, Con el mismo dni'
-             })
+            if(log[0]!=null){
+                res.json({
+                    'status': '2',
+                    'msg': 'Paciente Dni, Con el mismo dni'
+                })
+            }
+            else{
+                res.json({
+                    'status': '3',
+                    'msg': 'Paciente Tel, Con el mismo telefono'
+                })
+            }
+             
          }
      }catch(error){
          console.log(error);
