@@ -44,7 +44,7 @@ export class FormTurnoComponent implements OnInit{
   agregarTurno(turno:TurnoServ){
     console.log(this.turno);
     this.turno.obras_sociales=[this.turnoForm.get('obra')?.value];
-    this.turno.paciente_id="66dbe2eecf2ded2f7d2fc25a";
+    this.turno.paciente_id= sessionStorage.getItem('id');
     this.turno.estado="Ocupado"
     this._turnoService.putTurno(this.turno).subscribe({
       next:(data) => {

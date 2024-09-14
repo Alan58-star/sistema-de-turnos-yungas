@@ -6,7 +6,7 @@ const {
 } = require("@angular-devkit/build-angular/src/builders/ssr-dev-server");
 
 const token =
-  "EAASUrq8QlP0BOxPPo0tuiVMd5VLBtdbYWtnT4kFvC2xCOX1aXrxM4FXDZB8andSgvDxfOYAbBRlzWi1kQXYyjN4z46K0IyaeZCDUqy0e7fvpxu71DTqYfB38igLgAhJKZBrdgbPVl3NK3GuZBfoOXpmZCGLIZBppChKZC424oFyAIKNrEZCpZBb0g6iJroJwaal9mZAzwi8Ubi862k3IU1ivekQfVswEPoK0q5ph7ZB";
+  "EAASUrq8QlP0BOzmKfZBraJjTmh9OoTKqZCFiIxhCnWfl6tvzuQGtZC0mIdSA9DdyiZBZB6aEZCarKVALzXzZAlatPB0n0rKk3sTZAWkzzE9JZBIco3GHCc1skAL2rj0mvY1ErlD1fZAv05rRsC1ZAclBRZAgwGwkhBzBseMCae0rSwBtZAoP2N5mF0YDCiPtJBv2EZAQa0APSD5at6BOdZAT87dRI2iN48ismVHMQFZBmgUZD";
 const recipientPhoneNumber = "543884796051";
 
 // obtenerTurnos();
@@ -14,13 +14,14 @@ const recipientPhoneNumber = "543884796051";
 // console.log(turnos);
 
 
-cron.schedule("46 22 * * *", () => {
-  procesarTurnos();
+procesarTurnos();
+cron.schedule("10 00 * * *", () => {
   // enviarMensajeWhatsApp();
   // obtenerTurnos()
 });
 
 async function enviarMensajeWhatsApp(
+  number,
   nombre,
   fecha,
   doctor,
@@ -32,7 +33,7 @@ async function enviarMensajeWhatsApp(
       `https://graph.facebook.com/v20.0/398388510029004/messages`,
       {
         messaging_product: "whatsapp",
-        to: recipientPhoneNumber,
+        to: number,
         type: "template",
         template: {
           name: "info_turno",
@@ -100,18 +101,29 @@ async function procesarTurnos() {
   let turnos = await obtenerTurnos();
   for (let i = 0; i < turnos.length; i++) {
     if (turnos[i].fecha) {
+      
+      
       const fechaTurno = new Date(turnos[i].fecha);
       const fechaActual = new Date(); // Fecha y hora actual
 
       // Comparamos las fechas. Puedes ajustar la lógica de comparación según lo que necesites.
       if (fechaTurno.toDateString() === fechaActual.toDateString()) {
-        enviarMensajeWhatsApp(
-          turnos[i].paciente_id.nombre,
-          turnos[i].fecha,
-          turnos[i].medico_id,
-          turnos[i].consultorio,
-          turnos[i].especialidad_id.nombreEsp
-        );
+
+        // let doctor = turnos[i].medico_id.apellido
+        if (turnos[i].medico_id != null) {
+          console.log(turnos[i]);
+          
+          enviarMensajeWhatsApp(
+            turnos[i].paciente_id.telefono,
+            turnos[i].paciente_id.nombre,
+            turnos[i].fecha,
+            turnos[i].medico_id.nombre,
+            turnos[i].consultorio,
+            turnos[i].especialidad_id.nombreEsp
+          );
+        }
+        
+        
       }
     }
   }
