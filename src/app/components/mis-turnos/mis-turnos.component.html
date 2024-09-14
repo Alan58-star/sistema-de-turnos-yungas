@@ -7,12 +7,12 @@
 </div>
 
 <div class="turnos-section">
-    <div class="turno-card" *ngFor="let turno of turnos">
+    <div class="turno-card" *ngFor="let turno of _pacienteService.turnos">
         <ul class="turno-info">
-            <li class="turno-titulo-text"> DD/MM, a las HH:MM </li>
-            <li class="turno-text"> Duración: MM min </li>
-            <li class="turno-text"> Lugar: lugar </li>
-            <li class="turno-text"> <b>Consultorio consultorio </b></li>
+            <li class="turno-titulo-text"> {{turno.fecha}} </li>
+            <li class="turno-text"> Duración: {{turno.duracion}} min </li>
+            <li class="turno-text"> Medico: {{turno.medico_id.apellido}} {{turno.medico_id.nombre}} </li>
+            <li class="turno-text"> <b>Consultorio {{turno.consultorio}} </b></li>
         </ul>
         <div class="flex-row">
             <button class="option-pill-access red-button-access cancel-turno">Cancelar Turno</button>

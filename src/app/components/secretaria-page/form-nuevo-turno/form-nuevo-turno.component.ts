@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminNavComponent } from "../../admin-page/admin-nav/admin-nav.component";
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { EspecialidadService } from '../../../services/especialidad.service';
 import { CommonModule } from '@angular/common';
 import { MedicoService } from '../../../services/medico.service';
@@ -23,6 +23,8 @@ export class FormNuevoTurnoComponent implements OnInit{
   
   ngOnInit(): void {
     this.getEspecialidades();
+    this._especialidadService.especialidades=[];
+    this._medicoService.medicos=[];
     
   }
   constructor(
@@ -30,7 +32,8 @@ export class FormNuevoTurnoComponent implements OnInit{
     public _especialidadService:EspecialidadService, 
     public _medicoService:MedicoService, 
     public _turnoService:TurnoService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private router:Router
   ){
 
     this.turnoForm = this.fb.group({
@@ -51,11 +54,16 @@ export class FormNuevoTurnoComponent implements OnInit{
       estado:"Disponible"
 
     }
-    console.log(this.turnoForm.get('medico')?.value)
-    console.log(this.turnoForm.get('fecha')?.value)
+    if(this.turnoForm.invalid){
+      console.log(this.turnoForm);
+      this.toastr.error("Todos los campos deben estar completos");
+      return;
+    }
     this._turnoService.postTurno(TURNO).subscribe({
       next:(data) => {
-        console.log(data);
+        
+        this.toastr.success(data.msg);
+        this.router.navigateByUrl('secretaria');
         
       },
       error:(e) => {
@@ -63,6 +71,29 @@ export class FormNuevoTurnoComponent implements OnInit{
       },
       
     })
+    this._medicoService.getMedico(this.turnoForm.get('medico')?.value).subscribe({
+      next:(data) => {
+        let medico=data;
+        medico.disponibles=medico.disponibles+1;
+        console.log(medico);
+        this._medicoService.putMedico(data).subscribe({
+          next:(data) => {
+            console.log(data);
+            
+          },
+          error:(e) => {
+            console.log(e);
+          },
+          
+        })
+        
+      },
+      error:(e) => {
+        console.log(e);
+      },
+      
+    })
+
   }
   getEspecialidad(){
     this._especialidadService.getEspecialidad('66d7e1d5a93d91e9064ecb3e').subscribe({

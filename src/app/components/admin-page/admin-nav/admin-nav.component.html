@@ -6,8 +6,8 @@
         <div class="nav-items-list flex-row">
             <div class="logged-user-info nav-item">
                 <span style="margin-right: 1rem;">Sesión iniciada como: </span>
-                <span class="usertype">TIPO USUARIO </span>
-                <span class="username">Nombre Usuario</span>
+                <span class="usertype">{{_loginService.rolLogged()}} </span>
+                <span class="username">{{_loginService.userLogged()}}</span>
             </div>
             <button class="nav-item logout-button" routerLink="/login" (click)="logout()">Cerrar Sesión</button>
                 

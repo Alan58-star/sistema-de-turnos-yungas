@@ -2,13 +2,14 @@
 const express = require('express');
 const conectarDB = require('./config/db');
 const cors = require('cors');
+const {checkToken} = require('./utils/middleware')
 //Creamos servidor
 const app = express();
 
 conectarDB();
 app.use(cors())
 app.use(express.json());
-app.use('/api/medico', require('./routes/medico'));
+app.use('/api/medico',checkToken, require('./routes/medico'));
 app.use('/api/especialidad', require('./routes/especialidad'));
 app.use('/api/paciente', require('./routes/paciente'));
 app.use('/api/turno', require('./routes/turno'));

@@ -11,17 +11,23 @@ exports.crearMedico = async(req,res) => {
                 //Creamos Medico
                 medico = new Medico(req.body);
                 await medico.save();
-                res.send(medico);
+                res.json({
+                    'status': '1',
+                    'msg': 'Medico guardado.'
+                })
         
             }catch(error){
                 console.log(error);
-                res.status(500).send('Hubo un error');
+                res.json({
+                    'status': '2',
+                    'msg': 'Hubo un error.'
+                })
             }
         }
         else{
             res.json({
                 'status': '2',
-                'msg': 'Medico Existente, Con el mismo Legajo'
+                'msg': 'Medico Existente, Con la misma matricula'
             })
         }
         

@@ -5,12 +5,16 @@
         <button class="option-pill small-button" routerLink="/admin">Volver al Inicio</button>
     </div>
     <form action="#" method="post" class="form" [formGroup]="medicoForm" (ngSubmit)="agregarMedico()">
-        <label for="legajo">Legajo <small style="color: var(--celeste);">Sólo números</small></label>
+        <label for="legajo">Matricula <small style="color: var(--celeste);">Sólo números</small></label>
         <input type="number" formControlName="legajo" name="legajo" id="legajo" inputmode="numeric">
         <label for="apellido">Apellido</label>
         <input type="text" formControlName="apellido" name="apellido" id="apellido">
         <label for="nombres">Nombres</label>
         <input type="text" formControlName="nombre" name="nombres" id="nombres">
+        <label for="especialidad">Especialidad</label>
+        <select name="especialidad" id="especialidad"  formControlName="especialidad">
+            <option value="{{especialidad._id}}" *ngFor="let especialidad of _especialidadService.especialidades" > {{especialidad.nombreEsp}} </option>
+        </select>
         <div class="flex-row">
             <button type="submit" class="option-pill blue-button">
                 + Dar de Alta

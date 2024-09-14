@@ -12,20 +12,25 @@ import { FormTurnoComponent } from './components/form-turno/form-turno.component
 import { RegistroComponent } from './components/registro/registro.component';
 import { FormNuevoTurnoComponent } from './components/secretaria-page/form-nuevo-turno/form-nuevo-turno.component';
 import { MisTurnosComponent } from './components/mis-turnos/mis-turnos.component';
+import { loginGuardAdmin } from './guards/login.guard';
+import { loginGuardSecretaria } from './guards/login.guard';
+import { loginGuardPaciente } from './guards/login.guard';
 
 export const routes: Routes = [
     {path: '', component:BodyComponent},
-    {path: 'admin', component:AdminPageComponent},
-    {path: 'especialidades', component:EsepcialidadesPageComponent},
-    {path: 'admin/medico-list', component:MedicosListComponent},
-    {path: 'admin/medico-form', component:MedicoFormComponent},
-    {path: 'usuario-list', component:UsuariosListComponent},
+    {path: 'admin', component:AdminPageComponent,
+        canActivate:[loginGuardAdmin]
+    },
+    {path: 'especialidades', component:EsepcialidadesPageComponent,canActivate:[loginGuardPaciente]},
+    {path: 'admin/medico-list', component:MedicosListComponent,canActivate:[loginGuardAdmin]},
+    {path: 'admin/medico-form', component:MedicoFormComponent,canActivate:[loginGuardAdmin]},
+    {path: 'usuario-list', component:UsuariosListComponent,canActivate:[loginGuardAdmin]},
     {path: 'login', component:LoginComponent},
     {path: 'recover-password', component:RecoverPasswordComponent},
-    {path: 'secretaria', component:SecretariaPageComponent},
-    {path: 'form-turno', component:FormTurnoComponent},
-    {path: 'form-turno/:id', component:FormTurnoComponent},
+    {path: 'secretaria', component:SecretariaPageComponent,canActivate:[loginGuardSecretaria]},
+    {path: 'form-turno', component:FormTurnoComponent,canActivate:[loginGuardPaciente]},
+    {path: 'form-turno/:id', component:FormTurnoComponent,canActivate:[loginGuardPaciente]},
     {path: 'registro', component:RegistroComponent},
-    {path: 'secretaria/nuevo-turno', component:FormNuevoTurnoComponent},
-    {path: 'mis-turnos', component:MisTurnosComponent},
+    {path: 'secretaria/nuevo-turno', component:FormNuevoTurnoComponent,canActivate:[loginGuardSecretaria]},
+    {path: 'mis-turnos', component:MisTurnosComponent,canActivate:[loginGuardPaciente]},
 ];

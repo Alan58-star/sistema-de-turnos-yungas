@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NavComponent } from "../main-page/nav/nav.component";
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { PacienteService } from '../../services/paciente.service';
 
 @Component({
   selector: 'app-mis-turnos',
@@ -10,7 +11,28 @@ import { RouterLink } from '@angular/router';
   templateUrl: './mis-turnos.component.html',
   styleUrl: './mis-turnos.component.css'
 })
-export class MisTurnosComponent {
+export class MisTurnosComponent implements OnInit {
+  ngOnInit(): void {
+    this.cargarTurnos();
+  }
+  constructor(
+    public _pacienteService:PacienteService
+  ){}
+  cargarTurnos () {
+    
+    
+    
+    this._pacienteService.getTurnosPaciente().subscribe({
+      next:(data) => {
+        this._pacienteService.turnos=data;
+      },
+      error:(e) => {
+        this._pacienteService.turnos=[];
+        console.log(e);
+      },
+      
+    })
+  }
   turnos = [
     {
       idTurno: 1,

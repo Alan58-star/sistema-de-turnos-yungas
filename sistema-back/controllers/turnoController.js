@@ -4,9 +4,15 @@ exports.crearTurno = async (req, res) => {
     try {
         let turno = new Turno(req.body);
         await turno.save();
-        res.status(201).send(turno);
+        res.json({
+            'status': '1',
+            'msg': 'Turno creado.'
+        })
     } catch (error) {
-        res.status(400).send(error);
+        res.json({
+            'status': '0',
+            'msg': 'Error.'
+        })
     }
 };
 
@@ -44,11 +50,23 @@ exports.actualizarTurno = async (req, res) => {
     try {
         const turno = await Turno.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true });
         if (!turno) {
-            return res.status(404).send();
+            return res.json({
+                'status': '1',
+                'msg': 'Error',
+                
+            }) 
         }
-        res.status(200).send(turno);
+        res.json({
+            'status': '2',
+            'msg': 'Turno creado con exito',
+            
+        }) 
     } catch (error) {
-        res.status(400).send(error);
+        res.json({
+            'status': '0',
+            'msg': 'Error en el server',
+            
+        }) 
     }
 };
 

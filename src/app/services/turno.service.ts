@@ -21,7 +21,7 @@ export class TurnoService {
     return this.http.post<any>(this.url, turno);
   }
   putTurno(turno:TurnoServ){
-    return this.http.put(this.url+turno._id,turno);
+    return this.http.put<any>(this.url+turno._id,turno);
   }
   
   getTurno(id:any){

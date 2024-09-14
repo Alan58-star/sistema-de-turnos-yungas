@@ -14,7 +14,7 @@
                             <div class="card-input">
                                 <div class="turno-titulo-text">{{medico.nombre}} {{medico.nombre}}</div>
                                 <div class="turno-text">
-                                    Turnos Disponibles: {{disponible}}
+                                    Turnos Disponibles: {{medico.disponibles}}
                                 </div>
                             </div>
                         </label>
@@ -40,25 +40,28 @@
 
                 <h2>Seleccione sus Obras Sociales</h2>
                 <label for="user-dni">Obra Social 1</label>
-                <select name="obra" id="obra" formControlName="obra" required >
+                <select name="obra" id="obra" formControlName="obra1" required >
                     <option value="{{obra._id}}" *ngFor="let obra of _obraService.obras" >{{obra.nombreOS}}</option>
                 </select>
+            <div *ngIf="obra1">
                 <label for="user-dni">Obra Social 2</label>
-                <select name="obra2" id="obra2">
-                    <option value="NINGUNA">No tengo segunda obra</option>
-                    <option value="BOREAL">BOREAL</option>
-                    <option value="OSDE">OSDE</option>
-                    <option value="ISJ">INSTITUTO DE SEGUROS DE JUJUY</option>
-                    <option value="PAMI">PAMI</option>
+
+                <select name="obra2" id="obra2" formControlName="obra2">
+                    <option value="{{obra1._id}}" *ngFor="let obra1 of _obraService.obras" >{{obra1.nombreOS}}</option>
+                
                 </select>
+            </div>
+            <div *ngIf="obra2">
                 <label for="user-dni">Obra Social 3</label>
-                <select name="obra2" id="obra2">
-                    <option value="NINGUNA">No tengo tercera obra</option>
-                    <option value="BOREAL">BOREAL</option>
-                    <option value="OSDE">OSDE</option>
-                    <option value="ISJ">INSTITUTO DE SEGUROS DE JUJUY</option>
-                    <option value="PAMI">PAMI</option>
+                <select name="obra2" id="obra2" formControlName="obra3">
+                    <option value="{{obra2._id}}" *ngFor="let obra2 of _obraService.obras" >{{obra2.nombreOS}}</option>
                 </select>
+            </div>
+                <div class="flex-row">
+                    <button type="button" class="option-pill-access" style="margin-bottom: 2rem" (click)="agregarObra()" >Agregar otra Obra Social</button>
+                    <button *ngIf="obra1" type="button" class="option-pill-access" style="margin-bottom: 2rem" (click)="sacarObra()" >Sacar Obra Social</button>
+                
+                </div>
                 <div class="flex-column">
                     <button class="option-pill-access green-button-access">Solicitar Turno</button>
                 </div>

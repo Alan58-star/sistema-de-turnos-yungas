@@ -196,7 +196,7 @@ exports.register = async(req,res) => {
         else{
             return res.json({
                 'status': '1',
-                'msg': 'Login correcto.',
+                'msg': 'Sesion Iniciada.',
                 'token': createToken(paciente),
                 'dni': paciente.dni,
                 'telefono': paciente.telefono,

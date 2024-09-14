@@ -9,6 +9,7 @@ import { TurnoService } from '../../services/turno.service';
 import { FormGroup,ReactiveFormsModule,FormBuilder,Validators } from '@angular/forms';
 import { TurnoServ } from '../../models/turnoServ';
 import { Turno } from '../../models/turno';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-form-turno',
@@ -20,7 +21,9 @@ import { Turno } from '../../models/turno';
 export class FormTurnoComponent implements OnInit{
   turnoForm:FormGroup;
   turno:TurnoServ;
-  disponible:number;
+  obra1:boolean=false;
+  obra2:boolean=false;
+  medico_id:any;
   ngOnInit(): void {
     this._medicoService.medicos=[];
     this.cargarObras();
@@ -32,23 +35,66 @@ export class FormTurnoComponent implements OnInit{
       }
     )
   }
-  constructor(private fb:FormBuilder,public _obraService:ObraSocialService,public _turnoService:TurnoService, public _medicoService:MedicoService, private route:Router, private activatedRoute:ActivatedRoute){
+  constructor(private fb:FormBuilder,public _obraService:ObraSocialService,private toastr: ToastrService,public _turnoService:TurnoService, public _medicoService:MedicoService, private route:Router, private activatedRoute:ActivatedRoute){
     this.turnoForm = this.fb.group({
-      obra: ['',Validators.required],
+      obra1: [''],
+      obra2: [''],
+      obra3: [''],
       turno: ['',Validators.required],
           
     })
     this.turno=new TurnoServ("0","0","0","0","0",0);
-    this.disponible=0;
   }
-  agregarTurno(turno:TurnoServ){
-    console.log(this.turno);
-    this.turno.obras_sociales=[this.turnoForm.get('obra')?.value];
-    this.turno.paciente_id="66dbe2eecf2ded2f7d2fc25a";
+  agregarTurno(){
+    
+    if(this.obra1 && this.obra2){
+      this.turno.obras_sociales=[this.turnoForm.get('obra1')?.value,this.turnoForm.get('obra2')?.value,this.turnoForm.get('obra3')?.value];
+    }
+    else if(this.obra1){
+      this.turno.obras_sociales=[this.turnoForm.get('obra1')?.value,this.turnoForm.get('obra2')?.value];
+   
+    }
+    else{
+      this.turno.obras_sociales=[this.turnoForm.get('obra1')?.value];
+   
+    }
+    this.turno.paciente_id=sessionStorage.getItem('id');
     this.turno.estado="Ocupado"
     this._turnoService.putTurno(this.turno).subscribe({
+      next:(actua) => {
+        if(actua.status=='1'){
+          this.toastr.success("Turno agendado!");
+          this.route.navigateByUrl('/');
+        }
+        else{
+          this.toastr.success(actua.msg);
+          this.route.navigateByUrl('/');
+        }
+        
+        
+      },
+      error:(e) => {
+        this.toastr.success("Ocurrio un error");
+        console.log(e);
+      },
+      
+    })
+    
+    this._medicoService.getMedico(this.medico_id).subscribe({
       next:(data) => {
-        console.log(data);
+        let medico=data;
+        medico.disponibles=medico.disponibles-1;
+        console.log(medico);
+        this._medicoService.putMedico(data).subscribe({
+          next:(data) => {
+            console.log(data);
+            
+          },
+          error:(e) => {
+            console.log(e);
+          },
+          
+        })
         
       },
       error:(e) => {
@@ -56,6 +102,7 @@ export class FormTurnoComponent implements OnInit{
       },
       
     })
+
   }
   finalizarTurno(){
   
@@ -63,8 +110,8 @@ export class FormTurnoComponent implements OnInit{
       next:(data) => {
         
         this.turno=data;
-        console.log(this.turno);
-        this.agregarTurno(this.turno);
+        
+        this.agregarTurno();
       },
       error:(e) => {
         console.log(e);
@@ -91,7 +138,6 @@ export class FormTurnoComponent implements OnInit{
     this._medicoService.getEspecialidades(id).subscribe({
       next:(data) => {
         this._medicoService.medicos=data;
-        this.disponible=this._medicoService.medicos.length;
         
       },
       error:(e) => {
@@ -104,7 +150,7 @@ export class FormTurnoComponent implements OnInit{
   }
   cargarTurnos = (id: any) => {
     
-    const idMedico = id;
+    this.medico_id = id;
     let idEspecialidad="";
     this.activatedRoute.params.subscribe(
       params=>{
@@ -112,7 +158,7 @@ export class FormTurnoComponent implements OnInit{
       }
     )
     
-    this._medicoService.getTurnosMedicoEsp(idMedico,idEspecialidad).subscribe({
+    this._medicoService.getTurnosMedicoEsp(this.medico_id,idEspecialidad).subscribe({
       next:(data) => {
         this._medicoService.turnos=data;
       },
@@ -122,6 +168,22 @@ export class FormTurnoComponent implements OnInit{
       },
       
     })
+  }
+  agregarObra(){
+    if(this.obra1){
+      this.obra2=true;
+    }
+    else{
+      this.obra1=true;
+    }
+  }
+  sacarObra(){
+    if(this.obra2){
+      this.obra2=false;
+    }
+    else{
+      this.obra1=false;
+    }
   }
   medicos = [
     {

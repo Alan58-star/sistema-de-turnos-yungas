@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Medico } from '../models/medico';
@@ -17,25 +17,36 @@ export class MedicoService {
     this.turnos=[];
    }
   getMedicos(){
-    return this.http.get<Medico[]>(this.url);
+
+    return this.http.get<Medico[]>(this.url,this.createHeader());
   }
   getMedico(id:any){
-    return this.http.get<Medico>(`${this.url}/${id}`);
+    return this.http.get<Medico>(`${this.url}/${id}`,this.createHeader());
   }
 
   getEspecialidades(id:any){
-    return this.http.get<Medico[]>(`${this.url}especialidad/${id}`);
+    return this.http.get<Medico[]>(`${this.url}especialidad/${id}`,this.createHeader());
   }
   postMedico(medico: Medico){
-    return this.http.post<any>(this.url, medico);
+    return this.http.post<any>(this.url,medico,this.createHeader());
+  }
+  putMedico(medico: Medico){
+    return this.http.put<any>(this.url+medico._id, medico,this.createHeader());
   }
   deleteMedico(id:any){
-    return this.http.delete<any>(`${this.url}/${id}`);
+    return this.http.delete<any>(`${this.url}/${id}`,this.createHeader());
   }
   getTurnosMedico(id:any){
     return this.http.get<Turno[]>(`${this.url}turnos/${id}`);
   }
   getTurnosMedicoEsp(idMedico:any,idEspecialidad:any){
-    return this.http.get<Turno[]>(`${this.url}turnosdisp/${idMedico}/especialidad/${idEspecialidad}`);
+    return this.http.get<Turno[]>(`${this.url}turnosdisp/${idMedico}/especialidad/${idEspecialidad}`,this.createHeader());
+  }
+  createHeader(){
+    return {
+      headers: new HttpHeaders({
+        'Authorization':sessionStorage.getItem("token")!
+      })
+    }
   }
 }

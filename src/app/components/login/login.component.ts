@@ -40,6 +40,7 @@ export class LoginComponent implements OnInit{
           sessionStorage.setItem("telefono", paciente.telefono);
           sessionStorage.setItem("id", paciente.id);
           sessionStorage.setItem("token", paciente.token);
+          localStorage.setItem("token",paciente.token);
           sessionStorage.setItem("rol", paciente.rol);
           sessionStorage.setItem("nombre", paciente.nombre);
           if(data.rol=="paciente"){

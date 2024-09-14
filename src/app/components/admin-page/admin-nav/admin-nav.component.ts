@@ -12,7 +12,7 @@ import { CommonModule } from '@angular/common';
 })
 export class AdminNavComponent {
   constructor(public _loginService:LoginService, private router:Router){
-    console.log(_loginService)
+    
   }
   public logout() {
     this._loginService.logout();
