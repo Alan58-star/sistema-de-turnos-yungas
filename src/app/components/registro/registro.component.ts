@@ -75,7 +75,7 @@ export class RegistroComponent implements OnInit{
     const PACIENTE: Paciente ={
       dni: Number(this.pacienteForm.get('dni')?.value),
       nombre: this.pacienteForm.get('nombre')?.value,
-      telefono: this.pacienteForm.get('telefono')?.value,
+      telefono:"54" + this.pacienteForm.get('telefono')?.value,
       passw: this.pacienteForm.get('passw1')?.value,
       strikes:0
     }
