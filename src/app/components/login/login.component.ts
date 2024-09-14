@@ -70,7 +70,7 @@ export class LoginComponent implements OnInit{
   }
 showHidePwd(){
   this.passwd = !this.passwd;
-  console.log(this.passwd);
+  
 }
   
 }
