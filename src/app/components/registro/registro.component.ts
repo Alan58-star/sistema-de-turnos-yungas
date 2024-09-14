@@ -16,6 +16,7 @@ export class RegistroComponent implements OnInit{
   pacienteForm:FormGroup;
   passwordMismatch: boolean = false;
   dniInvalid: boolean = false;
+  passwd: boolean = false;
   constructor(private fb:FormBuilder, public _pacienteService: PacienteService,private toastr: ToastrService,private router:Router){
     this.pacienteForm = this.fb.group({
       dni: ['',
@@ -58,7 +59,10 @@ export class RegistroComponent implements OnInit{
     const dniControl = this.pacienteForm.get('dni')?.value;
     this.dniInvalid = dniControl?.invalid && dniControl?.touched;
   }
-  
+  showHidePwd(){
+    this.passwd = !this.passwd;
+    
+  }
   agregarPaciente(){
     if (this.passwordMismatch) {
       this.toastr.error("Las contraseñas no coinciden");
@@ -72,7 +76,7 @@ export class RegistroComponent implements OnInit{
       dni: Number(this.pacienteForm.get('dni')?.value),
       nombre: this.pacienteForm.get('nombre')?.value,
       telefono: this.pacienteForm.get('telefono')?.value,
-      passw: this.pacienteForm.get('passw')?.value,
+      passw: this.pacienteForm.get('passw1')?.value,
       strikes:0
     }
     

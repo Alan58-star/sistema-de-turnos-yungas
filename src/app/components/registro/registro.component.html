@@ -34,12 +34,16 @@
                 <hr>
                 <h2>Datos de Usuario</h2>
                 <label for="user-pass1">Contraseña</label>
-                <input type="password" formControlName="passw1" name="user-pass" id="user-pass1" required>
+                <input [type]="passwd ? 'text' : 'password'" formControlName="passw1" name="user-pass" id="user-pass1" required>
 
                 <label for="user-pass2">Repita la contraseña</label>
-                <input type="password" formControlName="passw2" name="user-pass" id="user-pass2" required>
+                <input [type]="passwd ? 'text' : 'password'" formControlName="passw2" name="user-pass" id="user-pass2" required>
                 <div *ngIf="passwordMismatch && pacienteForm.get('passw2')?.touched" style="color: red;">
                     Las contraseñas no coinciden.
+                </div>
+                <div class="flex-row">
+                    <button type="button" class="option-pill-access" style="margin-bottom: 2rem" (click)="showHidePwd()" [ngClass]="{hidden: passwd}">Mostrar Contraseña</button>
+                    <button type="button" class="option-pill-access gray-button-access" style="margin-bottom: 2rem" (click)="showHidePwd()" [ngClass]="{hidden: !passwd}">Ocultar Contraseña</button>
                 </div>
                 <div class="flex-row">
                     <button type="submit" class="option-pill-access blue-button-access">Crear Cuenta</button>
