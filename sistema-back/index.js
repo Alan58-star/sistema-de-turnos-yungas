@@ -6,6 +6,8 @@ const {checkToken} = require('./utils/middleware')
 //Creamos servidor
 const app = express();
 
+require('./cron');
+
 conectarDB();
 app.use(cors())
 app.use(express.json());

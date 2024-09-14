@@ -2,7 +2,7 @@ export const environment = {
     'baseUrl': 'https://graph.facebook.com',
     'Business-ID': '557605326605445',
     'Phone-Number-ID': '398388510029004',
-    'User-Access-Token': 'EAASUrq8QlP0BOyNdiZCfon2i0ZBVn1zX7ZAARSdMoY3Ak1FN6QSMl2t8TCXfLZBfMLRwWvba5MghyXdZBzY8JjtoHtQhjKZA2mn31t9Ozrm5sLTrZBauD9dTlxSlBEYw30xUSHECwEZAmJrIOAL35akkEEauOxGWHZCRefc6x3JP9RpMYnqiJdv8duZABt5DW9fquHB3itAfAUDrA3VTIwG9TaTPLIeeIuW4ETZAWEZD',
+    'User-Access-Token': 'EAASUrq8QlP0BOyRDAaMQiZCEplaBHzOpFim5Q0GUunv7iIx0ZC52Cw9yqLaBhvQKNS8Yb3UgZASS6GOCuqfiY8aA4vaCf3mRZCV9XyjYpA1MfNXuGyLpgrw7ONh72tutdn5x9pL0B2n2ALZBsJ30d4uxD4NNTwjeMCeikoLMcW7XZAC42ZCnKy2F2EhavzREBcI',
     'WABA-ID': '354116141128824',
     'Version': 'v20.0'
 };

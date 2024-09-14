@@ -135,6 +135,9 @@ export class FormNuevoTurnoComponent implements OnInit{
   cargarMedicos = (event: any) => {
     
     const idEspecialidad = event.target.value;
+
+    console.log(idEspecialidad);
+    
     
     this._medicoService.getEspecialidades(idEspecialidad).subscribe({
       next:(data) => {
