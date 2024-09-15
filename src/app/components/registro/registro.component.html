@@ -10,16 +10,17 @@
                 <h2>Datos Personales</h2>
                 <label for="user-dni">DNI</label>
                 <input type="text" formControlName="dni" name="user-dni" id="user-dni" required>
-                <div *ngIf="pacienteForm.get('dni')?.invalid && pacienteForm.get('dni')?.touched" style="color: red;">
-                    <div *ngIf="pacienteForm.get('dni')?.errors?.['required']">El DNI es requerido.</div>
-                    <div *ngIf="pacienteForm.get('dni')?.errors?.['maxlength']">El DNI no puede tener más de 8 números.</div>
-                    <div *ngIf="pacienteForm.get('dni')?.errors?.['pattern']">El DNI solo puede contener números.</div>
+                <div class="errors" *ngIf="pacienteForm.get('dni')?.invalid && pacienteForm.get('dni')?.touched">
+                    <div class="error-text" *ngIf="pacienteForm.get('dni')?.errors?.['required']">El DNI es requerido.</div>
+                    <div class="error-text" *ngIf="pacienteForm.get('dni')?.errors?.['maxlength']">El DNI no puede tener más de 8 números.</div>
+                    <div class="error-text" *ngIf="pacienteForm.get('dni')?.errors?.['pattern']">El DNI solo puede contener números.</div>
                 </div>
                 <label for="user-nombre">Nombre</label>
                 <input type="text" formControlName="nombre" name="user-nombre" id="user-nombre" required>
-                <div *ngIf="pacienteForm.get('nombre')?.invalid && pacienteForm.get('nombre')?.touched"
-                    style="color: red;">
+                <div class="errors">
+                    <div  class="error-text"*ngIf="pacienteForm.get('nombre')?.invalid && pacienteForm.get('nombre')?.touched">
                     El nombre es requerido.
+                </div>
                 </div>
                 <hr>
                 <h2>Datos de Contacto</h2>
@@ -27,9 +28,10 @@
                         style="color: var(--celeste); font-size: 14px; font-weight: 400;">(Los turnos se notificarán a
                         este número)</small></label>
                 <input type="text" formControlName="telefono" name="telefono" id="telefono" required>
-                <div *ngIf="pacienteForm.get('telefono')?.invalid && pacienteForm.get('telefono')?.touched"
-                    style="color: red;">
-                    El teléfono es requerido.
+                <div class="errors">
+                    <div class="error-text" *ngIf="pacienteForm.get('telefono')?.invalid && pacienteForm.get('telefono')?.touched">
+                        El teléfono es requerido.
+                    </div>
                 </div>
                 <hr>
                 <h2>Datos de Usuario</h2>
@@ -38,8 +40,10 @@
 
                 <label for="user-pass2">Repita la contraseña</label>
                 <input [type]="passwd ? 'text' : 'password'" formControlName="passw2" name="user-pass" id="user-pass2" required>
-                <div *ngIf="passwordMismatch && pacienteForm.get('passw2')?.touched" style="color: red;">
-                    Las contraseñas no coinciden.
+                <div class="errors">
+                    <div class="error-text" *ngIf="passwordMismatch && pacienteForm.get('passw2')?.touched">
+                        Las contraseñas no coinciden.
+                    </div>
                 </div>
                 <div class="flex-row">
                     <button type="button" class="option-pill-access" style="margin-bottom: 2rem" (click)="showHidePwd()" [ngClass]="{hidden: passwd}">Mostrar Contraseña</button>

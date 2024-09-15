@@ -68,11 +68,11 @@ export class RegistroComponent implements OnInit{
   }
   agregarPaciente(){
     if (this.passwordMismatch) {
-      this.toastr.error("Las contraseñas no coinciden");
+      this.toastr.error("Las contraseñas no coinciden.");
       return;
     }
     if (this.pacienteForm.invalid) {
-      this.toastr.error("Todos los campos deben estar completos");
+      this.toastr.error("Todos los campos deben estar completos y correctos.");
       return;
     }
     const PACIENTE: Paciente ={
@@ -86,19 +86,19 @@ export class RegistroComponent implements OnInit{
     this._pacienteService.postPaciente(PACIENTE).subscribe({
       next:(data) => {
         if(data.status=='1'){
-          this.toastr.success("Cuenta creada con exito")
+          this.toastr.success("Cuenta creada con éxito.")
           this.router.navigateByUrl('/login');
         }
         
         if(data.status=='2'){
-          this.toastr.error("El DNI ya esta registrado")
+          this.toastr.error("El DNI ya está registrado.")
         }
         
         if(data.status=='0'){
           this.toastr.error(data.msg)
         }
         if(data.status=='3'){
-          this.toastr.error("El telefono ya esta registrado")
+          this.toastr.error("El telefono ya está registrado.")
         }
         
       },

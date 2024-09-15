@@ -12,3 +12,12 @@ hr{
     
     background-color: var(--gris);
 }
+
+.errors{
+    margin-bottom: 2rem;
+}
+
+.error-text{
+    color: var(--rojo);
+    margin-bottom: 0.7rem;
+}
