@@ -58,12 +58,12 @@
                 </select>
             </div>
                 <div class="flex-row">
-                    <button type="button" class="option-pill-access" style="margin-bottom: 2rem" (click)="agregarObra()" >Agregar otra Obra Social</button>
-                    <button *ngIf="obra1" type="button" class="option-pill-access" style="margin-bottom: 2rem" (click)="sacarObra()" >Sacar Obra Social</button>
+                    <button type="button" class="option-pill-access green-button-access" style="margin-bottom: 2rem" (click)="agregarObra()" >+ Sumar Obra</button>
+                    <button *ngIf="obra1" type="button" class="option-pill-access red-button-access" style="margin-bottom: 2rem" (click)="sacarObra()" >- Quitar Obra</button>
                 
                 </div>
                 <div class="flex-column">
-                    <button class="option-pill-access green-button-access">Solicitar Turno</button>
+                    <button class="option-pill-access blue-button-access">Solicitar Turno</button>
                 </div>
             </form>
         </div>
