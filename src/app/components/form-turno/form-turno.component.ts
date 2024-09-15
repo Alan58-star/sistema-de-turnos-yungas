@@ -10,11 +10,18 @@ import { FormGroup,ReactiveFormsModule,FormBuilder,Validators } from '@angular/f
 import { TurnoServ } from '../../models/turnoServ';
 import { Turno } from '../../models/turno';
 import { ToastrService } from 'ngx-toastr';
+import { WhatsappService } from '../../services/whatsapp.service';
+import { DatePipe } from '@angular/common';
+import { LOCALE_ID } from '@angular/core';
+import { registerLocaleData } from '@angular/common';
+import localeEs from '@angular/common/locales/es';
+registerLocaleData(localeEs, 'es');
 
 @Component({
   selector: 'app-form-turno',
   standalone: true,
   imports: [RouterLink, NavComponent,ReactiveFormsModule, CommonModule],
+  providers:[DatePipe,{ provide: LOCALE_ID, useValue: 'es' }],
   templateUrl: './form-turno.component.html',
   styleUrl: './form-turno.component.css'
 })
@@ -35,7 +42,7 @@ export class FormTurnoComponent implements OnInit{
       }
     )
   }
-  constructor(private fb:FormBuilder,public _obraService:ObraSocialService,private toastr: ToastrService,public _turnoService:TurnoService, public _medicoService:MedicoService, private route:Router, private activatedRoute:ActivatedRoute){
+  constructor(private fb:FormBuilder,public _obraService:ObraSocialService,private toastr: ToastrService,public _turnoService:TurnoService, public _medicoService:MedicoService, private route:Router, private activatedRoute:ActivatedRoute, public _whatsappService:WhatsappService){
     this.turnoForm = this.fb.group({
       obra1: [''],
       obra2: [''],
@@ -43,8 +50,9 @@ export class FormTurnoComponent implements OnInit{
       turno: ['',Validators.required],
           
     })
-    this.turno=new TurnoServ("0","0","0","0","0",0);
+    this.turno=new TurnoServ("0",new Date(),"0","0","0",0);
   }
+  
   agregarTurno(){
     
     if(this.obra1 && this.obra2){
@@ -62,12 +70,26 @@ export class FormTurnoComponent implements OnInit{
     this.turno.estado="Ocupado"
     this._turnoService.putTurno(this.turno).subscribe({
       next:(actua) => {
-        if(actua.status=='1'){
+        if(actua.status=='2'){
           this.toastr.success("Turno agendado!");
+          this._whatsappService.sendTurnMessage(sessionStorage.getItem('telefono')!,sessionStorage.getItem('nombre')!,Date.now().toString(),"Alan","Consultorio 2","Cirugia").subscribe({
+            next:(data) => {
+              
+              console.log(data);
+              
+              
+              
+            },
+            error:(e) => {
+              console.log(e);
+            },
+            
+          })
+      
           this.route.navigateByUrl('/');
         }
         else{
-          this.toastr.success(actua.msg);
+          this.toastr.error(actua.msg);
           this.route.navigateByUrl('/');
         }
         

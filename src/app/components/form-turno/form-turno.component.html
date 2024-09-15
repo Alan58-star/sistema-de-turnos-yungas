@@ -28,7 +28,7 @@
                             <input formControlName="turno"  type="radio" value="{{turno._id}}" name="turno" id="{{turno._id}}" class="card-input-element" />
                             <div class="card-input">
                                 <ul>
-                                    <li class="turno-titulo-text"> {{turno.fecha}}, a las {{turno.fecha}} </li>
+                                    <li class="turno-titulo-text"> {{turno.fecha | date: 'EEEE dd/MM'}},  a las {{turno.fecha | date: 'shortTime'}} </li>
                                     <li class="turno-text"> Duración: {{turno.duracion}} min </li>
                                     <li class="turno-text"> Lugar: {{turno.consultorio}} </li>
                                     <li class="turno-text"> <b>Consultorio {{turno.consultorio}} </b> </li>

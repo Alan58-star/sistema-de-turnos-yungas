@@ -14,7 +14,7 @@ const recipientPhoneNumber = "543884796051";
 // console.log(turnos);
 
 
-cron.schedule("23 19 * * *", () => {
+cron.schedule("32 20 * * *", () => {
   // enviarMensajeWhatsApp();
   // obtenerTurnos()
   procesarTurnos();

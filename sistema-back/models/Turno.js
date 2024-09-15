@@ -9,7 +9,7 @@ const TurnoSchema = mongoose.Schema({
     medico_id:{type: Schema.Types.ObjectId, ref:'Medico'},
     paciente_id:{type: Schema.Types.ObjectId, ref:'Paciente'},
     fecha:{
-        type: String,
+        type: Date,
         required:true
     },
     especialidad_id:{type: Schema.Types.ObjectId, ref:'Especialidad'},
@@ -18,15 +18,15 @@ const TurnoSchema = mongoose.Schema({
         type:String,
         enum:['Disponible','Ocupado','Cancelado'],
         default:'Disponible',
-        require:true
+        required:true
     },
     consultorio:{
         type:String,
-        require:true
+        required:true
     },
     duracion:{
         type:Number,
-        require:true
+        required:true
     }
 });
 
