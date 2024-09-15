@@ -15,6 +15,7 @@ import { MisTurnosComponent } from './components/mis-turnos/mis-turnos.component
 import { loginGuardAdmin } from './guards/login.guard';
 import { loginGuardSecretaria } from './guards/login.guard';
 import { loginGuardPaciente } from './guards/login.guard';
+import { CambiarPasswordComponent } from './components/login/cambiar-password/cambiar-password.component';
 
 export const routes: Routes = [
     {path: '', component:BodyComponent},
@@ -33,4 +34,5 @@ export const routes: Routes = [
     {path: 'registro', component:RegistroComponent},
     {path: 'secretaria/nuevo-turno', component:FormNuevoTurnoComponent,canActivate:[loginGuardSecretaria]},
     {path: 'mis-turnos', component:MisTurnosComponent,canActivate:[loginGuardPaciente]},
+    {path: 'cambiar-password', component:CambiarPasswordComponent},
 ];
