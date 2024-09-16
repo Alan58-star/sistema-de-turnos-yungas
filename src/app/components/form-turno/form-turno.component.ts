@@ -35,6 +35,7 @@ export class FormTurnoComponent implements OnInit{
     this._medicoService.medicos=[];
     this.cargarObras();
     this._medicoService.turnos=[];
+    this._obraService.obras=[];
     
     this.activatedRoute.params.subscribe(
       params=>{

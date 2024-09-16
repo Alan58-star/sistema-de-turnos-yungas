@@ -25,7 +25,12 @@ export const loginGuardSecretaria=()=>{
 export const loginGuardPaciente=()=>{
     const router = inject(Router);
     if(sessionStorage.getItem('token')){
-        return true;
+        if(Number(sessionStorage.getItem('strikes'))<=3){
+         
+            return true;   
+        }
+        router.navigate(['/']);
+        return false;
     }
     else{
         router.navigate(['/']);

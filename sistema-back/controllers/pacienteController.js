@@ -41,7 +41,7 @@ exports.obtenerPacientes = async(req,res) => {
 }
 exports.actualizarPaciente = async(req,res) => {
     try{
-        const paciente = await Medico.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true });
+        const paciente = await Paciente.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true });
         if(!paciente){
            return res.status(404).json({msg: 'No existe el paciente'});
         }
@@ -202,7 +202,8 @@ exports.register = async(req,res) => {
                 'telefono': paciente.telefono,
                 'id': paciente._id,
                 'rol':paciente.rol,
-                'nombre':paciente.nombre
+                'nombre':paciente.nombre,
+                'strikes':paciente.strikes
             })
         }
      }

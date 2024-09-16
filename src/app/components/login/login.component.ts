@@ -43,6 +43,8 @@ export class LoginComponent implements OnInit{
           localStorage.setItem("token",paciente.token);
           sessionStorage.setItem("rol", paciente.rol);
           sessionStorage.setItem("nombre", paciente.nombre);
+          
+          sessionStorage.setItem("strikes", paciente.strikes);
           if(data.rol=="paciente"){
             
             this.router.navigateByUrl('/');

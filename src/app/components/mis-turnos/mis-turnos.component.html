@@ -1,24 +1,27 @@
 <app-nav />
-<button routerLink="/main-page" routerLinkActive="active" ariaCurrentWhenActive="page" class="option-pill-access blue-button-access return-button" routerLink="">< Volver</button>
+<button routerLink="/main-page" routerLinkActive="active" ariaCurrentWhenActive="page"
+    class="option-pill-access blue-button-access return-button" routerLink="">
+    < Volver</button>
+        <div *ngIf="!vacio">
+            <div class="title flex-column">
+                <h1>Turnos Pendientes</h1>
+                <span>Estos son los turnos que tiene usted pendiente. Puede <b>cancelarlos con 30 minutos de anticipacion</b> si desea.</span>
+            </div>
 
-<div class="title flex-column">
-    <h1>Turnos Pendientes</h1>
-    <span>Estos son los turnos que tiene usted pendiente. Puede <b>cancelarlos</b> si desea.</span>
-</div>
+            <div class="turnos-section">
+                <div class="turno-card" *ngFor="let turno of _pacienteService.turnos">
+                    <ul class="turno-info">
+                        <li class="turno-titulo-text"> {{turno.fecha | date:"EEEE, dd/MM/yy HH:mm"}} </li>
+                        <li class="turno-text"> Duración: {{turno.duracion}} min </li>
+                        <li class="turno-text"> Medico: {{turno.medico_id.apellido}} {{turno.medico_id.nombre}} </li>
+                        <li class="turno-text"> <b>Lugar: {{turno.consultorio}} </b></li>
+                    </ul>
+                    <div class="flex-row">
+                        <button *ngIf="canCancelTurno(turno.fecha)" class="option-pill-access red-button-access cancel-turno"
+                        [disabled]="!canCancelTurno(turno.fecha)" (click)="cancelarTurno(turno._id)">Cancelar Turno</button>
+                    </div>
 
-<div class="turnos-section">
-    <div class="turno-card" *ngFor="let turno of _pacienteService.turnos">
-        <ul class="turno-info">
-            <li class="turno-titulo-text"> {{turno.fecha}} </li>
-            <li class="turno-text"> Duración: {{turno.duracion}} min </li>
-            <li class="turno-text"> Medico: {{turno.medico_id.apellido}} {{turno.medico_id.nombre}} </li>
-            <li class="turno-text"> <b>Consultorio {{turno.consultorio}} </b></li>
-        </ul>
-        <div class="flex-row">
-            <button class="option-pill-access red-button-access cancel-turno">Cancelar Turno</button>
-        </div>
-
-       <!--  <div [ngClass]="{'hidden': isMenuHidden}">
+                    <!--  <div [ngClass]="{'hidden': isMenuHidden}">
             <p>¿Desea cancelar el turno?</p>
             <div class="flex-row">
                 <button class="option-pill-access green-button-access">Sí</button>
@@ -26,5 +29,10 @@
             </div>
         </div> -->
 
-    </div>
-</div>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="vacio" class="title flex-column">
+            <h1>Usted no tiene Turnos pendientes</h1>
+            
+        </div>

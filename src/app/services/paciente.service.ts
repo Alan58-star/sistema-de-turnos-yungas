@@ -30,6 +30,9 @@ export class PacienteService {
   deletePaciente(id:any){
     return this.http.delete<any>(`${this.url}/${id}`);
   }
+  putPaciente(paciente: Paciente){
+    return this.http.put<any>(this.url+paciente._id, paciente);
+  }
   getTurnosPaciente(){
     return this.http.get<Turno[]>(`${this.url}/turnos/${sessionStorage.getItem('id')}`);
   }
