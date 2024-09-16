@@ -69,15 +69,15 @@ exports.obtenerTurnosPorFecha = async (req, res) => {
     try {
         const fechaParametro = new Date(req.params.fecha); // Fecha enviada como parámetro en formato 'yyyy-mm-dd'
         fechaParametro.setHours(0, 0, 0, 0); // Inicio del día
-
+        fechaParametro.setDate(fechaParametro.getDate()+1);
         const siguienteDia = new Date(fechaParametro);
         siguienteDia.setDate(fechaParametro.getDate() + 1); // Fin del día
-
+      
         // Buscar los turnos entre la fecha especificada
         const turnos = await Turno.find({
             fecha: {
-                $gte: fechaParametro, // Mayor o igual que el inicio del día
-                $lt: siguienteDia // Menor que el inicio del siguiente día
+                $gt: fechaParametro, // Mayor o igual que el inicio del día
+                $lte: siguienteDia // Menor que el inicio del siguiente día
             }
         }).populate('medico_id paciente_id obras_sociales.obrasocial_id especialidad_id');
 
