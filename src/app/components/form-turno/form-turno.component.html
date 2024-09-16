@@ -1,69 +1,136 @@
 <app-nav />
 
-<button class="option-pill-access blue-button-access return-button" routerLink="/especialidades">
-    < Volver</button>
+<button
+  class="option-pill-access blue-button-access return-button"
+  routerLink="/especialidades"
+>
+  < Volver
+</button>
 
-        <div class="login-page">
-            <h1>Sacando turno para MÉDICO</h1>
-            <form action="#" class="form" [formGroup]="turnoForm" (ngSubmit)="finalizarTurno()">
-                <h2>Seleccione un médico</h2>
-                <div class="card-container">
-                    <div *ngFor="let medico of _medicoService.medicos" class="card" (click)="cargarTurnos(medico._id)">
-                        <label for="{{medico._id}}">
-                            <input type="radio" name="medico" id="{{medico._id}}" class="card-input-element" />
-                            <div class="card-input">
-                                <div class="turno-titulo-text">{{medico.nombre}} {{medico.nombre}}</div>
-                                <div class="turno-text">
-                                    Turnos Disponibles: {{medico.disponibles}}
-                                </div>
-                            </div>
-                        </label>
-                    </div>
-                </div>
-
-                <h2>Seleccione un turno</h2>
-                <div class="card-container">
-                    <div *ngFor="let turno of _medicoService.turnos" class="card">
-                        <label for="{{turno._id}}">
-                            <input formControlName="turno"  type="radio" value="{{turno._id}}" name="turno" id="{{turno._id}}" class="card-input-element" />
-                            <div class="card-input">
-                                <ul>
-                                    <li class="turno-titulo-text"> {{turno.fecha | date: 'EEEE dd/MM'}},  a las {{turno.fecha | date: 'shortTime'}} </li>
-                                    <li class="turno-text"> Duración: {{turno.duracion}} min </li>
-                                    <li class="turno-text"> Lugar: {{turno.consultorio}} </li>
-                                    <li class="turno-text"> <b>Consultorio {{turno.consultorio}} </b> </li>
-                                </ul>
-                            </div>
-                        </label>
-                    </div>
-                </div>
-
-                <h2>Seleccione sus Obras Sociales</h2>
-                <label for="user-dni">Obra Social 1</label>
-                <select name="obra" id="obra" formControlName="obra1" required >
-                    <option value="{{obra._id}}" *ngFor="let obra of _obraService.obras" >{{obra.nombreOS}}</option>
-                </select>
-            <div *ngIf="obra1">
-                <label for="user-dni">Obra Social 2</label>
-
-                <select name="obra2" id="obra2" formControlName="obra2">
-                    <option value="{{obra1._id}}" *ngFor="let obra1 of _obraService.obras" >{{obra1.nombreOS}}</option>
-                
-                </select>
+<div class="login-page">
+  <h1>Sacando turno para MÉDICO</h1>
+  <form
+    action="#"
+    class="form"
+    [formGroup]="turnoForm"
+    (ngSubmit)="finalizarTurno()"
+  >
+    <h2>Seleccione un médico</h2>
+    <div class="card-container">
+      <div
+        *ngFor="let medico of _medicoService.medicos"
+        class="card"
+        (click)="cargarTurnos(medico._id); getDoctor(medico.apellido.toString(), medico.nombre.toString())"
+      >
+        <label for="{{ medico._id }}">
+          <input
+            type="radio"
+            name="medico"
+            id="{{ medico._id }}"
+            class="card-input-element"
+          />
+          <div class="card-input">
+            <div class="turno-titulo-text">
+              {{ medico.nombre }} {{ medico.nombre }}
             </div>
-            <div *ngIf="obra2">
-                <label for="user-dni">Obra Social 3</label>
-                <select name="obra2" id="obra2" formControlName="obra3">
-                    <option value="{{obra2._id}}" *ngFor="let obra2 of _obraService.obras" >{{obra2.nombreOS}}</option>
-                </select>
+            <div class="turno-text">
+              Turnos Disponibles: {{ medico.disponibles }}
             </div>
-                <div class="flex-row">
-                    <button type="button" class="option-pill-access green-button-access" style="margin-bottom: 2rem" (click)="agregarObra()" >+ Sumar Obra</button>
-                    <button *ngIf="obra1" type="button" class="option-pill-access red-button-access" style="margin-bottom: 2rem" (click)="sacarObra()" >- Quitar Obra</button>
-                
-                </div>
-                <div class="flex-column">
-                    <button class="option-pill-access blue-button-access">Solicitar Turno</button>
-                </div>
-            </form>
-        </div>
+          </div>
+        </label>
+      </div>
+    </div>
+
+    <h2>Seleccione un turno</h2>
+    <div class="card-container">
+      <div
+        *ngFor="let turno of _medicoService.turnos"
+        class="card"
+        (click)="
+          formatearFecha(turno.fecha.toString());
+          getConsultorio(turno.consultorio.toString());
+          getEspecialidad(turno.especialidad_id.nombreEsp.toString())
+        "
+      >
+        <label for="{{ turno._id }}">
+          <input
+            formControlName="turno"
+            type="radio"
+            value="{{ turno._id }}"
+            name="turno"
+            id="{{ turno._id }}"
+            class="card-input-element"
+          />
+          <div class="card-input">
+            <ul>
+              <li class="turno-titulo-text">
+                {{ turno.fecha | date : "EEEE dd/MM" }}, a las
+                {{ turno.fecha | date : "shortTime" }}
+              </li>
+              <li class="turno-text">Duración: {{ turno.duracion }} min</li>
+              <li class="turno-text">Lugar: {{ turno.consultorio }}</li>
+              <li class="turno-text">
+                <b>Consultorio {{ turno.consultorio }} </b>
+              </li>
+            </ul>
+          </div>
+        </label>
+      </div>
+    </div>
+
+    <h2>Seleccione sus Obras Sociales</h2>
+    <label for="user-dni">Obra Social 1</label>
+    <select name="obra" id="obra" formControlName="obra1" required>
+      <option value="{{ obra._id }}" *ngFor="let obra of _obraService.obras">
+        {{ obra.nombreOS }}
+      </option>
+    </select>
+    <div *ngIf="obra1">
+      <label for="user-dni">Obra Social 2</label>
+
+      <select name="obra2" id="obra2" formControlName="obra2">
+        <option
+          value="{{ obra1._id }}"
+          *ngFor="let obra1 of _obraService.obras"
+        >
+          {{ obra1.nombreOS }}
+        </option>
+      </select>
+    </div>
+    <div *ngIf="obra2">
+      <label for="user-dni">Obra Social 3</label>
+      <select name="obra2" id="obra2" formControlName="obra3">
+        <option
+          value="{{ obra2._id }}"
+          *ngFor="let obra2 of _obraService.obras"
+        >
+          {{ obra2.nombreOS }}
+        </option>
+      </select>
+    </div>
+    <div class="flex-row">
+      <button
+        type="button"
+        class="option-pill-access green-button-access"
+        style="margin-bottom: 2rem"
+        (click)="agregarObra()"
+      >
+        + Sumar Obra
+      </button>
+      <button
+        *ngIf="obra1"
+        type="button"
+        class="option-pill-access red-button-access"
+        style="margin-bottom: 2rem"
+        (click)="sacarObra()"
+      >
+        - Quitar Obra
+      </button>
+    </div>
+    <div class="flex-column">
+      <button class="option-pill-access blue-button-access">
+        Solicitar Turno
+      </button>
+    </div>
+  </form>
+</div>

@@ -120,8 +120,7 @@ export class SecretariaPageComponent implements OnInit{
   getTurnos() {
     this._turnoService.getTurnosHoy().subscribe({
       next:(data) => {
-        this._turnoService.turnos=data;
-        
+        this._turnoService.turnos=data;;
       },
       error:(e) => {
         console.log(e);

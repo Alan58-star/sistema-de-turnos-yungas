@@ -69,4 +69,52 @@ export class WhatsappService {
   
     return this._http.post(this.urlBase, body, { headers });
   }
+
+  apointmentCancellationByPatient(target: string, name: string, date: string, doctor: string, room: string, especiality: string): Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.token}`,
+      'Content-Type': 'application/json'
+    });
+  
+    const body = {
+      messaging_product: 'whatsapp',
+      to: target,
+      type: 'template',
+      template: {
+        name: 'info_turno',
+        language: {
+          code: 'es_AR'
+        },
+        components: [
+          {
+            type: 'body',
+            parameters: [
+              {
+                type: 'text',
+                text: name
+              },
+              {
+                type: 'text',
+                text: date
+              },
+              {
+                type: 'text',
+                text: doctor
+              },
+              {
+                type: 'text',
+                text: room
+              },
+              {
+                type: 'text',
+                text: especiality
+              }
+            ]
+          }
+        ]
+      }
+    };
+  
+    return this._http.post(this.urlBase, body, { headers });
+  }
 }

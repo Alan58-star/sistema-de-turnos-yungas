@@ -260,7 +260,9 @@ exports.eliminarTurno = async (req, res) => {
 exports.getTurnosByPaciente = async (req, res) => {
     try {
         const { paciente_id } = req.params;
-        const turnos = await Turno.find({ paciente_id }).populate('medico_id obra_social_id especialidad_id');
+        const turnos = await Turno.find({ paciente_id }).populate('medico_id obra_social_id especialidad_id paciente_id');
+        console.log(turnos);
+        
         
         if (turnos.length === 0) {
             return res.status(404).send({ message: "No se encontraron turnos para este paciente." });

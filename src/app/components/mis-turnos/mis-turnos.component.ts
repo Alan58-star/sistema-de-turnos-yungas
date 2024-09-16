@@ -50,6 +50,8 @@ export class MisTurnosComponent implements OnInit {
     this._pacienteService.getTurnosPaciente().subscribe({
       next:(data) => {
         this._pacienteService.turnos=data;
+        console.log(this._pacienteService.turnos);
+        
       },
       error:(e) => {
         this._pacienteService.turnos=[];
@@ -78,9 +80,8 @@ export class MisTurnosComponent implements OnInit {
       
     })
   }
+  
   dejarLibreTurno(){
-    
-    
     this.turnoCancelado.estado="Disponible"
     this._turnoService.putTurno(this.turnoCancelado).subscribe({
       next:(actua) => {
@@ -134,6 +135,8 @@ export class MisTurnosComponent implements OnInit {
       },
       
     })
+
+
 
   }
 }

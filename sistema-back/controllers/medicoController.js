@@ -108,7 +108,7 @@ exports.obtenerMedicosporEspecialidad = async(req,res) =>{
         const especialidadId = req.params.especialidad_id;
         
         // Verificar si la especialidad existe
-        let especialidad = await Especialidad.findById(especialidadId);
+        let especialidad = await Especialidad.findById(especialidadId).populate('');
         
         if (!especialidad) {
             return res.status(404).json({ msg: 'No existe la especialidad' });
@@ -209,6 +209,7 @@ exports.obtenerTurnosMedicoEspDisponibles = async (req,res) => {
         // Buscar los turnos que coincidan con el ID del médico y el ID de la especialidad
         let turnos = await Turno.find({medico_id: medicoId,especialidad_id: especialidadId,estado:"Disponible"}) 
         .populate('paciente_id', 'dni nombre') // Opcional: Poblar detalles del médico
+        .populate('especialidad_id')
         .populate('obras_sociales', 'nombreOS') // Opcional: Poblar detalles de las obras sociales
         .exec();
 

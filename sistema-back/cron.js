@@ -20,6 +20,8 @@ cron.schedule("32 20 * * *", () => {
   procesarTurnos();
 });
 
+// eliminarTurnos()
+
 async function enviarMensajeWhatsApp(
   number,
   nombre,
@@ -128,3 +130,33 @@ async function procesarTurnos() {
     }
   }
 }
+
+async function eliminarTurnos() {
+  let turnos = await obtenerTurnos();
+  for (let i = 0; i < turnos.length; i++) {
+    const fechaTurno = new Date(turnos[i].fecha);
+    const fechaActual = new Date();
+
+    const fechaTurnoNormalizada = new Date(fechaTurno.getFullYear(), fechaTurno.getMonth(), fechaTurno.getDate());
+    const fechaActualNormalizada = new Date(fechaActual.getFullYear(), fechaActual.getMonth(), fechaActual.getDate());
+
+    const diferenciaTiempo = fechaActualNormalizada.getTime() - fechaTurnoNormalizada.getTime();
+
+    const diferenciaDias = diferenciaTiempo / (1000 * 60 * 60 * 24);
+
+    if (diferenciaDias >= 1) {
+      const id = turnos[i]._id;
+      try {
+        const turno = await Turno.findByIdAndDelete(id);
+        if (!turno) {
+          console.log("No se encontró el turno para eliminar.");
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  }
+}
+
+
+
