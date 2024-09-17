@@ -82,17 +82,60 @@ exports.obtenerPaciente = async(req,res) => {
         res.status(500).send('Hubo un error');
     }
 }
-exports.eliminarPaciente = async(req,res) => {
-    try{
-        let paciente =  await Paciente.findById(req.params.id);
-        if(!paciente){
-            return res.status(404).json({msg: 'No existe el paciente'});
-        }
-        await Paciente.deleteOne({_id:req.params.id});
-        res.json({msg: ' Paciente eliminado'});
+exports.obtenerPacienteTermino = async (req, res) => {
+    try {
+        const searchTerm = req.params.termino?.trim(); // Limpiar espacios en blanco
+        
+        let pacientes;
 
-    }catch(error){
-        console.error('Error al obtener la especialidad:', error.message);
+        if (!searchTerm) {
+            
+            pacientes = await Paciente.find({});
+        } else {
+            pacientes = await Paciente.find({
+                $or: [
+                    { nombre: { $regex: searchTerm, $options: 'i' } }, // Coincidencia parcial en el nombre
+                    { apellido: { $regex: searchTerm, $options: 'i' } } // Coincidencia parcial en el apellido
+                ]
+            })
+        }
+
+        
+        if (searchTerm && (!pacientes || pacientes.length === 0)) {
+            return res.status(404).json({ msg: 'No se encontraron pacientes que coincidan con la búsqueda' });
+        }
+
+        
+        res.json(pacientes);
+
+    } catch (error) {
+        console.error('Error al obtener pacientes:', error.message);
+        res.status(500).send('Hubo un error');
+    }
+}
+exports.eliminarPaciente = async(req,res) => {
+    try {
+        const pacienteId = req.params.id;
+
+        // Buscar el paciente a eliminar
+        let paciente = await Paciente.findById(pacienteId);
+        if (!paciente) {
+            return res.status(404).json({ msg: 'No existe el paciente' });
+        }
+
+        // Actualizar los turnos relacionados a que estén disponibles
+        await Turno.updateMany(
+            { paciente_id: pacienteId },
+            { $set: { estado: 'Disponible' } }
+        );
+
+        // Eliminar el paciente
+        await Paciente.deleteOne({ _id: pacienteId });
+
+        res.json({ msg: 'Paciente eliminado y turnos actualizados a Disponible' });
+
+    } catch (error) {
+        console.error('Error al eliminar el paciente:', error.message);
 
         if (error.name === 'CastError') {
             // Error de formato de ObjectId

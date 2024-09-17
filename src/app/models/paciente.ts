@@ -3,7 +3,7 @@ export class Paciente {
     dni: number;
     nombre: String;
     telefono: String;
-    passw: String;
+    passw?: String;
     strikes:number;
     rol?:String;
     constructor(dni:number,telefono:String,nombre:String,passw:String,strikes:number){

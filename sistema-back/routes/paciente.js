@@ -8,6 +8,7 @@ router.post('/', pacienteController.crearPaciente);
 router.get('/',pacienteController.obtenerPacientes);
 router.put('/:id', pacienteController.actualizarPaciente);
 router.get('/:id', pacienteController.obtenerPaciente);
+router.get('/termino/:termino', pacienteController.obtenerPacienteTermino);
 router.delete('/:id', pacienteController.eliminarPaciente);
 router.get('/turnos/:pacienteId', pacienteController.obtenerTurnosDelPaciente);
 router.post('/register',pacienteController.register);

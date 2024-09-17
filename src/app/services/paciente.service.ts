@@ -21,6 +21,9 @@ export class PacienteService {
   getPaciente(id:any){
     return this.http.get<Paciente>(`${this.url}/${id}`);
   }
+  getPacientesTermino(termino:any){
+    return this.http.get<Paciente[]>(`${this.url}/termino/${termino}`);
+  }
   postPaciente(paciente: Paciente){
     return this.http.post<any>(this.url+'/register', paciente);
   }
