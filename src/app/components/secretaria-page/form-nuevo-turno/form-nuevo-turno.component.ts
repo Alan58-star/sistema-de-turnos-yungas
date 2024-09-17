@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AdminNavComponent } from "../../admin-page/admin-nav/admin-nav.component";
 import { Router, RouterLink } from '@angular/router';
 import { EspecialidadService } from '../../../services/especialidad.service';
@@ -14,6 +14,7 @@ import { Toast, ToastrService } from 'ngx-toastr';
 import { NgModule, LOCALE_ID } from '@angular/core';
 import { registerLocaleData } from '@angular/common';
 import localeEs from '@angular/common/locales/es';
+import { interval, Subscription } from 'rxjs';
 @Component({
   selector: 'app-form-nuevo-turno',
   standalone: true,
@@ -22,14 +23,26 @@ import localeEs from '@angular/common/locales/es';
   templateUrl: './form-nuevo-turno.component.html',
   styleUrl: './form-nuevo-turno.component.css'
 })
-export class FormNuevoTurnoComponent implements OnInit {
+export class FormNuevoTurnoComponent implements OnInit , OnDestroy {
   turnoForm: FormGroup;
-
+  fechaMin: string='';
+  subscription?: Subscription;
   ngOnInit(): void {
     this.getEspecialidades();
     this._especialidadService.especialidades = [];
     this._medicoService.medicos = [];
-
+    this.updateFechaMin();
+    // Actualizar la fecha mínima cada minuto (opcional)
+    this.subscription = interval(60000).subscribe(() => this.updateFechaMin());
+  }
+  ngOnDestroy(): void {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
+  }
+  updateFechaMin(): void {
+    const now = new Date();
+    this.fechaMin = now.toISOString().slice(0, 16);
   }
   constructor(
     private fb: FormBuilder,

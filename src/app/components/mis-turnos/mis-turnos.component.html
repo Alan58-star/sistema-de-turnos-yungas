@@ -5,7 +5,7 @@
         <div *ngIf="!vacio">
             <div class="title flex-column">
                 <h1>Turnos Pendientes</h1>
-                <span>Estos son los turnos que tiene usted pendiente. Puede <b>cancelarlos con 30 minutos de anticipacion</b> si desea.</span>
+                <span>Estos son los turnos que tiene usted pendiente. Puede <b>cancelarlos con 1 Hora minima de anticipacion</b> si desea.</span>
             </div>
 
             <div class="turnos-section">
@@ -18,7 +18,7 @@
                     </ul>
                     <div class="flex-row">
                         <button *ngIf="canCancelTurno(turno.fecha)" class="option-pill-access red-button-access cancel-turno"
-                        [disabled]="!canCancelTurno(turno.fecha)" (click)="cancelarTurno(turno._id)">Cancelar Turno</button>
+                        [disabled]="!canCancelTurno(turno.fecha)" (click)="confirmarCancelarTurno(turno._id)">Cancelar Turno</button>
                     </div>
 
                     <!--  <div [ngClass]="{'hidden': isMenuHidden}">

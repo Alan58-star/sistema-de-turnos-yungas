@@ -14,7 +14,7 @@
             <option value="{{medico._id}}" *ngFor="let medico of _medicoService.medicos" >{{medico.nombre}}</option>
         </select>
         <label for="fecha">Fecha y hora del Turno<small style="color: var(--celeste);"> (Clic en el ícono para abrir el calendario)</small></label>
-        <input type="datetime-local" name="fecha" id="fecha" formControlName="fecha">
+        <input type="datetime-local" [attr.min]="fechaMin" name="fecha" id="fecha" formControlName="fecha">
         <label for="duracion">Duración<small style="color: var(--celeste);"> En minutos</small></label>
         <input type="number" formControlName="duracion" name="duracion" id="duracion">
         <label for="consultorio">Lugar</label>

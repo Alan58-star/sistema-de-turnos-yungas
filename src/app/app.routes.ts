@@ -16,6 +16,7 @@ import { loginGuardAdmin } from './guards/login.guard';
 import { loginGuardSecretaria } from './guards/login.guard';
 import { loginGuardPaciente } from './guards/login.guard';
 import { CambiarPasswordComponent } from './components/login/cambiar-password/cambiar-password.component';
+import { BanPageComponent } from './components/main-page/ban-page/ban-page.component';
 
 export const routes: Routes = [
     {path: '', component:BodyComponent},
@@ -25,6 +26,7 @@ export const routes: Routes = [
     {path: 'especialidades', component:EsepcialidadesPageComponent,canActivate:[loginGuardPaciente]},
     {path: 'admin/medico-list', component:MedicosListComponent,canActivate:[loginGuardAdmin]},
     {path: 'admin/medico-form', component:MedicoFormComponent,canActivate:[loginGuardAdmin]},
+    {path: 'admin/medico-form/:id', component:MedicoFormComponent,canActivate:[loginGuardAdmin]},
     {path: 'usuario-list', component:UsuariosListComponent,canActivate:[loginGuardAdmin]},
     {path: 'login', component:LoginComponent},
     {path: 'recover-password', component:RecoverPasswordComponent},
@@ -35,4 +37,5 @@ export const routes: Routes = [
     {path: 'secretaria/nuevo-turno', component:FormNuevoTurnoComponent,canActivate:[loginGuardSecretaria]},
     {path: 'mis-turnos', component:MisTurnosComponent,canActivate:[loginGuardPaciente]},
     {path: 'cambiar-password', component:CambiarPasswordComponent},
+    {path: 'baneado', component:BanPageComponent}
 ];

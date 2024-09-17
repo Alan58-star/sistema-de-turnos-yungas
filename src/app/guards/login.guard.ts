@@ -29,7 +29,7 @@ export const loginGuardPaciente=()=>{
          
             return true;   
         }
-        router.navigate(['/']);
+        router.navigate(['baneado']);
         return false;
     }
     else{

@@ -44,7 +44,7 @@ export class MisTurnosComponent implements OnInit {
     const diffInMinutes = (turnoDate.getTime() - now.getTime()) / 1000 / 60;
     console.log(diffInMinutes);
     // Si faltan 30 minutos o menos, devolver false
-    return diffInMinutes > 30;
+    return diffInMinutes > 60;
   }
   cargarTurnos () {
     this._pacienteService.getTurnosPaciente().subscribe({
@@ -60,6 +60,13 @@ export class MisTurnosComponent implements OnInit {
       },
       
     })
+  }
+  confirmarCancelarTurno(turnoId: any) {
+    const confirmacion = window.confirm('¿Estás seguro de que deseas cancelar el turno?');
+    
+    if (confirmacion) {
+      this.cancelarTurno(turnoId);
+    }
   }
   cancelarTurno(idTurno:any){
     this._turnoService.getTurno(idTurno).subscribe({

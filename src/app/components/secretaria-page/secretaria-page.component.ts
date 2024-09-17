@@ -20,9 +20,10 @@ registerLocaleData(localeEs, 'es');
 })
 export class SecretariaPageComponent implements OnInit{ 
   turnoForm:FormGroup
+  fecha=new Date();
   ngOnInit(): void {
     this.getTurnos();
-    
+    this.fecha = new Date();
     
   }
   constructor(
@@ -38,10 +39,42 @@ export class SecretariaPageComponent implements OnInit{
       tipo: ['']
     });
   }
+  diaAnterior(){
+    const nuevaFecha = new Date();
+    nuevaFecha.setDate(this.fecha.getDate() -1);
+    this.fecha = nuevaFecha;
+    
+    const fechaFormateada = this.datePipe.transform(this.fecha, 'yyyy-MM-dd');
+      
+      this._turnoService.getTurnosPorFecha(fechaFormateada).subscribe({
+        next: (data) => {
+          this._turnoService.turnos = data;
+        },
+        error: (e) => {
+          console.log(e);
+        },
+      });
+
+  }
+  diaSiguiente(){
+    let nuevaFecha = new Date();
+    nuevaFecha.setDate(this.fecha.getDate() +1);
+    this.fecha = nuevaFecha;
+    const fechaFormateada = this.datePipe.transform(this.fecha, 'yyyy-MM-dd');
+      
+      this._turnoService.getTurnosPorFecha(fechaFormateada).subscribe({
+        next: (data) => {
+          this._turnoService.turnos = data;
+        },
+        error: (e) => {
+          console.log(e);
+        },
+      });
+  }
   busqueda() {
     const busquedaValue = this.turnoForm.get('busqueda')?.value;
     const tipoValue = this.turnoForm.get('tipo')?.value;
-  
+    
     console.log(busquedaValue);
     console.log(tipoValue);
   
@@ -74,7 +107,10 @@ export class SecretariaPageComponent implements OnInit{
   buscarFecha(){
     console.log(this.turnoForm.get('fecha')?.value)
     const fechaValue = this.turnoForm.get('fecha')?.value;
-    
+    let fechaVal = this.turnoForm.get('fecha')?.value;
+    fechaVal=new Date(fechaVal);
+    fechaVal.setDate(fechaVal.getDate()+1)
+    this.fecha=fechaVal;
     if (fechaValue) {
       
       const fechaFormateada = this.datePipe.transform(fechaValue, 'yyyy-MM-dd');
@@ -118,6 +154,7 @@ export class SecretariaPageComponent implements OnInit{
     })
   }
   getTurnos() {
+    this.fecha=new Date();
     this._turnoService.getTurnosHoy().subscribe({
       next:(data) => {
         this._turnoService.turnos=data;;
