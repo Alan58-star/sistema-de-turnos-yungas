@@ -16,6 +16,7 @@ import { loginGuardAdmin } from './guards/login.guard';
 import { loginGuardSecretaria } from './guards/login.guard';
 import { loginGuardPaciente } from './guards/login.guard';
 import { CambiarPasswordComponent } from './components/login/cambiar-password/cambiar-password.component';
+import { NewPasswordComponent } from './components/login/new-password/new-password.component';
 
 export const routes: Routes = [
     {path: '', component:BodyComponent},
@@ -35,4 +36,7 @@ export const routes: Routes = [
     {path: 'secretaria/nuevo-turno', component:FormNuevoTurnoComponent,canActivate:[loginGuardSecretaria]},
     {path: 'mis-turnos', component:MisTurnosComponent,canActivate:[loginGuardPaciente]},
     {path: 'cambiar-password', component:CambiarPasswordComponent},
+
+    { path: 'reset-password', component: NewPasswordComponent },
+    { path: 'reset-password/:token', component: NewPasswordComponent }
 ];

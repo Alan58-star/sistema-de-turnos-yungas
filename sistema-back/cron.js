@@ -1,9 +1,6 @@
 const cron = require("node-cron");
 const axios = require("axios");
 const Turno = require("./models/Turno");
-const {
-  log,
-} = require("@angular-devkit/build-angular/src/builders/ssr-dev-server");
 
 const token =
   "EAASUrq8QlP0BOyRDAaMQiZCEplaBHzOpFim5Q0GUunv7iIx0ZC52Cw9yqLaBhvQKNS8Yb3UgZASS6GOCuqfiY8aA4vaCf3mRZCV9XyjYpA1MfNXuGyLpgrw7ONh72tutdn5x9pL0B2n2ALZBsJ30d4uxD4NNTwjeMCeikoLMcW7XZAC42ZCnKy2F2EhavzREBcI";

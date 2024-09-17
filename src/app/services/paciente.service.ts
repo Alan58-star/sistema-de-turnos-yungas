@@ -36,4 +36,12 @@ export class PacienteService {
   getTurnosPaciente(){
     return this.http.get<Turno[]>(`${this.url}/turnos/${sessionStorage.getItem('id')}`);
   }
+
+  requestPasswordReset(datos:any){
+    return this.http.post<any>(`${this.url}request-password-reset`, datos);
+  }
+
+  resetPassword(token: string, newPassword:string){
+    return this.http.post<any>(`${this.url}reset-password`, {token, newPassword})
+  }
 }
