@@ -13,4 +13,9 @@ router.get('/turnos/:pacienteId', pacienteController.obtenerTurnosDelPaciente);
 router.post('/register',pacienteController.register);
 router.post('/login',pacienteController.login);
 
+// Rutas para recuperación de contraseña
+router.post('/request-password-reset', pacienteController.requestPasswordReset);
+router.post('/reset-password', pacienteController.resetPassword);
+
+
 module.exports = router;

@@ -1,3 +1,4 @@
+const { type } = require('jquery');
 const {mongoose, Schema} = require ('mongoose');
 const PacienteSchema = mongoose.Schema({
     dni:{
@@ -25,6 +26,14 @@ const PacienteSchema = mongoose.Schema({
         type: String,
         required:false,
         default: 'paciente'
+    },
+    resetPasswordToken:{
+        type: String,
+        require: false
+    },
+    resetPasswordExpires:{
+        type: Date,
+        require: false
     }
 });
 

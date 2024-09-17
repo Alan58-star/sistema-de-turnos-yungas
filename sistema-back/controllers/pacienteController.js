@@ -2,6 +2,10 @@ const Paciente = require('../models/Paciente');
 const Turno = require('../models/Turno');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const wpp = require('../controllers/whatsappController');
+const { log } = require('@angular-devkit/build-angular/src/builders/ssr-dev-server');
+require('dotenv').config();
+
 exports.crearPaciente = async(req,res) => {
    try{     
     let log = await Paciente.find().where('dni').equals(req.body.dni)
@@ -214,6 +218,88 @@ exports.register = async(req,res) => {
                'msg': 'Error procesando operacion.'
            })
         }
+}
+
+const SECRET_KEY = process.env.JWT_SECRET;
+
+exports.requestPasswordReset = async (req, res) => {
+    const { dni, number } = req.body;
+    const paciente = await Paciente.findOne({ dni });
+  
+    if (!paciente) {
+      return res.status(404).json({
+        'status': '404',
+        'msg': 'DNI no encontrado'
+      });
+    }    
+  
+    if (paciente.telefono != number) {
+      return res.status(400).json({
+        'status': '400',
+        'msg': 'El número es incorrecto'
+      });
+    }
+  
+    // Genera un token con el ID del usuario y una expiración de 1 hora
+    const token = jwt.sign({ userId: paciente._id }, SECRET_KEY, { expiresIn: '1h' });
+  
+    // Guarda el token en la base de datos
+    paciente.resetPasswordToken = token;
+    paciente.resetPasswordExpires = Date.now() + 3600000; // Expira en 1 hora
+    await paciente.save();
+  
+    // Crea el enlace con el token
+    const resetLink = `http://localhost:4200/reset-password?token=${token}`;
+  
+    // Envía el enlace a través de WhatsApp
+    wpp.sendUrlResetPassword(number, `Click this link to reset your password: ${resetLink}`);
+  
+    res.status(200).json({
+      'status': '200',
+      'msg': 'Se envió un mensaje a su WhatsApp con el enlace para restablecer su contraseña'
+    });
+  };
+  
+
+exports.resetPassword = async(req, res) => {
+    const { token, newPassword } = req.body;
+
+    try {
+        // Verifica el token nuevamente
+        const decoded = jwt.verify(token, SECRET_KEY); 
+        
+        const paciente = await Paciente.findOne({
+            _id: decoded.userId,
+            resetPasswordToken: token,
+            resetPasswordExpires: { $gt: Date.now() }
+        });
+        
+        if (!paciente) {
+            // return res.status(400).json('Invalid or expired token');
+            return res.status(400).json({
+                'status': '400',
+                'msg': 'Invalido o token expirado'
+            });
+        }
+
+        // Hashea la nueva contraseña y guárdala
+        paciente.passw = await bcrypt.hash(newPassword, 10);
+        paciente.resetPasswordToken = undefined; // Borra el token después de usarlo
+        paciente.resetPasswordExpires = undefined;
+        await paciente.save();
+
+        // res.status(200).json('Password updated successfully');
+        res.status(200).json({
+            'status': '200',
+            'msg': 'Contraseña actualizada con exito'
+        });
+    } catch (error) {
+        // res.status(400).json('Invalid token');
+        res.status(400).json({
+            'status': '400',
+            'msg': 'Token invalido'
+        });
+    }
 }
 
 function createToken(paciente){
