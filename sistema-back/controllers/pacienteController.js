@@ -43,6 +43,48 @@ exports.obtenerPacientes = async(req,res) => {
         res.status(500).send('Hubo un error');
     }
 }
+exports.obtenerUsuarios = async(req,res) => {
+    try{
+        const usuarios = await Paciente.find({
+            $or: [
+                { rol: 'admin' },
+                { rol: 'secretaria' }
+            ]}
+        );
+        res.send(usuarios);
+
+    }catch(error){
+        console.log(error);
+        res.status(500).send('Hubo un error');
+    }
+}
+exports.obtenerSoloPacientes = async(req,res) => {
+    try{
+        const pacientes = await Paciente.find(
+            { rol: 'paciente' }
+            
+        );
+        res.send(pacientes);
+
+    }catch(error){
+        console.log(error);
+        res.status(500).send('Hubo un error');
+    }
+}
+exports.obtenerPacientesStrikes = async(req,res) => {
+    try{
+        const pacientes = await Paciente.find(
+           { rol: 'paciente' ,
+            strikes: { $gte: 3 } 
+           }
+        );
+        res.send(pacientes);
+
+    }catch(error){
+        console.log(error);
+        res.status(500).send('Hubo un error');
+    }
+}
 exports.actualizarPaciente = async(req,res) => {
     try{
         const paciente = await Paciente.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true });
@@ -96,6 +138,39 @@ exports.obtenerPacienteTermino = async (req, res) => {
                 $or: [
                     { nombre: { $regex: searchTerm, $options: 'i' } }, // Coincidencia parcial en el nombre
                     { apellido: { $regex: searchTerm, $options: 'i' } } // Coincidencia parcial en el apellido
+                ]
+            })
+        }
+
+        
+        if (searchTerm && (!pacientes || pacientes.length === 0)) {
+            return res.status(404).json({ msg: 'No se encontraron pacientes que coincidan con la búsqueda' });
+        }
+
+        
+        res.json(pacientes);
+
+    } catch (error) {
+        console.error('Error al obtener pacientes:', error.message);
+        res.status(500).send('Hubo un error');
+    }
+}
+
+exports.obtenerPacienteTerminoSec = async (req, res) => {
+    try {
+        const searchTerm = req.params.termino?.trim(); // Limpiar espacios en blanco
+        
+        let pacientes;
+
+        if (!searchTerm) {
+            
+            pacientes = await Paciente.find({});
+        } else {
+            pacientes = await Paciente.find({
+                rol:'paciente',
+                $or: [
+                    { nombre: { $regex: searchTerm, $options: 'i' } }, // Coincidencia parcial en el nombre
+                    { apellido: { $regex: searchTerm, $options: 'i' } }
                 ]
             })
         }

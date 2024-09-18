@@ -30,8 +30,8 @@ export class MedicoFormComponent implements OnInit {
       legajo: ['',Validators.required],
       nombre: ['',Validators.required],
       apellido: ['',Validators.required],
-      especialidad:['',Validators.required]
-      
+      especialidad:['',Validators.required],
+      disponibles:['']
     })
     
     
@@ -62,10 +62,9 @@ export class MedicoFormComponent implements OnInit {
           legajo: [data.legajo],
           nombre: [data.nombre],
           apellido: [data.apellido],
-          especialidad:[data.especialidades]
-          
+          especialidad:[data.especialidades],
+          disponibles:[data.disponibles]
         })
-        this.disponible=data.disponibles;
       },
       error:(e) => {
         console.log(e);
@@ -79,7 +78,7 @@ editarMedico(){
     nombre: this.medicoForm.get('nombre')?.value,
     apellido: this.medicoForm.get('apellido')?.value,
     especialidades: [this.medicoForm.get('especialidad')?.value],
-    disponibles:this.disponible
+    disponibles:this.medicoForm.get('disponibles')?.value
   }
   if (this.medicoForm.invalid) {
     this.toastr.error("Todos los campos deben estar completos");

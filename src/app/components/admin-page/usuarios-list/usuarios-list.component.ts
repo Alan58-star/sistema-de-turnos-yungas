@@ -6,6 +6,7 @@ import { PacienteService } from '../../../services/paciente.service';
 import { Paciente } from '../../../models/paciente';
 import { Toast, ToastrService } from 'ngx-toastr';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { LoginService } from '../../../services/login.service';
 
 @Component({
   selector: 'app-usuarios-list',
@@ -17,10 +18,18 @@ import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 export class UsuariosListComponent implements OnInit{
   busquedaForm:FormGroup;
   ngOnInit(): void {
-    this.getPacientes();
+    if(sessionStorage.getItem("rol")=='admin'){
+      this.getUsuarios();
+    }
+    else{
+      this.getSoloPacientes();
+    }
+    
     
   }
-  constructor(public _pacienteService:PacienteService,private toastr:ToastrService,private fb:FormBuilder){
+  constructor(public _pacienteService:PacienteService,
+    private toastr:ToastrService,private fb:FormBuilder, 
+  public _loginService:LoginService){
     
     this.busquedaForm = this.fb.group({
       busqueda: ['']
@@ -29,20 +38,39 @@ export class UsuariosListComponent implements OnInit{
   }
   
   busqueda() {
+    
     const busquedaValue = this.busquedaForm.get('busqueda')?.value;
-    if(busquedaValue==""){
-      this.getPacientes();
+    if(sessionStorage.getItem("rol")=='admin'){
+      if(busquedaValue==""){
+        this.getUsuarios();
+      }
+      else{
+        this._pacienteService.getPacientesTermino(busquedaValue).subscribe({
+          next: (data) => {
+            this._pacienteService.pacientes = data;
+          },
+          error: (e) => {
+            this.toastr.error("Sin coincidencias")
+          }
+        });
+      }
     }
     else{
-      this._pacienteService.getPacientesTermino(busquedaValue).subscribe({
-        next: (data) => {
-          this._pacienteService.pacientes = data;
-        },
-        error: (e) => {
-          this.toastr.error("Sin coincidencias")
-        }
-      });
+      if(busquedaValue==""){
+        this.getSoloPacientes();
+      }
+      else{
+        this._pacienteService.getPacientesTerminoSec(busquedaValue).subscribe({
+          next: (data) => {
+            this._pacienteService.pacientes = data;
+          },
+          error: (e) => {
+            this.toastr.error("Sin coincidencias")
+          }
+        });
+      }
     }
+   
     
   }
   
@@ -63,7 +91,8 @@ export class UsuariosListComponent implements OnInit{
           this._pacienteService.putPaciente(paciente).subscribe({
             next:(data) => {
               this.toastr.success("Usuario desbloqueado!")
-              this.getPacientes();
+              
+              this.getBloqueados();
             },
             error:(e) => {
               console.log(e);
@@ -81,6 +110,45 @@ export class UsuariosListComponent implements OnInit{
   }
   getPacientes() {
     this._pacienteService.getPacientes().subscribe({
+      next:(data) => {
+        this._pacienteService.pacientes=data;
+        
+      },
+      error:(e) => {
+        console.log(e);
+      },
+      
+    })
+  }
+  getSoloPacientes() {
+    this._pacienteService.getSoloPacientes().subscribe({
+      next:(data) => {
+        this._pacienteService.pacientes=data;
+        
+      },
+      error:(e) => {
+        console.log(e);
+      },
+      
+    })
+  }
+  getBloqueados() {
+    this._pacienteService.getPacientesStrikes().subscribe({
+      next:(data) => {
+        this._pacienteService.pacientes=data;
+        if(this._pacienteService.pacientes.length==0){
+          this.toastr.info("No hay paciente bloqueados");
+          this.getSoloPacientes();
+        }
+      },
+      error:(e) => {
+        this.toastr.error("No hay pacientes bloqueados")
+      },
+      
+    })
+  }
+  getUsuarios() {
+    this._pacienteService.getUsuarios().subscribe({
       next:(data) => {
         this._pacienteService.pacientes=data;
         

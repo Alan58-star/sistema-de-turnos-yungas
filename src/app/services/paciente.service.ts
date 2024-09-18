@@ -18,11 +18,23 @@ export class PacienteService {
   getPacientes(){
     return this.http.get<Paciente[]>(this.url);
   }
+  getUsuarios(){
+    return this.http.get<Paciente[]>(this.url+"/usuarios");
+  }
+  getSoloPacientes(){
+    return this.http.get<Paciente[]>(this.url+"/pacientes");
+  }
+  getPacientesStrikes(){
+    return this.http.get<Paciente[]>(this.url+"/ban");
+  }
   getPaciente(id:any){
     return this.http.get<Paciente>(`${this.url}/${id}`);
   }
   getPacientesTermino(termino:any){
     return this.http.get<Paciente[]>(`${this.url}/termino/${termino}`);
+  }
+  getPacientesTerminoSec(termino:any){
+    return this.http.get<Paciente[]>(`${this.url}/terminoSec/${termino}`);
   }
   postPaciente(paciente: Paciente){
     return this.http.post<any>(this.url+'/register', paciente);

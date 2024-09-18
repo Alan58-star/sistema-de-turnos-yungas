@@ -6,9 +6,15 @@ const pacienteController = require('../controllers/pacienteController');
 
 router.post('/', pacienteController.crearPaciente);
 router.get('/',pacienteController.obtenerPacientes);
+router.get('/usuarios',pacienteController.obtenerUsuarios);
+router.get('/pacientes',pacienteController.obtenerSoloPacientes);
+
+router.get('/ban',pacienteController.obtenerPacientesStrikes);
 router.put('/:id', pacienteController.actualizarPaciente);
 router.get('/:id', pacienteController.obtenerPaciente);
 router.get('/termino/:termino', pacienteController.obtenerPacienteTermino);
+
+router.get('/terminoSec/:termino', pacienteController.obtenerPacienteTerminoSec);
 router.delete('/:id', pacienteController.eliminarPaciente);
 router.get('/turnos/:pacienteId', pacienteController.obtenerTurnosDelPaciente);
 router.post('/register',pacienteController.register);

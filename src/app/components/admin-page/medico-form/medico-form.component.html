@@ -1,8 +1,9 @@
 <app-admin-nav/>
 <div class="admin-page">
-    <div class="flex-row">
-        <h1>Alta de Nuevo Médico</h1>
-        <button class="option-pill small-button" routerLink="/admin">Volver al Inicio</button>
+    <div  class="flex-row">
+        <h1 *ngIf="accion=='agregar'">Alta de Nuevo Médico</h1>
+        <h1 *ngIf="accion=='editar'">Modificar Médico</h1>
+        <button class="option-pill small-button" [routerLink]="accion ==='agregar'? '/admin':'/admin/medico-list' ">Volver</button>
     </div>
     <form action="#" method="post" class="form" [formGroup]="medicoForm" (ngSubmit)="accion === 'agregar' ? agregarMedico() : editarMedico()">
         <label for="legajo">Matricula <small style="color: var(--celeste);">Sólo números</small></label>
@@ -15,6 +16,10 @@
         <select name="especialidad" id="especialidad"  formControlName="especialidad">
             <option value="{{especialidad._id}}" *ngFor="let especialidad of _especialidadService.especialidades" > {{especialidad.nombreEsp}} </option>
         </select>
+        <div *ngIf="accion=='editar'">
+        <label for="disponibles">Turnos Disponibles</label>
+        <input type="number" formControlName="disponibles" name="disponibles" id="disponibles">
+    </div>
         <div class="flex-row">
             <button *ngIf="accion=='agregar'" type="submit" class="option-pill blue-button">
                 + Dar de Alta

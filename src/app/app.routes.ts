@@ -28,7 +28,7 @@ export const routes: Routes = [
     {path: 'admin/medico-list', component:MedicosListComponent,canActivate:[loginGuardAdmin]},
     {path: 'admin/medico-form', component:MedicoFormComponent,canActivate:[loginGuardAdmin]},
     {path: 'admin/medico-form/:id', component:MedicoFormComponent,canActivate:[loginGuardAdmin]},
-    {path: 'usuario-list', component:UsuariosListComponent,canActivate:[loginGuardAdmin]},
+    {path: 'usuario-list', component:UsuariosListComponent,canActivate:[loginGuardSecretaria]},
     {path: 'login', component:LoginComponent},
     {path: 'recover-password', component:RecoverPasswordComponent},
     {path: 'secretaria', component:SecretariaPageComponent,canActivate:[loginGuardSecretaria]},
