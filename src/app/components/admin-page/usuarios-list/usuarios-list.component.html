@@ -60,13 +60,18 @@
 								<div class="flex-column buttons-container">
 									<button *ngIf="paciente.rol=='paciente' && paciente.strikes>=3"
 										class="option-pill yellow-button action-element"
-										(click)="desbloquearPaciente(paciente._id)"><i class="fa-solid fa-lock-open"></i></button>
+										(click)="desbloquearPaciente(paciente._id)">
+										<span class="material-symbols-rounded">lock_open_right</span>
+									</button>
 									<button *ngIf="paciente.rol=='admin' || paciente.rol=='secretaria'"
 										class="option-pill blue-button action-element"
-										(click)="desbloquearPaciente(paciente._id)"><i class="fa-solid fa-pencil"></i></button>
+										(click)="desbloquearPaciente(paciente._id)">
+										<span class="material-symbols-rounded">stylus</span>
+									</button>
 									<button class="option-pill red-button action-element"
-										(click)="confirmarEliminarPaciente(paciente._id)"><i
-											class="fa-solid fa-trash"></i></button>
+										(click)="confirmarEliminarPaciente(paciente._id)">										
+										<span class="material-symbols-rounded">delete_forever</span>
+									</button>
 								</div>
 							</td>
 						</tr>
