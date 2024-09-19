@@ -73,6 +73,16 @@ button {
     gap: 10px;
 }
 
+/* Estilo personalizado de los toast */
+.ngx-toastr{
+    box-shadow: none !important;
+}
+
+.toast-message{
+    font-size: 18px;
+    font-weight: 600;
+}
+
 /* Colores personalizados para los toast */
 .toast-success {
   background-color: var(--verde);
@@ -81,7 +91,7 @@ button {
   background-color: var(--rojo);
 }
 .toast-info {
-  background-color: var(--celeste);
+  background-color: var(--celesteO);
 }
 .toast-warning {
   background-color: var(--amarillo);
