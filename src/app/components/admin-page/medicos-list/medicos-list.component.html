@@ -3,10 +3,17 @@
 
 	<div class="flex-row turnos-page">
 		<!--Zona de acciones-->
-		<div class="date-actions">
+		<div class="flex-column date-actions">
 			<div class="section flex-column">
 				<span class="section-title">Acciones</span>
 			</div>
+			<form class="flex-column section" [formGroup]='busquedaForm' (ngSubmit)="busqueda()" action="#"
+				method="get">
+				<span class="section-title">Búsqueda</span>
+				<input formControlName="busqueda" type="text" name="medico-query" id="medico-query"
+					placeholder="Buscar...">
+				<button class="option-pill action-element" type="submit">Buscar</button>
+			</form>
 		</div>
 
 		<div class="flex-column turnos">
@@ -16,12 +23,6 @@
 				<button class="option-pill small-button" routerLink="/admin">Volver al Inicio</button>
 			</div>
 			<div class="element-list">
-				<form class="search-bar flex-row" [formGroup]='busquedaForm' (ngSubmit)="busqueda()" action="#"
-					method="get">
-					<input formControlName="busqueda" type="text" name="medico-query" id="medico-query"
-						placeholder="Buscar...">
-					<button class="option-pill" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
-				</form>
 				<div class="scroll-table">
 					<table>
 						<tr>

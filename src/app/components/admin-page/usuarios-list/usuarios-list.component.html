@@ -5,7 +5,7 @@
 	<div class="flex-row turnos-page">
 
 		<!--Zona de acciones-->
-		<div class="date-actions">
+		<div class="flex-column date-actions">
 			<div class="section flex-column">
 				<span class="section-title">Acciones</span>
 				<button class="option-pill small-button action-element" (click)="getBloqueados()">Mostrar
@@ -18,6 +18,13 @@
 						Todo</button>
 				</div>
 			</div>
+			<form class="flex-column section" [formGroup]='busquedaForm' (ngSubmit)="busqueda()" action="#"
+				method="get">
+				<span class="section-title">Búsqueda</span>
+				<input formControlName="busqueda" type="text" name="usuario-query" id="usuario-query"
+					placeholder="Buscar...">
+				<button class="option-pill action-element" type="submit">Buscar</button>
+			</form>
 		</div>
 
 
@@ -32,13 +39,6 @@
 			</div>
 
 			<div class="element-list">
-				<form class="search-bar flex-row" [formGroup]='busquedaForm' (ngSubmit)="busqueda()" action="#"
-					method="get">
-					<input formControlName="busqueda" type="text" name="usuario-query" id="usuario-query"
-						placeholder="Buscar...">
-					<button class="option-pill" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
-				</form>
-
 				<div class="scroll-table">
 					<table>
 						<tr>
