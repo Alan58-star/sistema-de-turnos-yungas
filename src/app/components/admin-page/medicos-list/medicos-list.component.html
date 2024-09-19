@@ -1,37 +1,53 @@
-<app-admin-nav/>
+<app-admin-nav />
 <div class="admin-page">
-    <div class="flex-row">
-        <h1>Lista de Médicos</h1>
-        <button class="option-pill small-button" routerLink="/admin">Volver al Inicio</button>
-    </div>
-    <div class="element-list">
-        <form class="search-bar flex-row"  [formGroup]='busquedaForm' (ngSubmit)="busqueda()" action="#" method="get">
-            <input formControlName="busqueda"  type="text" name="medico-query" id="medico-query" placeholder="Buscar...">
-            <!-- <button type="submit">🔍︎</button> -->
-        </form>
-        <div class="scroll-table">
-            <table>
-                <tr>
-                    <th>Legajo</th>
-                    <th>Apellido</th>
-                    <th>Nombres</th>
-                    <th>Especialiad</th>
-                    <th>Acciones</th>
-                </tr>
-                <tr *ngFor="let medico of _medicoService.medicos">
-                    <td>{{ medico.legajo }}</td>
-                    <td>{{ medico.apellido }}</td>
-                    <td>{{ medico.nombre }}</td>
-                    <td>{{medico.especialidades[0].nombreEsp}}</td>
-                    <td class="actions-cell">
-                        <div class="flex-row buttons-container">
-                            <button class="option-pill blue-button"type="button" (click)="actualizarMedico(medico._id)">Actualizar</button>
-                            <button class="option-pill red-button" type="button" (click)="confirmarEliminarMedico(medico._id)">Dar de Baja</button>
-                        </div>
-                    </td>
-                </tr>
-            </table>
-        </div>
-    </div>
 
+	<div class="flex-row turnos-page">
+		<!--Zona de acciones-->
+		<div class="date-actions">
+			<div class="section flex-column">
+				<span class="section-title">Acciones</span>
+			</div>
+		</div>
+
+		<div class="flex-column turnos">
+			<!--Título-->
+			<div class="flex-row">
+				<h1>Lista de Médicos</h1>
+				<button class="option-pill small-button" routerLink="/admin">Volver al Inicio</button>
+			</div>
+			<div class="element-list">
+				<form class="search-bar flex-row" [formGroup]='busquedaForm' (ngSubmit)="busqueda()" action="#"
+					method="get">
+					<input formControlName="busqueda" type="text" name="medico-query" id="medico-query"
+						placeholder="Buscar...">
+					<button class="option-pill" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+				</form>
+				<div class="scroll-table">
+					<table>
+						<tr>
+							<th>Legajo</th>
+							<th>Apellido</th>
+							<th>Nombres</th>
+							<th>Especialiad</th>
+							<th>Acciones</th>
+						</tr>
+						<tr *ngFor="let medico of _medicoService.medicos">
+							<td>{{ medico.legajo }}</td>
+							<td>{{ medico.apellido }}</td>
+							<td>{{ medico.nombre }}</td>
+							<td>{{medico.especialidades[0].nombreEsp}}</td>
+							<td class="actions-cell">
+								<div class="flex-column buttons-container">
+									<button class="option-pill blue-button action-element" type="button"
+										(click)="actualizarMedico(medico._id)"><i class="fa-solid fa-pencil"></i></button>
+									<button class="option-pill red-button action-element" type="button"
+										(click)="confirmarEliminarMedico(medico._id)"><i class="fa-solid fa-trash"></i></button>
+								</div>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>

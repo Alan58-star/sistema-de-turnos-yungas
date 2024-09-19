@@ -4,7 +4,7 @@
 
 :root {
     --negro: #343434;
-    --gris: #d8daec;
+    --gris: #d2d2de;
     --azul: #252C61;
     --celeste: #7ca5dc;
     --cian: #99E1DE;
@@ -20,7 +20,7 @@
     --rojoC: #ffd8df;
         
     --azulO: #1b214b;
-    --grisO: #9ca0c1;
+    --grisO: #a0a1a7;
     --celesteO: #4c63a9;
     --cianO: #046068;
     --verdeO: #109f51;
@@ -134,8 +134,10 @@ input[type="date"]{
 }
 
 .search-bar button{
-    width: 10%;
-    background-color: var(--celeste);
+    width: 60px;
+    padding: 0;
+    height: 40px;
+    margin-top: 5px;
 }
 
 .admin-page{    
@@ -152,6 +154,7 @@ input[type="date"]{
 
 .element-list{
     padding: 10px;
+    margin-bottom: 1rem;
     border: solid 1px var(--gris);
     border-radius: 10px;
     box-shadow: 0 0 10px 10px #fafafa;
@@ -178,41 +181,65 @@ input[type="date"]{
 .green-button{
     background-color:var(--verdeC);
     color: var(--verde);
+    * {         
+        color: var(--verde);
+    }
 }
 
 .green-button:hover{
     background-color: var(--verde);
     color: #fff;
+    * {         
+        color: #fff;
+    }
 }
 
 .red-button{
     background-color:var(--rojoC);
     color: var(--rojo);
+    * {         
+        color: var(--rojo);
+    }
 }
 
 .red-button:hover{
     background-color: var(--rojo);
     color: #fff;
+    * {         
+        color: #fff;
+    }
 }
 
 .blue-button{
     background-color:var(--celesteC);
-    color: var(--azul);
+    color: var(--celesteO);
+    * {         
+        color: var(--celesteO);
+    }
 }
 
 .blue-button:hover{
     background-color: var(--celeste);
     color: #fff;
+    * {         
+        color: #fff;
+    }
 }
 
 .yellow-button{
     background-color:var(--amarilloC);
     color: var(--naranja);
+    * {         
+        color: var(--naranja);
+    }
 }
 
 .yellow-button:hover{
     background-color: var(--amarillo);
     color: var(--negro);
+    * {         
+        color: var(--negro);
+    }
 }
 
 /* Clases para botones con ayuda visual */

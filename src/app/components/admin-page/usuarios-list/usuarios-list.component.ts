@@ -50,7 +50,7 @@ export class UsuariosListComponent implements OnInit{
             this._pacienteService.pacientes = data;
           },
           error: (e) => {
-            this.toastr.error("Sin coincidencias")
+            this.toastr.error("Sin coincidencias.")
           }
         });
       }
@@ -65,7 +65,7 @@ export class UsuariosListComponent implements OnInit{
             this._pacienteService.pacientes = data;
           },
           error: (e) => {
-            this.toastr.error("Sin coincidencias")
+            this.toastr.error("Sin coincidencias.")
           }
         });
       }
@@ -90,7 +90,7 @@ export class UsuariosListComponent implements OnInit{
           paciente.strikes=0;
           this._pacienteService.putPaciente(paciente).subscribe({
             next:(data) => {
-              this.toastr.success("Usuario desbloqueado!")
+              this.toastr.success("¡Usuario desbloqueado!")
               
               this.getBloqueados();
             },
@@ -137,12 +137,12 @@ export class UsuariosListComponent implements OnInit{
       next:(data) => {
         this._pacienteService.pacientes=data;
         if(this._pacienteService.pacientes.length==0){
-          this.toastr.info("No hay paciente bloqueados");
+          this.toastr.info("No hay pacientes bloqueados.");
           this.getSoloPacientes();
         }
       },
       error:(e) => {
-        this.toastr.error("No hay pacientes bloqueados")
+        this.toastr.error("No hay pacientes bloqueados.")
       },
       
     })
