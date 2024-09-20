@@ -20,6 +20,8 @@ import { DatePipe } from '@angular/common';
 import { LOCALE_ID } from '@angular/core';
 import { registerLocaleData } from '@angular/common';
 import localeEs from '@angular/common/locales/es';
+import { ObraSocial } from '../../models/obraSocial';
+import { EspecialidadService } from '../../services/especialidad.service';
 registerLocaleData(localeEs, 'es');
 
 @Component({
@@ -36,21 +38,26 @@ export class FormTurnoComponent implements OnInit {
   obra1: boolean = false;
   obra2: boolean = false;
   medico_id: any;
-
+  obra1Array: ObraSocial[]=[];
+  obra2Array: ObraSocial[]=[];
   fechaTurno:String = "";
   doctor = ""
   consultorio = ""
   especialidad = ""
+   especialidadNombre:String=""
 
   ngOnInit(): void {
     this._medicoService.medicos = [];
     this.cargarObras();
     this._medicoService.turnos = [];
     this._obraService.obras = [];
-
+    this._obraService.obras1 = [];
+    this._obraService.obras2 = [];
     this.activatedRoute.params.subscribe((params) => {
       this.cargarMedicos(params['id']);
+      this.obtenerEspecialidad(params['id']);
     });
+  
   }
   constructor(
     private fb: FormBuilder,
@@ -60,7 +67,8 @@ export class FormTurnoComponent implements OnInit {
     public _medicoService: MedicoService,
     private route: Router,
     private activatedRoute: ActivatedRoute,
-    public _whatsappService: WhatsappService
+    public _whatsappService: WhatsappService,
+    public _especialidadService:EspecialidadService
   ) {
     this.turnoForm = this.fb.group({
       obra1: [''],
@@ -70,7 +78,85 @@ export class FormTurnoComponent implements OnInit {
     });
     this.turno = new TurnoServ('0', new Date(), '0', '0', '0', 0);
   }
+  obtenerEspecialidad(id:any){
+    this._especialidadService.getEspecialidad(id).subscribe({
+      next: (data) => {
+        this.especialidadNombre= data.nombreEsp;
+        
+      },
+      error: (e) => {
+        this._medicoService.medicos = [];
+        this.toastr.error("Sin Medicos")
+      },
+    });
+  }
+  
+  cargarMedicos(id: any) {
+    this._medicoService.getEspecialidades(id).subscribe({
+      next: (data) => {
+        this._medicoService.medicos = data;
+        
+      },
+      error: (e) => {
+        this._medicoService.medicos = [];
+        this.toastr.error("Sin Medicos")
+      },
+    });
+  }
+  cargarObras() {
+    this._obraService.getObras().subscribe({
+      next: (data) => {
+        this._obraService.obras = data;
+        this._obraService.obras1 = data;
+        this._obraService.obras2 = data;
+      },
+      error: (e) => {
+        this._obraService.obras = [];
+        console.log(e);
+      },
+    });
+  }
+  
+  cargarTurnos = (id: any) => {
+    this.medico_id = id;
+    let idEspecialidad = '';
+    this.activatedRoute.params.subscribe((params) => {
+      idEspecialidad = params['id'];
+    });
 
+    this._medicoService
+      .getTurnosMedicoEsp(this.medico_id, idEspecialidad)
+      .subscribe({
+        next: (data) => {
+          this._medicoService.turnos = data;
+        },
+        error: (e) => {
+          this._medicoService.turnos = [];
+         this.toastr.error("Sin turnos");
+        },
+      });
+  };
+
+  agregarObra() {
+    if (this.obra1) {
+      this.obra2 = true;
+    } else {
+      this.obra1 = true;
+      
+    }
+  }
+
+  sacarObra() {
+    if (this.obra2) {
+      this.obra2 = false;
+      this.turnoForm.get('obra3')?.setValue('');
+    } else {
+      this.obra1 = false;
+      
+      this.turnoForm.get('obra2')?.setValue('');
+      
+    }
+  }
   agregarTurno() {
     if (this.obra1 && this.obra2) {
       this.turno.obras_sociales = [
@@ -85,6 +171,10 @@ export class FormTurnoComponent implements OnInit {
       ];
     } else {
       this.turno.obras_sociales = [this.turnoForm.get('obra1')?.value];
+    }
+    if((this.turnoForm.get('obra2')?.value=="" && this.obra1) || (this.turnoForm.get('obra3')?.value=="" && this.obra2)){
+      this.toastr.error("Ingrese una Obra correctamente");
+      return;
     }
     this.turno.paciente_id = sessionStorage.getItem('id');
     this.turno.estado = 'Ocupado';
@@ -154,70 +244,6 @@ export class FormTurnoComponent implements OnInit {
       },
     });
   }
-
-  cargarObras() {
-    this._obraService.getObras().subscribe({
-      next: (data) => {
-        this._obraService.obras = data;
-      },
-      error: (e) => {
-        this._obraService.obras = [];
-        console.log(e);
-      },
-    });
-  }
-
-  cargarMedicos(id: any) {
-    this._medicoService.getEspecialidades(id).subscribe({
-      next: (data) => {
-        this._medicoService.medicos = data;
-        console.log(this._medicoService.medicos);
-        
-      },
-      error: (e) => {
-        this._medicoService.medicos = [];
-        console.log(e);
-      },
-    });
-  }
-
-  cargarTurnos = (id: any) => {
-    this.medico_id = id;
-    let idEspecialidad = '';
-    this.activatedRoute.params.subscribe((params) => {
-      idEspecialidad = params['id'];
-    });
-
-    this._medicoService
-      .getTurnosMedicoEsp(this.medico_id, idEspecialidad)
-      .subscribe({
-        next: (data) => {
-          this._medicoService.turnos = data;
-          console.log(this._medicoService.turnos);
-        },
-        error: (e) => {
-          this._medicoService.turnos = [];
-          console.log(e);
-        },
-      });
-  };
-
-  agregarObra() {
-    if (this.obra1) {
-      this.obra2 = true;
-    } else {
-      this.obra1 = true;
-    }
-  }
-
-  sacarObra() {
-    if (this.obra2) {
-      this.obra2 = false;
-    } else {
-      this.obra1 = false;
-    }
-  }
-
   formatearFecha(fechaISO: string) {
     // Convertir la cadena ISO a un objeto Date
     const fecha = new Date(fechaISO);
@@ -245,69 +271,4 @@ export class FormTurnoComponent implements OnInit {
     this.especialidad = esp
   }
   
-  
-  
-  
-
-  medicos = [
-    {
-      id: 1,
-      genero: 'DR.',
-      nombre: 'Gastón Lozano',
-      turnos: 14,
-    },
-    {
-      id: 2,
-      genero: 'DRA.',
-      nombre: 'Alicia Gutiérrez',
-      turnos: 7,
-    },
-    {
-      id: 3,
-      genero: 'DR.',
-      nombre: 'Ernesto Alvarado',
-      turnos: 1,
-    },
-    {
-      id: 4,
-      genero: 'DR.',
-      nombre: 'Johnson Martínez',
-      turnos: 99,
-    },
-  ];
-
-  turnos = [
-    {
-      idTurno: 1,
-      fecha: 'DD/MM/AAAA',
-      hora: 'HH:MM',
-      duracion: 30,
-      lugar: 'Hospital (Presencial)',
-      consultorio: 15,
-    },
-    {
-      idTurno: 2,
-      fecha: 'DD/MM/AAAA',
-      hora: 'HH:MM',
-      duracion: 30,
-      lugar: 'Hospital (Presencial)',
-      consultorio: 12,
-    },
-    {
-      idTurno: 3,
-      fecha: 'DD/MM/AAAA',
-      hora: 'HH:MM',
-      duracion: 30,
-      lugar: 'Hospital (Presencial)',
-      consultorio: 12,
-    },
-    {
-      idTurno: 4,
-      fecha: 'DD/MM/AAAA',
-      hora: 'HH:MM',
-      duracion: 30,
-      lugar: 'Hospital (Presencial)',
-      consultorio: 15,
-    },
-  ];
 }

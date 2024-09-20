@@ -8,7 +8,7 @@
 </button>
 
 <div class="login-page">
-  <h1>Sacando turno para MÉDICO</h1>
+  <h1>Sacando turno para {{especialidadNombre}}</h1>
   <form
     action="#"
     class="form"
@@ -91,7 +91,7 @@
       <select name="obra2" id="obra2" formControlName="obra2">
         <option
           value="{{ obra1._id }}"
-          *ngFor="let obra1 of _obraService.obras"
+          *ngFor="let obra1 of _obraService.obras1"
         >
           {{ obra1.nombreOS }}
         </option>
@@ -102,7 +102,7 @@
       <select name="obra2" id="obra2" formControlName="obra3">
         <option
           value="{{ obra2._id }}"
-          *ngFor="let obra2 of _obraService.obras"
+          *ngFor="let obra2 of _obraService.obras2"
         >
           {{ obra2.nombreOS }}
         </option>
@@ -110,6 +110,7 @@
     </div>
     <div class="flex-row">
       <button
+        *ngIf="!obra2"
         type="button"
         class="option-pill-access green-button-access"
         style="margin-bottom: 2rem"
