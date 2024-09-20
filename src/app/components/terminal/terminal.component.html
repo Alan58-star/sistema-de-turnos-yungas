@@ -1,0 +1,119 @@
+<div class="terminal">
+	<div *ngIf="pasoActual == 0" class="flex-column paso" id="bienvenida">
+		<img class="logo" src="logos/logo-transp.png" alt="">
+		<h1>Bienvenidos al Hospital Distrital de Las Heras</h1>
+		<h2>Desde aquí puede tramitar un turno de manera inmediata.</h2>
+		<button class="option-pill-access blue-button-access" (click)="avanzar()">Tramitar Turno</button>
+	</div>
+
+	<form action="#">
+
+		<div *ngIf="pasoActual == 1" class="flex-column paso">
+			<h1>Paso 1: DNI</h1>
+			<h2>Introduzca su número de documento.</h2>
+			<input class="dni-input" type="number" name="dni" id="dni">
+		</div>
+
+		<div *ngIf="pasoActual == 2" class="flex-column paso">
+			<h1>Paso 2: Especialidad</h1>
+			<h2>¿Para qué médico desea sacar turno?</h2>
+			<select name="especialidad" id="especialidad">
+				<option value="">Toque aquí</option>
+				<option value="">Ejemplo</option>
+				<option value="">Ejemplo</option>
+				<option value="">Ejemplo</option>
+				<option value="">Ejemplo</option>
+			</select>
+		</div>
+
+		<div *ngIf="pasoActual == 3" class="flex-column paso">
+			<h1>Paso 3: Médico y Turno</h1>
+			<h2>Seleccione el médico y el turno que desee.</h2>
+
+			<div class="flex-row">
+
+				<div class="flex-column section">
+					<h3>MÉDICO</h3>
+					<div class="card-container">
+						<div class="card">
+							<label for="medicoID">
+								<input type="radio" name="medico" id="medicoID" class="card-input-element" />
+								<div class="card-input">
+									<div class="turno-titulo-text">
+										Nombre Apellido
+									</div>
+									<div class="turno-text">
+										Turnos Disponibles: numTurnos
+									</div>
+								</div>
+							</label>
+						</div>
+					</div>
+				</div>
+
+				<div class="flex-column section">
+					<h3>TURNO</h3>
+					<div class="card-container">
+						<div class="card">
+							<label for="turnoID">
+								<input formControlName="turno" type="radio" value="turnoID" name="turno" id="turnoID"
+									class="card-input-element" />
+								<div class="card-input">
+									<ul>
+										<li class="turno-titulo-text">
+											Martes 24/7 a las 19:99
+										</li>
+										<li class="turno-text">Duración: 10 min</li>
+										<li class="turno-text">Lugar: Hospital</li>
+										<li class="turno-text">
+											<b>Consultorio 1 </b>
+										</li>
+									</ul>
+								</div>
+							</label>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+		<div *ngIf="pasoActual == 4" class="flex-column paso">
+			<h1>Paso 4: Obras Sociales</h1>
+			<h2>Seleccione sus Obras Sociales</h2>
+
+			<div class="flex-row" style="justify-content: center;">
+
+				<div>
+					<select class="small-select" name="obra0" id="obra0">
+						<option value="">Obra A</option>
+						<option value="">Obra B</option>
+					</select>
+		
+					<select class="small-select" name="obra0" id="obra0">
+						<option value="">Obra A</option>
+						<option value="">Obra B</option>
+					</select>
+		
+					<select class="small-select" name="obra0" id="obra0">
+						<option value="">Obra A</option>
+						<option value="">Obra B</option>
+					</select>
+				</div>
+
+				<div class="flex-column">
+					<button class="option-pill red-button small-button">Quitar Obra Social</button>
+					<button class="option-pill green-button small-button">Agregar Obra Social</button>
+				</div>
+
+			</div>
+
+		</div>		
+	</form>
+
+	<div *ngIf="pasoActual > 0" class="botonera flex-row">
+		<button *ngIf="pasoActual > 0" class="option-pill-access" (click)="retroceder()">Paso Anterior</button>
+		<button *ngIf="pasoActual < 4" class="option-pill-access blue-button-access" (click)="avanzar()">Paso Siguiente</button>
+		<button *ngIf="pasoActual === 4" class="option-pill-access green-button-access">Confirmar Turno</button>
+	</div>
+</div>
