@@ -1,0 +1,76 @@
+@import "../form-turno/form-turno.component.css";
+
+h1{
+    font-size: 54px;
+    color: var(--azul);
+}
+h2{
+    font-size: 32px;
+}
+h3{
+    text-align: center;
+}
+
+button{
+    padding: 2rem;
+    font-size: 28px;
+}
+
+input, select{
+    max-width: 800px;
+    padding: 1rem;
+
+    border: solid 3px var(--gris);
+    border-radius: 20px;
+
+    text-align: center;
+    font-size: 36px;
+}
+
+.small-select{
+    max-width: 600px;
+    padding: 0.5rem;
+
+    font-size: 28px;
+}
+
+option{
+    padding: 1rem;
+
+    text-align: center;
+    margin: auto;
+    font-size: 28px;
+    font-weight: 600;
+}
+
+.terminal{
+    margin-bottom: 3rem;
+}
+
+.paso{
+    padding: 3rem 1rem;
+}
+
+.logo{
+    padding: 0.5rem;
+    max-width: 200px;
+
+    background-color: var(--azul);
+    border-radius: 100%;
+}
+
+.dni-input{
+    max-width: 400px;
+}
+
+.small-button{
+    padding: 20px;
+    font-size: 20px;
+}
+
+.section{
+    padding: 2rem 0;
+}
+
+
+
