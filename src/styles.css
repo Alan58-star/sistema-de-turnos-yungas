@@ -15,7 +15,7 @@
     
     --cianC: #a3ffe3;
     --celesteC: #c1ebff;
-    --verdeC: #dfffdd;
+    --verdeC: #ccffcc;
     --amarilloC: #fffccd;
     --rojoC: #ffd8df;
         
@@ -155,21 +155,6 @@ input[type="date"]{
     width: 60%;
 }
 
-/* Clases para listas de elementos de usuarios no pacientes */
-
-.scroll-table{
-    height: 400px;
-    overflow-y: scroll;
-}
-
-.element-list{
-    padding: 10px;
-    margin-bottom: 1rem;
-    border: solid 1px var(--gris);
-    border-radius: 10px;
-    box-shadow: 0 0 10px 10px #fafafa;
-}
-
 /* Clases para botones genéricos */
 
 .option-pill{
@@ -186,6 +171,22 @@ input[type="date"]{
 
 .option-pill:hover{
     background-color: var(--gris);
+}
+
+.cian-button{
+    background-color:var(--cianC);
+    color: var(--cianO);
+    * {         
+        color: var(--cianO);
+    }
+}
+
+.cian-button:hover{
+    background-color: var(--cian);
+    color: var(--cianO);
+    * {         
+        color: var(--cianO);
+    }
 }
 
 .green-button{
@@ -320,6 +321,15 @@ input[type="date"]{
 
 .blue-button-access:hover{
     outline-color: var(--azul);
+}
+
+.lblue-button-access{
+    background-color:var(--celesteO);
+    color: #fff;
+}
+
+.lblue-button-access:hover{
+    outline-color: var(--celesteO);
 }
 
 .yellow-button-access{
