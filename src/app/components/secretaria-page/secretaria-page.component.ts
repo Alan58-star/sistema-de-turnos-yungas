@@ -20,6 +20,7 @@ registerLocaleData(localeEs, 'es');
 })
 export class SecretariaPageComponent implements OnInit{ 
   menuTurnoAbierto: boolean;
+  selectedTurno: any = null;
   mostrandoFecha: boolean;
 
   turnoForm:FormGroup
@@ -181,11 +182,13 @@ export class SecretariaPageComponent implements OnInit{
     })
   }
 
-  showMenuTurno() {
+  showMenuTurno(turno: any) {
+    this.selectedTurno = turno;
     this.menuTurnoAbierto = true;
   }
 
   hideMenuTurno() {
+    this.selectedTurno = null;
     this.menuTurnoAbierto = false;
   }
 }
