@@ -19,6 +19,9 @@ registerLocaleData(localeEs, 'es');
   styleUrl: './secretaria-page.component.css'
 })
 export class SecretariaPageComponent implements OnInit{ 
+  menuTurnoAbierto: boolean;
+  mostrandoFecha: boolean;
+
   turnoForm:FormGroup
   fecha=new Date();
   ngOnInit(): void {
@@ -38,7 +41,11 @@ export class SecretariaPageComponent implements OnInit{
       busqueda:[''],
       tipo: ['']
     });
+    
+    this.menuTurnoAbierto = false;
+    this.mostrandoFecha = false;
   }
+
   diaAnterior(){
     const nuevaFecha = new Date();
     nuevaFecha.setDate(this.fecha.getDate() -1);
@@ -72,6 +79,8 @@ export class SecretariaPageComponent implements OnInit{
       });
   }
   busqueda() {
+    this.mostrandoFecha = true;
+
     const busquedaValue = this.turnoForm.get('busqueda')?.value;
     const tipoValue = this.turnoForm.get('tipo')?.value;
     
@@ -104,6 +113,12 @@ export class SecretariaPageComponent implements OnInit{
       console.log('Tipo de búsqueda no reconocido');
     }
   }
+
+  reiniciarFiltros(){
+    this.mostrandoFecha = false;
+    this.getTurnos();
+  }
+
   buscarFecha(){
     console.log(this.turnoForm.get('fecha')?.value)
     const fechaValue = this.turnoForm.get('fecha')?.value;
@@ -164,5 +179,13 @@ export class SecretariaPageComponent implements OnInit{
       },
       
     })
+  }
+
+  showMenuTurno() {
+    this.menuTurnoAbierto = true;
+  }
+
+  hideMenuTurno() {
+    this.menuTurnoAbierto = false;
   }
 }
