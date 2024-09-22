@@ -27,11 +27,35 @@ input, select{
     font-size: 36px;
 }
 
+.terminal{
+    background: linear-gradient(180deg, #ffffff, #ecf5ff);
+    height: 720px;
+}
+
+.logo{
+    background: var(--celeste);
+
+    padding: 0.5rem;
+    max-width: 200px;
+
+    border: solid 4px #fff;
+    border-radius: 100%;
+}
+
 .small-select{
-    max-width: 600px;
+    float: right;
+
+    max-width: 400px;
     padding: 0.5rem;
 
     font-size: 28px;
+}
+
+.buttons{
+    max-width: 500px;
+    padding: 1rem;
+    margin: auto;
+    
 }
 
 option{
@@ -43,24 +67,20 @@ option{
     font-weight: 600;
 }
 
-.terminal{
-    margin-bottom: 3rem;
-}
-
 .paso{
     padding: 3rem 1rem;
 }
 
-.logo{
-    padding: 0.5rem;
-    max-width: 200px;
-
-    background-color: var(--azul);
-    border-radius: 100%;
-}
-
 .dni-input{
     max-width: 400px;
+}
+
+.section{
+    padding: 1rem;
+}
+
+.card-container{
+    background-color: #fff;
 }
 
 .small-button{
@@ -68,9 +88,25 @@ option{
     font-size: 20px;
 }
 
-.section{
-    padding: 2rem 0;
+.botonera{
+    position:fixed;
+    bottom: 2rem;
 }
 
+.option-pill-access{
+    background: linear-gradient(180deg, #dbe2e9, var(--gris));
+}
 
+.option-pill-access:hover{
+    outline: none;
+}
 
+.lblue-button-access{
+    background: linear-gradient(180deg, #5c98c9, var(--celesteO));
+    color: #fff;
+}
+
+.green-button-access{
+    background: linear-gradient(180deg, var(--verde), var(--verdeO));
+    color: #fff;
+}

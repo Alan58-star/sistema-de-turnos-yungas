@@ -322,6 +322,15 @@ input[type="date"]{
     outline-color: var(--azul);
 }
 
+.lblue-button-access{
+    background-color:var(--celesteO);
+    color: #fff;
+}
+
+.lblue-button-access:hover{
+    outline-color: var(--celesteO);
+}
+
 .yellow-button-access{
     background-color:var(--amarillo);
     color: var(--negro);

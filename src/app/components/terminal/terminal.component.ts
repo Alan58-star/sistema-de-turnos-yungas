@@ -9,7 +9,7 @@ import { Component } from '@angular/core';
   styleUrl: './terminal.component.css'
 })
 export class TerminalComponent {
-  pasoActual: number = 0;
+  pasoActual: number = 3;
 
   avanzar = () => {
     if (this.pasoActual < 4){

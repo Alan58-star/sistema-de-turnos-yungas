@@ -3,7 +3,7 @@
 		<img class="logo" src="logos/logo-transp.png" alt="">
 		<h1>Bienvenidos al Hospital Distrital de Las Heras</h1>
 		<h2>Desde aquí puede tramitar un turno de manera inmediata.</h2>
-		<button class="option-pill-access blue-button-access" (click)="avanzar()">Tramitar Turno</button>
+		<button class="option-pill-access lblue-button-access" (click)="avanzar()">Tramitar Turno</button>
 	</div>
 
 	<form action="#">
@@ -30,7 +30,7 @@
 			<h1>Paso 3: Médico y Turno</h1>
 			<h2>Seleccione el médico y el turno que desee.</h2>
 
-			<div class="flex-row">
+			<div class="flex-row" style="gap: 3rem; max-width: 1000px;">
 
 				<div class="flex-column section">
 					<h3>MÉDICO</h3>
@@ -82,30 +82,30 @@
 			<h1>Paso 4: Obras Sociales</h1>
 			<h2>Seleccione sus Obras Sociales</h2>
 
-			<div class="flex-row" style="justify-content: center;">
-
-				<div>
-					<select class="small-select" name="obra0" id="obra0">
-						<option value="">Obra A</option>
-						<option value="">Obra B</option>
-					</select>
-		
-					<select class="small-select" name="obra0" id="obra0">
-						<option value="">Obra A</option>
-						<option value="">Obra B</option>
-					</select>
-		
-					<select class="small-select" name="obra0" id="obra0">
-						<option value="">Obra A</option>
-						<option value="">Obra B</option>
-					</select>
+			<div class="flex-column" style="width: 100%; margin: auto;">
+				<div class="flex-row" style="gap: 2rem; justify-content: center; width: 60%;">
+					<div>
+						<select class="small-select" name="obra0" id="obra0">
+							<option value="">Obra A</option>
+							<option value="">Obra B</option>
+						</select>
+			
+						<select class="small-select" name="obra0" id="obra0">
+							<option value="">Obra A</option>
+							<option value="">Obra B</option>
+						</select>
+			
+						<select class="small-select" name="obra0" id="obra0">
+							<option value="">Obra A</option>
+							<option value="">Obra B</option>
+						</select>
+					</div>
+	
+					<div class="flex-column buttons">
+						<button class="option-pill red-button small-button">Quitar Obra Social</button>
+						<button class="option-pill green-button small-button">Agregar Obra Social</button>
+					</div>	
 				</div>
-
-				<div class="flex-column">
-					<button class="option-pill red-button small-button">Quitar Obra Social</button>
-					<button class="option-pill green-button small-button">Agregar Obra Social</button>
-				</div>
-
 			</div>
 
 		</div>		
@@ -113,7 +113,7 @@
 
 	<div *ngIf="pasoActual > 0" class="botonera flex-row">
 		<button *ngIf="pasoActual > 0" class="option-pill-access" (click)="retroceder()">Paso Anterior</button>
-		<button *ngIf="pasoActual < 4" class="option-pill-access blue-button-access" (click)="avanzar()">Paso Siguiente</button>
+		<button *ngIf="pasoActual < 4" class="option-pill-access lblue-button-access" (click)="avanzar()">Paso Siguiente</button>
 		<button *ngIf="pasoActual === 4" class="option-pill-access green-button-access">Confirmar Turno</button>
 	</div>
 </div>
