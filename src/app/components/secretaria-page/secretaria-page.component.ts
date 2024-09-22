@@ -21,6 +21,8 @@ registerLocaleData(localeEs, 'es');
 export class SecretariaPageComponent implements OnInit{ 
   menuTurnoAbierto: boolean;
   mostrandoFecha: boolean;
+  mostrandoSpinner: boolean;
+
 
   turnoForm:FormGroup
   fecha=new Date();
@@ -44,6 +46,7 @@ export class SecretariaPageComponent implements OnInit{
     
     this.menuTurnoAbierto = false;
     this.mostrandoFecha = false;
+    this.mostrandoSpinner = false;
   }
 
   diaAnterior(){
@@ -169,10 +172,12 @@ export class SecretariaPageComponent implements OnInit{
     })
   }
   getTurnos() {
+    this.mostrandoSpinner = true;
     this.fecha=new Date();
     this._turnoService.getTurnosHoy().subscribe({
       next:(data) => {
         this._turnoService.turnos=data;;
+        this.mostrandoSpinner = false;
       },
       error:(e) => {
         console.log(e);

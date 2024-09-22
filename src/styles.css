@@ -354,6 +354,13 @@ input[type="date"]{
     display: none;
 }
 
+.onCenter{
+    position: relative;
+    width: 30%;
+    top: 50%;
+    left: 42%;
+}
+
 /* Configuración de Material Design */
 .material-symbols-rounded {
   font-variation-settings:
