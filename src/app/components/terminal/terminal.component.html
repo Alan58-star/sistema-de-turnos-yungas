@@ -6,44 +6,47 @@
 		<button class="option-pill-access lblue-button-access" (click)="avanzar()">Tramitar Turno</button>
 	</div>
 
-	<form action="#">
+	<form action="#" [formGroup]="turnoForm" (ngSubmit)="finalizarTurno()">
 
 		<div *ngIf="pasoActual == 1" class="flex-column paso">
 			<h1>Paso 1: DNI</h1>
 			<h2>Introduzca su número de documento.</h2>
-			<input class="dni-input" type="number" name="dni" id="dni">
+			<input formControlName="pacienteDNI" class="dni-input" type="number" name="dni" id="dni">
 		</div>
-
 		<div *ngIf="pasoActual == 2" class="flex-column paso">
-			<h1>Paso 2: Especialidad</h1>
-			<h2>¿Para qué médico desea sacar turno?</h2>
-			<select name="especialidad" id="especialidad">
-				<option value="">Toque aquí</option>
-				<option value="">Ejemplo</option>
-				<option value="">Ejemplo</option>
-				<option value="">Ejemplo</option>
-				<option value="">Ejemplo</option>
-			</select>
+			<h1>Paso 2: Nombre</h1>
+			<h2>Introduzca su nombre.</h2>
+			<input formControlName="pacienteNombre" class="dni-input" type="text" name="nombre" id="nombre">
 		</div>
 
 		<div *ngIf="pasoActual == 3" class="flex-column paso">
-			<h1>Paso 3: Médico y Turno</h1>
+			<h1>Paso 3: Especialidad</h1>
+			<h2>¿Para qué médico desea sacar turno?</h2>
+			<select formControlName="especialidad" name="especialidad" id="especialidad">
+				<option value="">Toque aquí</option>
+				<option *ngFor="let especialidad of _especialidadService.especialidades" value={{especialidad._id}}>{{especialidad.nombreEsp}}</option>
+			</select>
+		</div>
+
+		<div *ngIf="pasoActual == 4" class="flex-column paso">
+			<h1>Paso 4: Médico y Turno</h1>
 			<h2>Seleccione el médico y el turno que desee.</h2>
 
 			<div class="flex-row" style="gap: 3rem; max-width: 1000px;">
 
 				<div class="flex-column section">
 					<h3>MÉDICO</h3>
-					<div class="card-container">
-						<div class="card">
+					<div class="card-container" *ngFor="let medico of _medicoService.medicos" (click)="cargarTurnos(medico._id)">
+						<div class="card" 
+						>
 							<label for="medicoID">
 								<input type="radio" name="medico" id="medicoID" class="card-input-element" />
 								<div class="card-input">
 									<div class="turno-titulo-text">
-										Nombre Apellido
+										{{ medico.apellido }} {{ medico.nombre }}
 									</div>
 									<div class="turno-text">
-										Turnos Disponibles: numTurnos
+										Turnos Disponibles: {{ medico.disponibles }}
 									</div>
 								</div>
 							</label>
@@ -53,20 +56,21 @@
 
 				<div class="flex-column section">
 					<h3>TURNO</h3>
-					<div class="card-container">
+					<div class="card-container" *ngFor="let turno of _medicoService.turnos">
 						<div class="card">
 							<label for="turnoID">
-								<input formControlName="turno" type="radio" value="turnoID" name="turno" id="turnoID"
+								<input formControlName="turno" value="{{ turno._id }}" type="radio" value="turnoID" name="turno" id="turnoID"
 									class="card-input-element" />
 								<div class="card-input">
 									<ul>
 										<li class="turno-titulo-text">
-											Martes 24/7 a las 19:99
+											{{ turno.fecha | date : "EEEE dd/MM" }}, a las
+               								 {{ turno.fecha | date : "shortTime" }}
 										</li>
-										<li class="turno-text">Duración: 10 min</li>
-										<li class="turno-text">Lugar: Hospital</li>
+										<li class="turno-text">Duración: {{ turno.duracion }} min</li>
+										<li class="turno-text">Lugar: {{ turno.consultorio }} </li>
 										<li class="turno-text">
-											<b>Consultorio 1 </b>
+											<b>{{turno.consultorio}} </b>
 										</li>
 									</ul>
 								</div>
@@ -78,32 +82,36 @@
 			</div>
 		</div>
 
-		<div *ngIf="pasoActual == 4" class="flex-column paso">
-			<h1>Paso 4: Obras Sociales</h1>
+		<div *ngIf="pasoActual == 5" class="flex-column paso">
+			<h1>Paso 5: Obras Sociales</h1>
 			<h2>Seleccione sus Obras Sociales</h2>
 
 			<div class="flex-column" style="width: 100%; margin: auto;">
 				<div class="flex-row" style="gap: 2rem; justify-content: center; width: 60%;">
 					<div>
-						<select class="small-select" name="obra0" id="obra0">
-							<option value="">Obra A</option>
-							<option value="">Obra B</option>
+						<select class="small-select" name="obra0" id="obra0" formControlName="obra1">
+							<option *ngFor="let obra of _obraService.obras" value="{{obra._id}}">{{ obra.nombreOS }}</option>
+							
 						</select>
 			
-						<select class="small-select" name="obra0" id="obra0">
-							<option value="">Obra A</option>
-							<option value="">Obra B</option>
+						<select *ngIf="obra1" class="small-select" name="obra0" id="obra0" formControlName="obra2">
+							<option  value="{{ obra1._id }}"
+							*ngFor="let obra1 of _obraService.obras1">{{obra1.nombreOS}}</option>
+							
 						</select>
 			
-						<select class="small-select" name="obra0" id="obra0">
-							<option value="">Obra A</option>
-							<option value="">Obra B</option>
+						<select *ngIf="obra2" class="small-select" name="obra0" id="obra0" formControlName="obra3">
+							<option value="{{ obra2._id }}"
+							*ngFor="let obra2 of _obraService.obras1">{{obra2.nombreOS}}</option>
+							
 						</select>
 					</div>
 	
 					<div class="flex-column buttons">
-						<button class="option-pill red-button small-button">Quitar Obra Social</button>
-						<button class="option-pill green-button small-button">Agregar Obra Social</button>
+						<button *ngIf="obra1"
+						(click)="sacarObra()" type="button" class="option-pill red-button small-button">Quitar Obra Social</button>
+						<button *ngIf="!obra2"
+						(click)="agregarObra()"  type="button" class="option-pill green-button small-button">Agregar Obra Social</button>
 					</div>	
 				</div>
 			</div>
@@ -113,7 +121,7 @@
 
 	<div *ngIf="pasoActual > 0" class="botonera flex-row">
 		<button *ngIf="pasoActual > 0" class="option-pill-access" (click)="retroceder()">Paso Anterior</button>
-		<button *ngIf="pasoActual < 4" class="option-pill-access lblue-button-access" (click)="avanzar()">Paso Siguiente</button>
-		<button *ngIf="pasoActual === 4" class="option-pill-access green-button-access">Confirmar Turno</button>
+		<button *ngIf="pasoActual < 5" class="option-pill-access lblue-button-access" (click)="avanzar()">Paso Siguiente</button>
+		<button *ngIf="pasoActual === 5" class="option-pill-access green-button-access" type="submit" (click)="finalizarTurno()">Confirmar Turno</button>
 	</div>
 </div>

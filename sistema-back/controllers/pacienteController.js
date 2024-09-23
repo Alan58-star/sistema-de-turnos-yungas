@@ -87,11 +87,16 @@ exports.obtenerPacientesStrikes = async(req,res) => {
 }
 exports.actualizarPaciente = async(req,res) => {
     try{
+        req.body.passw = bcrypt.hashSync(req.body.passw,12);
         const paciente = await Paciente.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true });
+       
         if(!paciente){
            return res.status(404).json({msg: 'No existe el paciente'});
         }
-        res.json(paciente);
+        res.json({
+            'status': '1',
+            'msg': 'Paciente actualizado.'
+        })
 
     }catch(error){
         console.error('Error al obtener el paciente:', error.message);
@@ -127,7 +132,7 @@ exports.obtenerPaciente = async(req,res) => {
 exports.obtenerPacienteTermino = async (req, res) => {
     try {
         const searchTerm = req.params.termino?.trim(); // Limpiar espacios en blanco
-        
+        const isNumeric = !isNaN(searchTerm);
         let pacientes;
 
         if (!searchTerm) {
@@ -135,7 +140,9 @@ exports.obtenerPacienteTermino = async (req, res) => {
             pacientes = await Paciente.find({});
         } else {
             pacientes = await Paciente.find({
-                $or: [
+                $or: isNumeric 
+                ?[{dni: parseInt(searchTerm)}]
+                :[
                     { nombre: { $regex: searchTerm, $options: 'i' } }, // Coincidencia parcial en el nombre
                     { apellido: { $regex: searchTerm, $options: 'i' } } // Coincidencia parcial en el apellido
                 ]
@@ -159,7 +166,7 @@ exports.obtenerPacienteTermino = async (req, res) => {
 exports.obtenerPacienteTerminoSec = async (req, res) => {
     try {
         const searchTerm = req.params.termino?.trim(); // Limpiar espacios en blanco
-        
+        const isNumeric = !isNaN(searchTerm);
         let pacientes;
 
         if (!searchTerm) {
@@ -168,7 +175,9 @@ exports.obtenerPacienteTerminoSec = async (req, res) => {
         } else {
             pacientes = await Paciente.find({
                 rol:'paciente',
-                $or: [
+                $or: isNumeric 
+                ?[{dni:parseInt(searchTerm)}]
+                :[
                     { nombre: { $regex: searchTerm, $options: 'i' } }, // Coincidencia parcial en el nombre
                     { apellido: { $regex: searchTerm, $options: 'i' } }
                 ]
@@ -231,7 +240,7 @@ exports.obtenerTurnosDelPaciente = async (req, res) => {
         }
 
         // Obtener turnos del paciente
-        let turnos = await Turno.find({ paciente_id: pacienteId })
+        let turnos = await Turno.find({ paciente_id: pacienteId , estaod:'Ocupado'})
             .populate('medico_id', 'nombre apellido') // Opcional: Poblar detalles del médico
             .populate('obras_sociales', 'nombreOS') // Opcional: Poblar detalles de las obras sociales
             .exec();

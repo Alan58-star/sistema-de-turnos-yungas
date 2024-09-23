@@ -47,6 +47,7 @@ export class EsepcialidadesPageComponent implements OnInit {
       
     })
   }
+  
   ToMedicos(id:any){
     this.route.navigate(['form-turno/',id]);
   }

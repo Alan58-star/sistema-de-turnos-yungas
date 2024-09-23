@@ -1,4 +1,4 @@
-<button class="option-pill-access red-button-access return" routerLink="">
+<button class="option-pill-access red-button-access return" [routerLink]="_loginService.rolLogged()==='admin'? '/admin':'/'">
     < Volver al inicio</button>
 
         <div class="login-page">
@@ -6,7 +6,7 @@
                 <h1>Crear Cuenta</h1>
                 <span class="subtext">Si ya posee una cuenta, <a href="/login">inicie sesión aquí.</a></span>
             </div>
-            <form action="#" class="form" [formGroup]="pacienteForm" (ngSubmit)="agregarPaciente()">
+            <form action="#" class="form" [formGroup]="pacienteForm" (ngSubmit)="accion === 'agregar' ? agregarPaciente() : editarUsuario()">
                 <h2>Datos Personales</h2>
                 <label for="user-dni">DNI</label>
                 <input type="text" formControlName="dni" name="user-dni" id="user-dni" required>
@@ -45,12 +45,27 @@
                         Las contraseñas no coinciden.
                     </div>
                 </div>
+                <div *ngIf="_loginService.rolLogged()=='admin'">
+                    <label for="rol">Rol</label>
+                    <select name="rol" id="rol"  formControlName="rol">
+                        <option value="admin" > Administrador </option>
+                        
+                        <option value="secretaria" > Secretaria </option>
+                        <option value="terminal" >Terminal </option>
+                    </select>
+                </div>
                 <div class="flex-row">
                     <button type="button" class="option-pill-access" style="margin-bottom: 2rem" (click)="showHidePwd()" [ngClass]="{hidden: passwd}">Mostrar Contraseña</button>
                     <button type="button" class="option-pill-access gray-button-access" style="margin-bottom: 2rem" (click)="showHidePwd()" [ngClass]="{hidden: !passwd}">Ocultar Contraseña</button>
                 </div>
                 <div class="flex-row">
-                    <button type="submit" class="option-pill-access blue-button-access">Crear Cuenta</button>
+                    <button *ngIf="accion=='agregar'" type="submit" class="option-pill blue-button">
+                        Crear Cuenta
+                    </button>
+                    <button *ngIf="accion=='editar'"  class="option-pill blue-button">
+                        Modificar
+                    </button>
                 </div>
+              
             </form>
         </div>
