@@ -1,6 +1,20 @@
-.carrusel{
-    max-width: 1000px;
+.carrusel {
+    max-width: 1100px;
     height: auto;
     margin: auto;
-    padding: 0 1rem 2rem;
+    
+    box-shadow: 0 0 20px 10px #0001;
+}
+
+@media(min-width: 1280px){
+    swiper-slide img, .carrusel{    
+        border-radius: 20px;    
+    }
+}
+
+
+@media(min-width: 1600px){
+    .carrusel{
+        max-width: 1400px;
+    }
 }

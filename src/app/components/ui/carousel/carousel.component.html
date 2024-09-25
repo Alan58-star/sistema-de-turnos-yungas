@@ -1,5 +1,5 @@
-<ngx-slick-carousel #slickModal="slick-carousel" [config]="carouselConfig" class="carrusel">
-    <div ngxSlickItem *ngFor="let foto of fotos" class="diapositiva">
-        <img src="{{foto.img}}">
-    </div>
-</ngx-slick-carousel>
+<swiper-container class="carrusel" loop="true">
+    <swiper-slide *ngFor="let foto of fotos" class="slide">
+        <img src="{{foto.img}}" alt="imagen">
+    </swiper-slide>
+</swiper-container>
