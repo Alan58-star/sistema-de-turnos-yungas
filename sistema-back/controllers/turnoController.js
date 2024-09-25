@@ -38,7 +38,7 @@ exports.obtenerTurno = async(req,res) => {
 // Obtener Todos los Turnos
 exports.obtenerTurnos = async (req, res) => {
     try {
-        const turnos = await Turno.find({}).populate('medico_id paciente_id obras_sociales.obrasocial_id especialidad_id');
+        const turnos = await Turno.find({}).populate('medico_id paciente_id especialidad_id obras_sociales');
         res.send(turnos);
     } catch (error) {
         res.send(error);
@@ -58,7 +58,7 @@ exports.obtenerTurnosHoy = async (req, res) => {
                 $gte: hoy, // Mayor o igual que el inicio del día
                 $lt: mañana // Menor que el inicio del siguiente día
             }
-        }).populate('medico_id paciente_id obras_sociales.obrasocial_id especialidad_id');
+        }).populate('medico_id paciente_id obras_sociales especialidad_id');
 
         res.send(turnos);
     } catch (error) {
@@ -79,7 +79,7 @@ exports.obtenerTurnosPorFecha = async (req, res) => {
                 $gt: fechaParametro, // Mayor o igual que el inicio del día
                 $lte: siguienteDia // Menor que el inicio del siguiente día
             }
-        }).populate('medico_id paciente_id obras_sociales.obrasocial_id especialidad_id');
+        }).populate('medico_id paciente_id obras_sociales especialidad_id');
 
         res.send(turnos);
     } catch (error) {
@@ -106,7 +106,7 @@ exports.obtenerTurnosPorFecha = async (req, res) => {
 exports.obtenerTurnosPorMedico = async (req, res) => {
     try {
         const searchTerm = req.params.termino; // Puede ser nombre o legajo (parcial)
-        
+        const isNumeric = !isNaN(searchTerm);
         // Usamos agregación para buscar por campos dentro de la referencia poblada
         const turnos = await Turno.aggregate([
             {
@@ -120,10 +120,11 @@ exports.obtenerTurnosPorMedico = async (req, res) => {
             { $unwind: '$medico' }, // Descomponer array resultante de $lookup
             {
                 $match: {
-                    $or: [
-                        { 'medico.nombre': { $regex: searchTerm, $options: 'i' } }, // Nombre parcial insensible a mayúsculas/minúsculas
-                        { 'medico.legajo': { $regex: searchTerm, $options: 'i' } }   // Legajo parcial
-                    ]
+                    $or: isNumeric
+                        ? [{ 'medico.legajo': parseInt(searchTerm)}]   // Legajo parcial
+                   
+                        :[{ 'medico.nombre': { $regex: searchTerm, $options: 'i' } }], // Nombre parcial insensible a mayúsculas/minúsculas
+                    
                 }
             },
             {
@@ -147,7 +148,7 @@ exports.obtenerTurnosPorMedico = async (req, res) => {
             { $unwind: '$especialidad' },
             {
                 $lookup: {
-                    from: 'obrasociales', // Nombre de la colección de obras sociales
+                    from: 'obrasocials', // Nombre de la colección de obras sociales
                     localField: 'obras_sociales',
                     foreignField: '_id',
                     as: 'obras_sociales'
@@ -162,7 +163,7 @@ exports.obtenerTurnosPorMedico = async (req, res) => {
 exports.obtenerTurnosPorPaciente = async (req, res) => {
     try {
         const searchTerm = req.params.termino; // Puede ser nombre o DNI (parcial)
-       
+        const isNumeric = !isNaN(searchTerm);
         // Usamos agregación para buscar por campos dentro de la referencia poblada
         const turnos = await Turno.aggregate([
             {
@@ -176,10 +177,11 @@ exports.obtenerTurnosPorPaciente = async (req, res) => {
             { $unwind: '$paciente'}, // Descomponer array resultante de $lookup
             {
                 $match: {
-                    $or: [
-                        { 'paciente.nombre': { $regex: searchTerm, $options: 'i' } }, // Nombre parcial insensible a mayúsculas/minúsculas
-                        { 'paciente.dni': { $regex: searchTerm, $options: 'i' } }   // DNI parcial
-                    ]
+                    $or: isNumeric
+                        ?[{ 'paciente.dni':  parseInt(searchTerm) } ] // DNI parcial
+                    
+                        :[{ 'paciente.nombre': { $regex: searchTerm, $options: 'i' } }] // Nombre parcial insensible a mayúsculas/minúsculas
+                        
                 }
             },
             {
@@ -202,7 +204,7 @@ exports.obtenerTurnosPorPaciente = async (req, res) => {
             { $unwind: '$especialidad' }, // Descomponer array resultante de $lookup
             {
                 $lookup: {
-                    from: 'obrasociales', // Nombre de la colección de obras sociales
+                    from: 'obrasocials', // Nombre de la colección de obras sociales
                     localField: 'obras_sociales',
                     foreignField: '_id',
                     as: 'obras_sociales'

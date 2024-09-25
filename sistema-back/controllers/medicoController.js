@@ -92,7 +92,7 @@ exports.obtenerMedico = async (req, res) => {
 exports.obtenerMedicoTermino = async (req, res) => {
     try {
         const searchTerm = req.params.termino?.trim(); // Limpiar espacios en blanco
-
+        const isNumeric = !isNaN(searchTerm);
         let medicos;
 
         if (!searchTerm) {
@@ -101,7 +101,9 @@ exports.obtenerMedicoTermino = async (req, res) => {
         } else {
             // Buscar médicos cuyo nombre o apellido coincidan parcialmente con el término de búsqueda
             medicos = await Medico.find({
-                $or: [
+                $or: isNumeric 
+                ?[{ legajo: parseInt(searchTerm) }] 
+                :[
                     { nombre: { $regex: searchTerm, $options: 'i' } }, // Coincidencia parcial en el nombre
                     { apellido: { $regex: searchTerm, $options: 'i' } } // Coincidencia parcial en el apellido
                 ]

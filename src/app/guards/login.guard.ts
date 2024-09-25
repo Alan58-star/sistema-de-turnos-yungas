@@ -11,6 +11,18 @@ export const loginGuardAdmin=()=>{
     }
     
 }
+export const loginGuardTerminal=()=>{
+    const router = inject(Router);
+    if(sessionStorage.getItem('token') && sessionStorage.getItem('rol')=='terminal'){
+        return true;
+        
+    }
+    else{
+        router.navigate(['/']);
+        return false;
+    }
+    
+}
 export const loginGuardSecretaria=()=>{
     const router = inject(Router);
     if(sessionStorage.getItem('token') && (sessionStorage.getItem('rol')=='secretaria'|| sessionStorage.getItem('rol')=='admin')){

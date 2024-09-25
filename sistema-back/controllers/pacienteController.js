@@ -87,11 +87,16 @@ exports.obtenerPacientesStrikes = async(req,res) => {
 }
 exports.actualizarPaciente = async(req,res) => {
     try{
+        req.body.passw = bcrypt.hashSync(req.body.passw,12);
         const paciente = await Paciente.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true });
+       
         if(!paciente){
            return res.status(404).json({msg: 'No existe el paciente'});
         }
-        res.json(paciente);
+        res.json({
+            'status': '1',
+            'msg': 'Paciente actualizado.'
+        })
 
     }catch(error){
         console.error('Error al obtener el paciente:', error.message);
@@ -127,7 +132,7 @@ exports.obtenerPaciente = async(req,res) => {
 exports.obtenerPacienteTermino = async (req, res) => {
     try {
         const searchTerm = req.params.termino?.trim(); // Limpiar espacios en blanco
-        
+        const isNumeric = !isNaN(searchTerm);
         let pacientes;
 
         if (!searchTerm) {
@@ -135,7 +140,9 @@ exports.obtenerPacienteTermino = async (req, res) => {
             pacientes = await Paciente.find({});
         } else {
             pacientes = await Paciente.find({
-                $or: [
+                $or: isNumeric 
+                ?[{dni: parseInt(searchTerm)}]
+                :[
                     { nombre: { $regex: searchTerm, $options: 'i' } }, // Coincidencia parcial en el nombre
                     { apellido: { $regex: searchTerm, $options: 'i' } } // Coincidencia parcial en el apellido
                 ]
@@ -159,7 +166,7 @@ exports.obtenerPacienteTermino = async (req, res) => {
 exports.obtenerPacienteTerminoSec = async (req, res) => {
     try {
         const searchTerm = req.params.termino?.trim(); // Limpiar espacios en blanco
-        
+        const isNumeric = !isNaN(searchTerm);
         let pacientes;
 
         if (!searchTerm) {
@@ -168,7 +175,9 @@ exports.obtenerPacienteTerminoSec = async (req, res) => {
         } else {
             pacientes = await Paciente.find({
                 rol:'paciente',
-                $or: [
+                $or: isNumeric 
+                ?[{dni:parseInt(searchTerm)}]
+                :[
                     { nombre: { $regex: searchTerm, $options: 'i' } }, // Coincidencia parcial en el nombre
                     { apellido: { $regex: searchTerm, $options: 'i' } }
                 ]
@@ -231,7 +240,7 @@ exports.obtenerTurnosDelPaciente = async (req, res) => {
         }
 
         // Obtener turnos del paciente
-        let turnos = await Turno.find({ paciente_id: pacienteId })
+        let turnos = await Turno.find({ paciente_id: pacienteId , estaod:'Ocupado'})
             .populate('medico_id', 'nombre apellido') // Opcional: Poblar detalles del médico
             .populate('obras_sociales', 'nombreOS') // Opcional: Poblar detalles de las obras sociales
             .exec();
@@ -419,6 +428,50 @@ exports.resetPassword = async(req, res) => {
         });
     }
 }
+
+exports.resetPasswordSinToken = async (req, res) => {
+    const { cPassword, newPassword, idPac } = req.body;
+    
+    try {
+        // Busca al paciente por su ID
+        const paciente = await Paciente.findById(idPac);
+
+        if (!paciente) {
+            return res.status(404).json({
+                'status': '404',
+                'msg': 'Paciente no encontrado'
+            });
+        }
+
+        // Compara la contraseña actual proporcionada con la almacenada en la base de datos
+        const isMatch = await bcrypt.compare(cPassword, paciente.passw);
+
+        if (!isMatch) {
+            return res.status(400).json({
+                'status': '400',
+                'msg': 'La contraseña actual es incorrecta'
+            });
+        }
+
+        // Si las contraseñas coinciden, hash de la nueva contraseña
+        paciente.passw = await bcrypt.hash(newPassword, 10);
+
+        // Guarda los cambios en la base de datos
+        await paciente.save();
+
+        res.status(200).json({
+            'status': '200',
+            'msg': 'Contraseña actualizada con éxito'
+        });
+
+    } catch (error) {
+        console.error('Error al cambiar la contraseña:', error.message);
+        res.status(500).json({
+            'status': '500',
+            'msg': 'Hubo un error al intentar cambiar la contraseña'
+        });
+    }
+};
 
 function createToken(paciente){
     const payload={

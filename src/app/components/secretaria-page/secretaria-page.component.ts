@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminNavComponent } from "../admin-page/admin-nav/admin-nav.component";
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { TurnoService } from '../../services/turno.service';
 import { DatePipe } from '@angular/common';
 import { LOCALE_ID } from '@angular/core';
@@ -9,6 +9,7 @@ import { registerLocaleData } from '@angular/common';
 import localeEs from '@angular/common/locales/es';
 import { PacienteService } from '../../services/paciente.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 registerLocaleData(localeEs, 'es');
 @Component({
   selector: 'app-secretaria-page',
@@ -20,6 +21,7 @@ registerLocaleData(localeEs, 'es');
 })
 export class SecretariaPageComponent implements OnInit{ 
   menuTurnoAbierto: boolean;
+  selectedTurno: any = null;
   mostrandoFecha: boolean;
   mostrandoSpinner: boolean;
 
@@ -35,7 +37,9 @@ export class SecretariaPageComponent implements OnInit{
     private fb:FormBuilder,
     public _turnoService:TurnoService,
     public _pacienteService:PacienteService,
-    private datePipe:DatePipe
+    private datePipe:DatePipe,
+    private toastr: ToastrService,
+    private router:Router
     
   ){
     this.turnoForm = this.fb.group({
@@ -50,10 +54,12 @@ export class SecretariaPageComponent implements OnInit{
   }
 
   diaAnterior(){
-    const nuevaFecha = new Date();
+    const nuevaFecha = new Date(this.fecha);
     nuevaFecha.setDate(this.fecha.getDate() -1);
     this.fecha = nuevaFecha;
-    
+    if (nuevaFecha.getMonth() !== this.fecha.getMonth()) {
+      nuevaFecha.setMonth(this.fecha.getMonth() - 1);
+    }
     const fechaFormateada = this.datePipe.transform(this.fecha, 'yyyy-MM-dd');
       
       this._turnoService.getTurnosPorFecha(fechaFormateada).subscribe({
@@ -67,9 +73,12 @@ export class SecretariaPageComponent implements OnInit{
 
   }
   diaSiguiente(){
-    let nuevaFecha = new Date();
+    let nuevaFecha = new Date(this.fecha);
     nuevaFecha.setDate(this.fecha.getDate() +1);
+    
+   
     this.fecha = nuevaFecha;
+    
     const fechaFormateada = this.datePipe.transform(this.fecha, 'yyyy-MM-dd');
       
       this._turnoService.getTurnosPorFecha(fechaFormateada).subscribe({
@@ -171,6 +180,64 @@ export class SecretariaPageComponent implements OnInit{
       
     })
   }
+  confirmarDarStrike(pacienteId: any) {
+    const confirmacion = window.confirm('¿Estás seguro de que deseas dar un strike a este usuario?');
+    
+    if (confirmacion) {
+      this.darStrike(pacienteId);
+    }
+  }
+  confirmarAsistio(turno: any) {
+    const confirmacion = window.confirm('¿Estás seguro de finalizar el turno?');
+    
+    if (confirmacion) {
+      this.asistio(turno);
+    }
+  }
+  asistio(turno:any){
+    turno.estado="Finalizado"
+    this._turnoService.putTurno(turno).subscribe({
+      next: (actua) => {
+        if (actua.status == '2') {
+          this.toastr.success('Turno Finalizado!');
+        } else {
+          this.toastr.error(actua.msg);
+          
+        }
+      },
+      error: (e) => {
+        this.toastr.success('Ocurrio un error');
+        console.log(e);
+      },
+    });
+  }
+  confirmarCancelarTurno(turno: any) {
+    const confirmacion = window.confirm('¿Estás seguro de que deseas cancelar el turno?');
+    
+    if (confirmacion) {
+      this.cancelarTurno(turno);
+    }
+  }
+  cancelarTurno(turno:any){
+    turno.estado="Cancelado"
+    this._turnoService.putTurno(turno).subscribe({
+      next: (actua) => {
+        if (actua.status == '2') {
+          this.toastr.success('Turno cancelado!');
+        } else {
+          this.toastr.error(actua.msg);
+          
+        }
+      },
+      error: (e) => {
+        this.toastr.success('Ocurrio un error');
+        console.log(e);
+      },
+    });
+  }
+  reprogramarTurno(id:any){
+    this.router.navigateByUrl("/secretaria/nuevo-turno/"+id);
+  }
   getTurnos() {
     this.mostrandoSpinner = true;
     this.fecha=new Date();
@@ -186,11 +253,13 @@ export class SecretariaPageComponent implements OnInit{
     })
   }
 
-  showMenuTurno() {
+  showMenuTurno(turno: any) {
+    this.selectedTurno = turno;
     this.menuTurnoAbierto = true;
   }
 
   hideMenuTurno() {
+    this.selectedTurno = null;
     this.menuTurnoAbierto = false;
   }
 }

@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AdminNavComponent } from "../../admin-page/admin-nav/admin-nav.component";
-import { Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { EspecialidadService } from '../../../services/especialidad.service';
 import { CommonModule } from '@angular/common';
 import { MedicoService } from '../../../services/medico.service';
@@ -27,8 +27,22 @@ export class FormNuevoTurnoComponent implements OnInit , OnDestroy {
   turnoForm: FormGroup;
   fechaMin: string='';
   subscription?: Subscription;
+  accion:String=""
+  idTurno:any
   ngOnInit(): void {
     this.getEspecialidades();
+    this.activatedRouter.params.subscribe(
+      params=>{
+          if(params['id']==null){
+            this.accion='agregar'
+            
+          }else{
+            this.accion="editar";  
+            this.idTurno=params['id']; 
+            this.getTurno();
+          }
+      }
+    )
     this._especialidadService.especialidades = [];
     this._medicoService.medicos = [];
     this.updateFechaMin();
@@ -40,6 +54,25 @@ export class FormNuevoTurnoComponent implements OnInit , OnDestroy {
       this.subscription.unsubscribe();
     }
   }
+  getTurno() {
+    this._turnoService.getTurno(this.idTurno).subscribe({
+      next:(data) => {
+        console.log(data)
+        this.turnoForm = this.fb.group({
+          especialidad: [data.especialidad_id, Validators.required],
+          medico: [data.medico_id, Validators.required],
+          fecha: [data.fecha, Validators.required],
+          duracion: [data.duracion, Validators.required],
+          consultorio: [data.consultorio, Validators.required],
+          estado:[data.estado]
+        })
+        this.preCargarMedicos(data.especialidad_id);
+      },
+      error:(e) => {
+        console.log(e);
+      },
+  })
+  }
   updateFechaMin(): void {
     const now = new Date();
     this.fechaMin = now.toISOString().slice(0, 16);
@@ -50,7 +83,8 @@ export class FormNuevoTurnoComponent implements OnInit , OnDestroy {
     public _medicoService: MedicoService,
     public _turnoService: TurnoService,
     private toastr: ToastrService,
-    private router: Router
+    private router: Router,
+    private activatedRouter:ActivatedRoute
   ) {
 
     this.turnoForm = this.fb.group({
@@ -59,7 +93,44 @@ export class FormNuevoTurnoComponent implements OnInit , OnDestroy {
       fecha: ['', Validators.required],
       duracion: ['', Validators.required],
       consultorio: ['', Validators.required],
+      estado:['']
     })
+  }
+  
+  editarTurno() {
+    if (this.turnoForm.invalid) {
+      this.toastr.error("Todos los campos deben estar completos");
+      return;
+    }
+    const fechaRaw = this.turnoForm.get('fecha')?.value;
+    const fechaISO = new Date(fechaRaw).toISOString();
+    const TURNO: TurnoServ = {
+      _id:this.idTurno,
+      medico_id: this.turnoForm.get('medico')?.value,
+      especialidad_id: this.turnoForm.get('especialidad')?.value,
+      fecha: new Date(fechaISO),
+      duracion: this.turnoForm.get('duracion')?.value,
+      consultorio: this.turnoForm.get('consultorio')?.value,
+      estado: this.turnoForm.get('estado')?.value
+
+    }
+    this._turnoService.putTurno(TURNO).subscribe({
+      next: (data) => {
+
+        this.toastr.success(data.msg);
+        
+        
+
+        
+        this.router.navigateByUrl('secretaria');
+
+      },
+      error: (e) => {
+        console.log(e);
+      },
+
+    })
+
   }
   agregarTurno() {
     if (this.turnoForm.invalid) {
@@ -145,10 +216,21 @@ export class FormNuevoTurnoComponent implements OnInit , OnDestroy {
 
     this._medicoService.medicos = [];
     const idEspecialidad = event.target.value;
+    this._medicoService.getEspecialidades(idEspecialidad).subscribe({
+      next: (data) => {
+        this._medicoService.medicos = data;
+      },
+      error: (e) => {
+        this._medicoService.medicos = [];
+        console.log(e);
+      },
 
-    
+    })
+  }
+  preCargarMedicos = (id: any) => {
 
-
+    this._medicoService.medicos = [];
+    const idEspecialidad = id;
     this._medicoService.getEspecialidades(idEspecialidad).subscribe({
       next: (data) => {
         this._medicoService.medicos = data;

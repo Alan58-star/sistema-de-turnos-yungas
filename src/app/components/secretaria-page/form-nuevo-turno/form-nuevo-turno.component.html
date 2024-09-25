@@ -4,7 +4,7 @@
         <h1>Creando un Nuevo Turno</h1>
         <button class="option-pill small-button" routerLink="/secretaria">Volver al Inicio</button>
     </div>
-    <form action="#" method="post" class="form"  [formGroup]="turnoForm" (ngSubmit)="agregarTurno()">
+    <form action="#" method="post" class="form"  [formGroup]="turnoForm" (ngSubmit)="accion === 'agregar' ? agregarTurno() : editarTurno()">
         <label for="especialidad">Especialidad</label>
         <select name="especialidad" id="especialidad" formControlName="especialidad" (change)="cargarMedicos($event)">
             <option value="{{especialidad._id}}" *ngFor="let especialidad of _especialidadService.especialidades" > {{especialidad.nombreEsp}} </option>
@@ -19,6 +19,12 @@
         <input type="number" formControlName="duracion" name="duracion" id="duracion">
         <label for="consultorio">Lugar</label>
         <input type="text" formControlName="consultorio" name="consultorio" id="consultorio">
+        <select *ngIf="accion=='editar'" name="estado" id="estado" formControlName="estado" >
+            <option value="Disponible" >Disponible</option>
+            <option value="Cancelado" >Cancelado</option>
+            <option value="Ocupado" >Ocupado</option>
+            <option value="Finalizado" >Finalizado</option>
+        </select>
         <div class="flex-row">
             <button type="sumbit" class="option-pill blue-button" >
                 + Crear Turno

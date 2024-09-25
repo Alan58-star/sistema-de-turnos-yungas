@@ -65,7 +65,7 @@
 									</button>
 									<button *ngIf="paciente.rol=='admin' || paciente.rol=='secretaria'"
 										class="option-pill blue-button action-element"
-										(click)="desbloquearPaciente(paciente._id)">
+										(click)="modificarUsuario(paciente._id)">
 										<span class="material-symbols-rounded">stylus</span>
 									</button>
 									<button class="option-pill red-button action-element"

@@ -8,6 +8,8 @@ const {Schema} = mongoose;
 const TurnoSchema = mongoose.Schema({
     medico_id:{type: Schema.Types.ObjectId, ref:'Medico'},
     paciente_id:{type: Schema.Types.ObjectId, ref:'Paciente'},
+    dniTerminal:{type:Number},
+    nombreTerminal:{type:String},
     fecha:{
         type: Date,
         required:true
@@ -16,7 +18,7 @@ const TurnoSchema = mongoose.Schema({
     obras_sociales:[{type:Schema.Types.ObjectId, ref:'ObraSocial'}],
     estado:{
         type:String,
-        enum:['Disponible','Ocupado','Cancelado'],
+        enum:['Disponible','Ocupado','Cancelado','Finalizado'],
         default:'Disponible',
         required:true
     },

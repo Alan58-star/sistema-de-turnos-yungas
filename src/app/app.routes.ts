@@ -12,7 +12,7 @@ import { FormTurnoComponent } from './components/form-turno/form-turno.component
 import { RegistroComponent } from './components/registro/registro.component';
 import { FormNuevoTurnoComponent } from './components/secretaria-page/form-nuevo-turno/form-nuevo-turno.component';
 import { MisTurnosComponent } from './components/mis-turnos/mis-turnos.component';
-import { loginGuardAdmin } from './guards/login.guard';
+import { loginGuardAdmin, loginGuardTerminal } from './guards/login.guard';
 import { loginGuardSecretaria } from './guards/login.guard';
 import { loginGuardPaciente } from './guards/login.guard';
 import { CambiarPasswordComponent } from './components/login/cambiar-password/cambiar-password.component';
@@ -36,11 +36,14 @@ export const routes: Routes = [
     {path: 'form-turno', component:FormTurnoComponent,canActivate:[loginGuardPaciente]},
     {path: 'form-turno/:id', component:FormTurnoComponent,canActivate:[loginGuardPaciente]},
     {path: 'registro', component:RegistroComponent},
+    {path: 'registro/:id', component:RegistroComponent,canActivate:[loginGuardAdmin]},
     {path: 'secretaria/nuevo-turno', component:FormNuevoTurnoComponent,canActivate:[loginGuardSecretaria]},
+    {path: 'secretaria/nuevo-turno/:id', component:FormNuevoTurnoComponent,canActivate:[loginGuardSecretaria]},
+    
     {path: 'mis-turnos', component:MisTurnosComponent,canActivate:[loginGuardPaciente]},
     {path: 'cambiar-password', component:CambiarPasswordComponent},
     {path: 'baneado', component:BanPageComponent},
     { path: 'reset-password', component: NewPasswordComponent },
     { path: 'reset-password/:token', component: NewPasswordComponent },
-    { path: 'terminal', component:TerminalComponent },
+    { path: 'terminal', component:TerminalComponent ,canActivate:[loginGuardTerminal]},
 ];

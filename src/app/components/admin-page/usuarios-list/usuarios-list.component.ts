@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { AdminNavComponent } from "../admin-nav/admin-nav.component";
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { PacienteService } from '../../../services/paciente.service';
 import { Paciente } from '../../../models/paciente';
 import { Toast, ToastrService } from 'ngx-toastr';
@@ -29,14 +29,19 @@ export class UsuariosListComponent implements OnInit{
   }
   constructor(public _pacienteService:PacienteService,
     private toastr:ToastrService,private fb:FormBuilder, 
-  public _loginService:LoginService){
+  public _loginService:LoginService, private router:Router){
     
     this.busquedaForm = this.fb.group({
       busqueda: ['']
       
     })
   }
-  
+  registrarUsuario(){
+    this.router.navigateByUrl("/registro")
+  }
+  modificarUsuario(idPaciente:any){
+    this.router.navigateByUrl("/registro/"+idPaciente)
+  }
   busqueda() {
     
     const busquedaValue = this.busquedaForm.get('busqueda')?.value;

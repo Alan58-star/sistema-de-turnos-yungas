@@ -11,6 +11,8 @@ export class TurnoServ {
     estado?:String;
     consultorio?:String;
     duracion?:number;
+    nombreTerminal?:String;
+    dniTerminal?:number;
     constructor(medico_id:any,fecha:Date,especialidad_id:any,estado:String,consultorio:String,duracion:number){
         this.medico_id=medico_id;
         this.fecha=fecha;
