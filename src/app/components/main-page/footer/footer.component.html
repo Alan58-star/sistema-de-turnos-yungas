@@ -1,4 +1,4 @@
-<footer>
+<footer *ngIf="_loginService.rolLogged() !== 'terminal'">
     <div class="flex-column">
         <img src="logos/ministerio-lg-transp.png" alt="Logo del Ministerio de Salud y Ambiente del Gobierno de Santa Cruz" class="logo">
     </div>

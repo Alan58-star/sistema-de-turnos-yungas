@@ -60,6 +60,12 @@ button {
     justify-content: space-between;
 }
 
+.flex-row-reverse{
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+}
+
 .flex-column{
     display: flex;
     flex-direction: column;

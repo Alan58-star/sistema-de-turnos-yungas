@@ -1,23 +1,82 @@
 <app-nav></app-nav>
 <div id="main-page">
     <div class="title">
+        <app-carousel />
         <h1>Bienvenidos al Hospital Distrital Las Heras</h1>
-        <app-carousel/>
     </div>
+    <div class="info-container">
+        <h2>Sobre Nosotros</h2>
 
-    <h2>Autogestión</h2>
-    <div class="options">
-        <app-option-card
-            [accion]="_loginService.userLoggedIn() ? 'especialidades':'login'"
-            titulo="Sacar Turno"
-            descripcion="Haga clic aquí para sacar un turno con un médico especializado y bla bla bla."
-            color="var(--cian)"
-        ></app-option-card>
-        <app-option-card
-            [accion]="_loginService.userLoggedIn() ? 'mis-turnos':'login'"
-            titulo="Mis Turnos Pendientes"
-            descripcion="Haga clic aquí para gestionar los turnos que tiene pendiente con sus médicos. Desde acá puede revisarlos y cancelarlos en caso de que no pueda asistir."
-            color="#82f8b5"
-        ></app-option-card>
+        <div class="info-mobile">
+            <div class="section">
+                <img src="https://picsum.photos/1360/768" alt="placeholder" class="parrafo-imagen">
+                <h3>Nuestra Misión</h3>
+                <p class="parrafo-info">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet aspernatur recusandae nesciunt exercitationem,
+                    voluptate enim in est rem placeat sapiente quo alias sed error. Inventore fuga aliquid quas aliquam
+                    voluptatibus!
+                </p>
+            </div>
+        
+            <div class="section">
+                <img src="https://picsum.photos/1360/768" alt="placeholder" class="parrafo-imagen">
+                <h3>Visión</h3>
+                <p class="parrafo-info">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet aspernatur recusandae nesciunt exercitationem,
+                    voluptate enim in est rem placeat sapiente quo alias sed error. Inventore fuga aliquid quas aliquam
+                    voluptatibus!
+                </p>
+            </div>
+        
+            <div class="section">
+                <img src="https://picsum.photos/1360/768" alt="placeholder" class="parrafo-imagen">
+                <h3>Nuestros Valores</h3>
+                <p class="parrafo-info">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet aspernatur recusandae nesciunt exercitationem,
+                    voluptate enim in est rem placeat sapiente quo alias sed error. Inventore fuga aliquid quas aliquam
+                    voluptatibus!
+                </p>
+            </div>
+        </div>
+
+        <div class="info-desktop">
+            <div class="section flex-row">
+                <img src="https://picsum.photos/1360/768" alt="placeholder" class="parrafo-imagen">
+                <div>
+                    <h3>Nuestra Misión</h3>
+                    <p class="parrafo-info">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet aspernatur recusandae nesciunt exercitationem,
+                        voluptate enim in est rem placeat sapiente quo alias sed error. Inventore fuga aliquid quas aliquam
+                        voluptatibus!
+                    </p>
+                </div>
+            </div>
+        
+            <div class="section flex-row-reverse">
+                <img src="https://picsum.photos/1360/768" alt="placeholder" class="parrafo-imagen">
+                <div>
+                    <h3>Nuestra Visión</h3>
+                    <p class="parrafo-info">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet aspernatur recusandae nesciunt exercitationem,
+                        voluptate enim in est rem placeat sapiente quo alias sed error. Inventore fuga aliquid quas aliquam
+                        voluptatibus!
+                    </p>
+                </div>
+            </div>
+        
+            <div class="section flex-row">
+                <img src="https://picsum.photos/1360/768" alt="placeholder" class="parrafo-imagen">
+                <div>
+                    <h3>Nuestros Valores</h3>
+                    <p class="parrafo-info">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet aspernatur recusandae nesciunt exercitationem,
+                        voluptate enim in est rem placeat sapiente quo alias sed error. Inventore fuga aliquid quas aliquam
+                        voluptatibus!
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
     </div>
 </div>

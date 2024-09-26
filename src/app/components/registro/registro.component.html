@@ -59,10 +59,10 @@
                     <button type="button" class="option-pill-access gray-button-access" style="margin-bottom: 2rem" (click)="showHidePwd()" [ngClass]="{hidden: !passwd}">Ocultar Contraseña</button>
                 </div>
                 <div class="flex-row">
-                    <button *ngIf="accion=='agregar'" type="submit" class="option-pill blue-button">
+                    <button *ngIf="accion=='agregar'" type="submit" class="option-pill-access green-button-access">
                         Crear Cuenta
                     </button>
-                    <button *ngIf="accion=='editar'"  class="option-pill blue-button">
+                    <button *ngIf="accion=='editar'"  class="option-pill-access yellow-button-access">
                         Modificar
                     </button>
                 </div>

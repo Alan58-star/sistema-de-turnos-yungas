@@ -19,6 +19,7 @@ import { CambiarPasswordComponent } from './components/login/cambiar-password/ca
 import { BanPageComponent } from './components/main-page/ban-page/ban-page.component';
 import { NewPasswordComponent } from './components/login/new-password/new-password.component';
 import { TerminalComponent } from './components/terminal/terminal.component';
+import { AutogestionComponent } from './components/main-page/autogestion/autogestion.component';
 
 export const routes: Routes = [
     {path: '', component:BodyComponent},
@@ -46,4 +47,5 @@ export const routes: Routes = [
     { path: 'reset-password', component: NewPasswordComponent },
     { path: 'reset-password/:token', component: NewPasswordComponent },
     { path: 'terminal', component:TerminalComponent ,canActivate:[loginGuardTerminal]},
+    {path: 'autogestion', component: AutogestionComponent}
 ];
