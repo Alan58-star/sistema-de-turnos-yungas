@@ -6,19 +6,25 @@
         <span class="subtext">Si usted no tiene una cuenta, <a href="/registro">puede crear una aquí.</a></span>
     </div>
     <form action="#" class="form" [formGroup]="pacienteForm" (ngSubmit)="login()">
+        
         <label for="user-dni">DNI</label>
         <input type="number" name="user-dni" id="user-dni" formControlName="dni" required>
-       <div>
-            <label for="user-pass">Contraseña</label>
-            <input [type]="passwd ? 'text' : 'password'" name="user-pass" id="user-pass" formControlName="passw" required>            
-        </div>
+
+        <label for="user-pass">Contraseña</label>        
         <div class="flex-row">
-            <button type="button" class="option-pill-access" style="margin-bottom: 2rem" (click)="showHidePwd()" [ngClass]="{hidden: passwd}">Mostrar Contraseña</button>
-            <button type="button" class="option-pill-access gray-button-access" style="margin-bottom: 2rem" (click)="showHidePwd()" [ngClass]="{hidden: !passwd}">Ocultar Contraseña</button>
+            <input class="passwd-input" [type]="passwd ? 'text' : 'password'" name="user-pass" id="user-pass" formControlName="passw" required>    
+            <button type="button" class="option-pill passwd-btn show-pass" style="margin-bottom: 2rem" (click)="showHidePwd()" [ngClass]="{hidden: passwd}">
+                <span class="material-symbols-rounded">visibility</span>
+            </button>
+            <button type="button" class="option-pill passwd-btn hide-pass" style="margin-bottom: 2rem" (click)="showHidePwd()" [ngClass]="{hidden: !passwd}">
+                <span class="material-symbols-rounded">visibility_off</span>
+            </button>
         </div>
+
         <div class="flex-row">
             <button class="option-pill-access blue-button-access">Ingresar</button>
         </div>
+
     </form>
     
     <div class="flex-column">

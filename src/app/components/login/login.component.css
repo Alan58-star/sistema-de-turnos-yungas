@@ -20,6 +20,39 @@ input{
     outline: solid 1px #cccccc;
 }
 
+.passwd-input{
+    border-top-right-radius: 0px !important;
+    border-bottom-right-radius: 0px !important;
+}
+
+.passwd-btn{
+    margin: auto;
+    width: auto;
+    padding: 0.4rem;
+
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+
+    span{        
+        font-size: 22px;
+    }
+}
+
+.show-pass{    
+    background-color: var(--celesteC);
+    span{
+        color: var(--azul);
+    }
+}
+
+.hide-pass{    
+    background-color: var(--celeste);
+    
+    span{
+        color:#fff;
+    }
+}
+
 .return{
     margin: 2rem 2rem 0;
     font-size: 16px;
@@ -65,6 +98,10 @@ input{
 
     button{
         width: 300px;
+    }
+
+    .passwd-btn{
+        padding: 0.76rem;
     }
 
     .form{
