@@ -17,19 +17,39 @@
                 </div>
                 <label for="user-nombre">Nombre</label>
                 <input type="text" formControlName="nombre" name="user-nombre" id="user-nombre" required>
-                <div class="errors">
-                    <div  class="error-text"*ngIf="pacienteForm.get('nombre')?.invalid && pacienteForm.get('nombre')?.touched">
-                    El nombre es requerido.
+                <div class="errors" *ngIf="pacienteForm.get('nombre')?.invalid && pacienteForm.get('nombre')?.touched">
+                    <div  class="error-text">El nombre es requerido.</div>
                 </div>
-                </div>
+                
+                <!-- Agregarlo al formGroup -->
+                <label for="user-email">Correo Electrónico</label>
+                <input type="email" name="user-email" id="user-email" require>
+
                 <hr>
                 <h2>Datos de Contacto</h2>
                 <label for="telefono">Número de Teléfono <br><small
                         style="color: var(--celeste); font-size: 14px; font-weight: 400;">(Los turnos se notificarán a
                         este número)</small></label>
-                <input type="text" formControlName="telefono" name="telefono" id="telefono" required>
-                <div class="errors">
-                    <div class="error-text" *ngIf="pacienteForm.get('telefono')?.invalid && pacienteForm.get('telefono')?.touched">
+
+                <div class="flex-row" style="gap: 1rem; margin-top: 1rem;">
+                    <div style="width: 35%;">             
+                        <small>Código de Área</small>           
+                        <div class="flex-row">
+                            <button type="button" class="input-pill" style="margin-bottom: 2rem; cursor: default;">
+                                <span class="material-symbols-rounded">add</span>
+                            </button>
+                            <input class="cod-area-input" type="text" formControlName="" name="" id=""required>
+                        </div>
+                    </div>
+
+                    <div>
+                        <small>Número de Teléfono</small>
+                        <input type="text" formControlName="telefono" name="telefono" id="telefono" required>
+                    </div>
+                </div>
+
+                <div class="errors" *ngIf="pacienteForm.get('telefono')?.invalid && pacienteForm.get('telefono')?.touched">
+                    <div class="error-text">
                         El teléfono es requerido.
                     </div>
                 </div>
@@ -40,8 +60,8 @@
 
                 <label for="user-pass2">Repita la contraseña</label>
                 <input [type]="passwd ? 'text' : 'password'" formControlName="passw2" name="user-pass" id="user-pass2" required>
-                <div class="errors">
-                    <div class="error-text" *ngIf="passwordMismatch && pacienteForm.get('passw2')?.touched">
+                <div class="errors" *ngIf="passwordMismatch && pacienteForm.get('passw2')?.touched">
+                    <div class="error-text">
                         Las contraseñas no coinciden.
                     </div>
                 </div>
@@ -55,8 +75,14 @@
                     </select>
                 </div>
                 <div class="flex-row">
-                    <button type="button" class="option-pill-access" style="margin-bottom: 2rem" (click)="showHidePwd()" [ngClass]="{hidden: passwd}">Mostrar Contraseña</button>
-                    <button type="button" class="option-pill-access gray-button-access" style="margin-bottom: 2rem" (click)="showHidePwd()" [ngClass]="{hidden: !passwd}">Ocultar Contraseña</button>
+                    <button type="button" class="option-pill-access" style="margin-bottom: 2rem" (click)="showHidePwd()" [ngClass]="{hidden: passwd}">
+                        <span class="material-symbols-rounded">visibility</span>
+                        Mostrar Contraseñas
+                    </button>
+                    <button type="button" class="option-pill-access gray-button-access" style="margin-bottom: 2rem" (click)="showHidePwd()" [ngClass]="{hidden: !passwd}">
+                        <span class="material-symbols-rounded" style="color: #fff;">visibility_off</span>
+                        Ocultar Contraseñas
+                    </button>
                 </div>
                 <div class="flex-row">
                     <button *ngIf="accion=='agregar'" type="submit" class="option-pill-access green-button-access">

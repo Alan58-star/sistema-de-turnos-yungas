@@ -1,25 +1,32 @@
 <app-nav/>
 
 <h1>Bienvenido, {{_loginService.userLogged()}}</h1>
-<h2>AUTOGESTIÓN</h2>
-<h3>Aquí puede organizar sus turnos y cambiar su contraseña.</h3>
+
+<div class="title flex-column">
+    <h2>AUTOGESTIÓN</h2>
+    <span>Aquí puede organizar sus turnos y cambiar su contraseña.</span>
+</div>
+
 <div class="options">
     <app-option-card
+        icono="overview"
         [accion]="'/especialidades'"
         titulo="Sacar Turno"
-        descripcion="Haga clic aquí para sacar un turno con un médico especializado y bla bla bla."
-        color="var(--cian)"
+        descripcion="Haga clic aquí para solicitar un nuevo turno con el médico que necesite."
+        color="var(--verde)"
     ></app-option-card>
     <app-option-card
+        icono="clinical_notes"
         [accion]="'/mis-turnos'"
         titulo="Mis Turnos Pendientes"
-        descripcion="Haga clic aquí para gestionar los turnos que tiene pendiente con sus médicos. Desde acá puede revisarlos y cancelarlos en caso de que no pueda asistir."
-        color="#82f8b5"
+        descripcion="Haga clic aquí para gestionar los turnos que tiene pendiente con sus médicos."
+        color="var(--celeste)"
     ></app-option-card>
     <app-option-card
+        icono="password_2"
         [accion]="'/cambiar-password'"
         titulo="Cambiar Contraseña"
-        descripcion="Puede generar una nueva contraseña desde aquí."
-        color="var(--celesteC)"
+        descripcion="Haga clic aquí para actualizar su contraseña actual."
+        color="var(--rojo)"
     ></app-option-card>
 </div>
