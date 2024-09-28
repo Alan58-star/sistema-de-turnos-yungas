@@ -20,7 +20,7 @@ span{
 
 .title{
     width: 100%;
-    margin: 2rem 0;
+    margin: 0.8rem 0;
     padding: 0 1rem;
     gap: 1rem;
 }
@@ -36,8 +36,12 @@ span{
 }
 
 @media(min-width: 768px) {
+    h1{
+        padding: 3rem 1rem;
+    }
+
     .options{
-        padding:2rem 4rem;
+        padding:2rem 8rem;
     }
 }
 
@@ -52,11 +56,22 @@ span{
     }
 
     .options{
-        padding: 3rem 8rem;
+        padding: 2rem 3rem;
         flex-direction: row;
         justify-content: space-around;
-        flex-wrap: wrap;
         gap: 2rem;
+    }
+}
+
+@media(min-width: 1600px){
+    app-option-card{
+        max-width: 100%;
+    }
+
+    .options{
+        padding: 3rem 6rem;
+        flex-wrap: nowrap;
+        gap: 4rem;
     }
 }
 
@@ -66,6 +81,7 @@ span{
     }
 
     .options{
+        padding: 3rem 8rem;
         flex-wrap: nowrap;
         gap: 4rem;
     }

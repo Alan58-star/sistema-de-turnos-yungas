@@ -50,9 +50,10 @@ h3{
 @media(min-width: 1280px) {
     .option-card{
         margin:0;
+        padding: 1rem;
     }
 
     .option-description{
-        padding:2rem 3rem;
+        padding:1rem 2rem;
     }
 }
