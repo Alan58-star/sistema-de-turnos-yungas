@@ -6,26 +6,33 @@ h1{
 }
 
 h2{
-    padding: 2rem 1rem;
-    font-size: 2.4rem;
+    font-size: 36px;
+    font-weight: 800;
     text-align: center;
 }
 
-h3{
-    font-size: 1.5rem;
-    text-align:center;
+span{
     padding: 0 1rem;
+
+    font-size: 18px;
+    text-align:center;
+}
+
+.title{
+    width: 100%;
+    margin: 2rem 0;
+    padding: 0 1rem;
+    gap: 1rem;
 }
 
 .options{
-
     margin-bottom: 2rem;
     padding: 2rem;
+    width: 100%;
 
     display: flex;
     flex-direction: column;
-    
-    width: 100%;
+
 }
 
 @media(min-width: 768px) {
@@ -40,9 +47,26 @@ h3{
         font-size: 54px;
     }
 
+    app-option-card{
+        max-width: 400px;
+    }
+
     .options{
         padding: 3rem 8rem;
         flex-direction: row;
-        gap: 5rem;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        gap: 2rem;
+    }
+}
+
+@media(min-width: 1800px){
+    app-option-card{
+        max-width: 100%;
+    }
+
+    .options{
+        flex-wrap: nowrap;
+        gap: 4rem;
     }
 }

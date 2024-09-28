@@ -10,6 +10,7 @@ import { RouterLink } from '@angular/router';
   styleUrl: './option-card.component.css'
 })
 export class OptionCardComponent {
+  @Input() icono: string = "home_health";
   @Input() titulo: string = "";
   @Input() descripcion: string = "";
   @Input() accion: string = "";
