@@ -25,7 +25,7 @@ input{
     border-bottom-right-radius: 0px !important;
 }
 
-.passwd-btn{
+.input-pill{
     margin: auto;
     width: auto;
     padding: 0.4rem;
@@ -33,19 +33,21 @@ input{
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
 
+    background-color: #efefef;
+
     span{        
         font-size: 22px;
     }
 }
 
-.show-pass{    
+.input-btn-off{    
     background-color: var(--celesteC);
     span{
         color: var(--azul);
     }
 }
 
-.hide-pass{    
+.input-btn-on{    
     background-color: var(--celeste);
     
     span{
@@ -100,7 +102,7 @@ input{
         width: 300px;
     }
 
-    .passwd-btn{
+    .input-pill{
         padding: 0.76rem;
     }
 

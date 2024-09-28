@@ -13,6 +13,17 @@ hr{
     background-color: var(--gris);
 }
 
+.input-pill{
+    border-radius: 10px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.cod-area-input{
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
 .errors{
     margin-bottom: 2rem;
 }

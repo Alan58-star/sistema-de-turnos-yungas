@@ -13,10 +13,10 @@
         <label for="user-pass">Contraseña</label>        
         <div class="flex-row">
             <input class="passwd-input" [type]="passwd ? 'text' : 'password'" name="user-pass" id="user-pass" formControlName="passw" required>    
-            <button type="button" class="option-pill passwd-btn show-pass" style="margin-bottom: 2rem" (click)="showHidePwd()" [ngClass]="{hidden: passwd}">
+            <button type="button" class="option-pill input-pill input-btn-off" style="margin-bottom: 2rem" (click)="showHidePwd()" [ngClass]="{hidden: passwd}">
                 <span class="material-symbols-rounded">visibility</span>
             </button>
-            <button type="button" class="option-pill passwd-btn hide-pass" style="margin-bottom: 2rem" (click)="showHidePwd()" [ngClass]="{hidden: !passwd}">
+            <button type="button" class="option-pil input-pill input-btn-on" style="margin-bottom: 2rem" (click)="showHidePwd()" [ngClass]="{hidden: !passwd}">
                 <span class="material-symbols-rounded">visibility_off</span>
             </button>
         </div>
