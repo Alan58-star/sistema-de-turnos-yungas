@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ObraSocialService } from '../../services/obra-social.service';
@@ -9,11 +9,15 @@ import { EspecialidadService } from '../../services/especialidad.service';
 import { TurnoServ } from '../../models/turnoServ';
 import { ObraSocial } from '../../models/obraSocial';
 import { Router } from '@angular/router';
-
+import { LOCALE_ID } from '@angular/core';
+import { registerLocaleData } from '@angular/common';
+import localeEs from '@angular/common/locales/es';
+registerLocaleData(localeEs, 'es');
 @Component({
   selector: 'app-terminal',
   standalone: true,
   imports: [CommonModule,ReactiveFormsModule],
+  providers:[DatePipe,  { provide: LOCALE_ID, useValue: 'es' }],
   templateUrl: './terminal.component.html',
   styleUrl: './terminal.component.css'
 })
@@ -40,10 +44,10 @@ export class TerminalComponent implements OnInit{
     public _especialidadService:EspecialidadService
   ){
     this.turnoForm = this.fb.group({
-      pacienteDNI:[''],
-      pacienteNombre:[''],
-      especialidad:[''],
-      obra1: [''],
+      pacienteDNI:['',Validators.required],
+      pacienteNombre:['',Validators.required],
+      especialidad:['',Validators.required],
+      obra1: ['',Validators.required],
       obra2: [''],
       obra3: [''],
       turno: ['', Validators.required],
@@ -72,7 +76,6 @@ export class TerminalComponent implements OnInit{
     })
   }
   cargarMedicos(id:any) {
-    console.log(this.turnoForm.get('especialidad')?.value)
     this._medicoService.getEspecialidades(this.turnoForm.get('especialidad')?.value).subscribe({
       next: (data) => {
         this._medicoService.medicos = data;
@@ -134,6 +137,10 @@ export class TerminalComponent implements OnInit{
   }
   
   finalizarTurno() {
+    if(this.turnoForm.invalid){
+      this.toastr.error("Todos los campos deben estar completos");
+      return;
+    }
     this._turnoService.getTurno(this.turnoForm.get('turno')?.value).subscribe({
       next: (data) => {
         this.turno = data;
@@ -177,6 +184,24 @@ export class TerminalComponent implements OnInit{
           this.toastr.success('Turno agendado!');
         
           this.pasoActual = 0;
+          this._medicoService.getMedico(this.medico_id).subscribe({
+            next: (data) => {
+              let medico = data;
+              medico.disponibles = medico.disponibles - 1;
+              console.log(medico);
+              this._medicoService.putMedico(data).subscribe({
+                next: (data) => {
+                  console.log(data);
+                },
+                error: (e) => {
+                  console.log(e);
+                },
+              });
+            },
+            error: (e) => {
+              console.log(e);
+            },
+          });
         } else {
           this.toastr.error(actua.msg);
           this.pasoActual = 0;
@@ -188,36 +213,22 @@ export class TerminalComponent implements OnInit{
       },
     });
 
-    this._medicoService.getMedico(this.medico_id).subscribe({
-      next: (data) => {
-        let medico = data;
-        medico.disponibles = medico.disponibles - 1;
-        console.log(medico);
-        this._medicoService.putMedico(data).subscribe({
-          next: (data) => {
-            console.log(data);
-          },
-          error: (e) => {
-            console.log(e);
-          },
-        });
-      },
-      error: (e) => {
-        console.log(e);
-      },
-    });
+    
   }
   //MOVILIDAD
   pasoActual: number = 0;
 
   avanzar = () => {
+    let paso4:Boolean=false;
     if (this.pasoActual < 5){
       this.pasoActual++;
+      
     }
+    
     if(this.pasoActual == 4){
+      this._medicoService.turnos = [];
       this.cargarMedicos(this.turnoForm.get('especialidad')?.value);
     }
-    console.log("Paso Actual: " + this.pasoActual);
   }
 
   retroceder = () => {

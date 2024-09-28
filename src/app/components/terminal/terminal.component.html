@@ -36,8 +36,8 @@
 
 				<div class="flex-column section">
 					<h3>MÉDICO</h3>
-					<div class="card-container" *ngFor="let medico of _medicoService.medicos" (click)="cargarTurnos(medico._id)">
-						<div class="card" 
+					<div class="card-container" >
+						<div class="card" *ngFor="let medico of _medicoService.medicos" (click)="cargarTurnos(medico._id)" 
 						>
 							<label for="medicoID">
 								<input type="radio" name="medico" id="medicoID" class="card-input-element" />
@@ -56,10 +56,10 @@
 
 				<div class="flex-column section">
 					<h3>TURNO</h3>
-					<div class="card-container" *ngFor="let turno of _medicoService.turnos">
-						<div class="card">
-							<label for="turnoID">
-								<input formControlName="turno" value="{{ turno._id }}" type="radio" value="turnoID" name="turno" id="turnoID"
+					<div class="card-container" >
+						<div class="card" *ngFor="let turno of _medicoService.turnos">
+							<label for="{{ turno._id }}" >
+								<input formControlName="turno" value="{{ turno._id }}" type="radio"  name="turno" id="{{ turno._id }}"
 									class="card-input-element" />
 								<div class="card-input">
 									<ul>
