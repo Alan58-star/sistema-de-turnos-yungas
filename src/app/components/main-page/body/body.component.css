@@ -24,6 +24,15 @@ h3{
     text-align: center;
 }
 
+.separator{
+    margin: 0 auto 1.5rem;
+    width: 10%;
+    
+    border: none;
+    border-bottom: solid 8px var(--celeste);
+    border-radius: 10px;
+}
+
 .title{    
     position: relative;
     background: linear-gradient(90deg, #066c8b, #04597b);
@@ -47,6 +56,7 @@ h3{
 
 .section{
     margin: 0 0 4rem;
+    padding: 2rem ;
     gap: 2rem;
 }
 
@@ -72,11 +82,30 @@ h3{
         font-size: 74px;
     }
 
+    h2{
+        padding:5rem;
+
+        font-size: 72px;
+        color: var(--azul);
+    }
+
     h3{
-        font-size: 2.3rem;
+        font-size: 3rem;
+    }
+
+    .section{
+        padding: 3rem;
+        *{
+            margin: auto;
+        }
+    }
+
+    .separator{
+        margin: 0 auto 2rem;
     }
 
     .parrafo-info{
+        padding-top: 1.5rem;
         font-size: 20px;
     }
 
@@ -86,11 +115,12 @@ h3{
 
     .info-desktop{
         display: block;
+        padding: 0 2%;
     }
 
     .parrafo-imagen{
-        max-width: 580px;
-        max-height: 540px;
+        max-width: 520px;
+        max-height: 500px;
     
         object-fit: cover;
     }
@@ -103,7 +133,11 @@ h3{
     }
 
     .parrafo-imagen{
-        max-width: 1000px;
+        max-width: 800px;
         max-height: 400px;
+    }
+
+    .info-desktop{
+        padding: 0 6%;
     }
 }
