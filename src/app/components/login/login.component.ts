@@ -57,6 +57,10 @@ export class LoginComponent implements OnInit{
             
             this.router.navigateByUrl('/secretaria');
           }
+          if(data.rol=="terminal"){
+            
+            this.router.navigateByUrl('/terminal');
+          }
           
         }
         else{

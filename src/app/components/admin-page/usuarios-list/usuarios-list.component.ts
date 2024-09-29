@@ -17,6 +17,7 @@ import { LoginService } from '../../../services/login.service';
 })
 export class UsuariosListComponent implements OnInit{
   busquedaForm:FormGroup;
+  pacienteActu:Paciente;
   ngOnInit(): void {
     if(sessionStorage.getItem("rol")=='admin'){
       this.getUsuarios();
@@ -30,7 +31,7 @@ export class UsuariosListComponent implements OnInit{
   constructor(public _pacienteService:PacienteService,
     private toastr:ToastrService,private fb:FormBuilder, 
   public _loginService:LoginService, private router:Router){
-    
+    this.pacienteActu= new Paciente(0,"0","0",0);
     this.busquedaForm = this.fb.group({
       busqueda: ['']
       
@@ -91,9 +92,13 @@ export class UsuariosListComponent implements OnInit{
       this._pacienteService.getPaciente(idPaciente).subscribe({
         next:(data) => {
           
-          let paciente=data;
-          paciente.strikes=0;
-          this._pacienteService.putPaciente(paciente).subscribe({
+          this.pacienteActu._id=data._id;
+          this.pacienteActu.dni=data.dni;
+          this.pacienteActu.nombre=data.nombre;
+          this.pacienteActu.telefono=data.telefono;
+          this.pacienteActu.strikes=0
+          
+          this._pacienteService.putPaciente(this.pacienteActu).subscribe({
             next:(data) => {
               this.toastr.success("¡Usuario desbloqueado!")
               

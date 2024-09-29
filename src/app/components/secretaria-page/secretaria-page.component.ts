@@ -10,6 +10,7 @@ import localeEs from '@angular/common/locales/es';
 import { PacienteService } from '../../services/paciente.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { Paciente } from '../../models/paciente';
 registerLocaleData(localeEs, 'es');
 @Component({
   selector: 'app-secretaria-page',
@@ -25,7 +26,7 @@ export class SecretariaPageComponent implements OnInit{
   mostrandoFecha: boolean;
   mostrandoSpinner: boolean;
 
-
+  pacienteActu:Paciente;
   turnoForm:FormGroup
   fecha=new Date();
   ngOnInit(): void {
@@ -47,7 +48,7 @@ export class SecretariaPageComponent implements OnInit{
       busqueda:[''],
       tipo: ['']
     });
-    
+    this.pacienteActu= new Paciente(0,"0","0",0);
     this.menuTurnoAbierto = false;
     this.mostrandoFecha = false;
     this.mostrandoSpinner = false;
@@ -154,15 +155,25 @@ export class SecretariaPageComponent implements OnInit{
       console.log('No se ha seleccionado ninguna fecha');
     }
   }
+  
+  confirmarDarStrike(pacienteId: any) {
+    const confirmacion = window.confirm('¿Estás seguro de que deseas dar un strike a este usuario?');
+    
+    if (confirmacion) {
+      this.darStrike(pacienteId);
+    }
+  }
   darStrike(paciente_id:any){
     console.log(paciente_id);
     this._pacienteService.getPaciente(paciente_id).subscribe({
       next:(data) => {
-        let paciente=data;
+        this.pacienteActu._id=data._id;
+        this.pacienteActu.dni=data.dni;
+        this.pacienteActu.nombre=data.nombre;
+        this.pacienteActu.telefono=data.telefono;
+        this.pacienteActu.strikes=this.pacienteActu.strikes+1
         
-        paciente.strikes=paciente.strikes+1;
-       
-        this._pacienteService.putPaciente(paciente).subscribe({
+        this._pacienteService.putPaciente(this.pacienteActu).subscribe({
           next:(data) => {
             console.log(data);
             
@@ -179,13 +190,6 @@ export class SecretariaPageComponent implements OnInit{
       },
       
     })
-  }
-  confirmarDarStrike(pacienteId: any) {
-    const confirmacion = window.confirm('¿Estás seguro de que deseas dar un strike a este usuario?');
-    
-    if (confirmacion) {
-      this.darStrike(pacienteId);
-    }
   }
   confirmarAsistio(turno: any) {
     const confirmacion = window.confirm('¿Estás seguro de finalizar el turno?');
