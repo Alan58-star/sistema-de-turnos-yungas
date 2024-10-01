@@ -1,7 +1,8 @@
 <app-admin-nav/>
 <div class="admin-page">
     <div class="flex-row">
-        <h1>Creando un Nuevo Turno</h1>
+        <h1 *ngIf="accion=='agregar'">Creando un Nuevo Turno</h1>
+        <h1 *ngIf="accion=='editar'">Modificar Turno</h1>
         <button class="option-pill small-button" routerLink="/secretaria">Volver al Inicio</button>
     </div>
     <form action="#" method="post" class="form"  [formGroup]="turnoForm" (ngSubmit)="accion === 'agregar' ? agregarTurno() : editarTurno()">
@@ -25,7 +26,12 @@
             <option value="Ocupado" >Ocupado</option>
             <option value="Finalizado" >Finalizado</option>
         </select>
-        <div class="flex-row">
+        <div *ngIf="accion=='editar'" class="flex-row">
+            <button type="sumbit" class="option-pill blue-button" >
+                Modificar Turno
+            </button>
+        </div>
+        <div *ngIf="accion=='agregar'" class="flex-row">
             <button type="sumbit" class="option-pill blue-button" >
                 + Crear Turno
             </button>

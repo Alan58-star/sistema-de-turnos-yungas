@@ -132,11 +132,11 @@ exports.obtenerTurnosPorMedico = async (req, res) => {
                     from: 'pacientes', // Nombre de la colección de pacientes
                     localField: 'paciente_id',
                     foreignField: '_id',
-                    as: 'paciente'
+                    as: 'paciente_id'
                 }
             },
             
-            { $unwind: { path: '$paciente', preserveNullAndEmptyArrays: true } },
+            { $unwind: { path: '$paciente_id', preserveNullAndEmptyArrays: true } },
             {
                 $lookup: {
                     from: 'especialidads', // Nombre de la colección de especialidades
@@ -171,16 +171,16 @@ exports.obtenerTurnosPorPaciente = async (req, res) => {
                     from: 'pacientes', // Nombre de la colección de pacientes
                     localField: 'paciente_id',
                     foreignField: '_id',
-                    as: 'paciente'
+                    as: 'paciente_id'
                 }
             },
-            { $unwind: '$paciente'}, // Descomponer array resultante de $lookup
+            { $unwind: '$paciente_id'}, // Descomponer array resultante de $lookup
             {
                 $match: {
                     $or: isNumeric
-                        ?[{ 'paciente.dni':  parseInt(searchTerm) } ] // DNI parcial
+                        ?[{ 'paciente_id.dni':  parseInt(searchTerm) } ] // DNI parcial
                     
-                        :[{ 'paciente.nombre': { $regex: searchTerm, $options: 'i' } }] // Nombre parcial insensible a mayúsculas/minúsculas
+                        :[{ 'paciente_id.nombre': { $regex: searchTerm, $options: 'i' } }] // Nombre parcial insensible a mayúsculas/minúsculas
                         
                 }
             },

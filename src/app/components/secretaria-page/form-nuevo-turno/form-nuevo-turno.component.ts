@@ -54,14 +54,27 @@ export class FormNuevoTurnoComponent implements OnInit , OnDestroy {
       this.subscription.unsubscribe();
     }
   }
+  formatDate(fechaISO: any): string {
+    const fecha = new Date(fechaISO);
+    const year = fecha.getFullYear();
+    const month = ('0' + (fecha.getMonth() + 1)).slice(-2);
+    const day = ('0' + fecha.getDate()).slice(-2);
+    const hours = ('0' + fecha.getHours()).slice(-2);
+    const minutes = ('0' + fecha.getMinutes()).slice(-2);
+  
+  // Retorna la fecha en el formato adecuado para un campo 'datetime-local'
+  return `${year}-${month}-${day}T${hours}:${minutes}`;
+  }
   getTurno() {
     this._turnoService.getTurno(this.idTurno).subscribe({
       next:(data) => {
         console.log(data)
+        const fechaFormateada = this.formatDate(data.fecha);
+
         this.turnoForm = this.fb.group({
           especialidad: [data.especialidad_id, Validators.required],
           medico: [data.medico_id, Validators.required],
-          fecha: [data.fecha, Validators.required],
+          fecha: [fechaFormateada,Validators.required],
           duracion: [data.duracion, Validators.required],
           consultorio: [data.consultorio, Validators.required],
           estado:[data.estado]
