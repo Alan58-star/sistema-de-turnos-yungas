@@ -6,7 +6,7 @@ import { Turno } from '../models/turno';
   providedIn: 'root'
 })
 export class PacienteService {
-  url='http://localhost:4000/api/paciente/';
+  url='https://sistema-de-turnos-hdlh.onrender.com/api/paciente/';
   
   pacientes:Paciente[];
   turnos:Turno[];

@@ -9,7 +9,7 @@ export class LoginService {
   url: string;
 
   constructor(private http: HttpClient) {
-    this.url = "http://localhost:4000/api/login";
+    this.url = "https://sistema-de-turnos-hdlh.onrender.com/api/login";
   }
 
   loginUsuario(formulario: any){
