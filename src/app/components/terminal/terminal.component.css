@@ -81,6 +81,7 @@ option{
 
 .card-container{
     background-color: #fff;
+    max-height: 250px !important;
 }
 
 .small-button{
