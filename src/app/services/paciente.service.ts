@@ -37,7 +37,7 @@ export class PacienteService {
     return this.http.get<Paciente[]>(`${this.url}/terminoSec/${termino}`,this.createHeader());
   }
   postPaciente(paciente: Paciente){
-    return this.http.post<any>(this.url+'/register', paciente,this.createHeader());
+    return this.http.post<any>(this.url+'/register', paciente);
   }
   loginUsuario(formulario: any){
     return this.http.post<any>(this.url+'/login', formulario,this.createHeader());
