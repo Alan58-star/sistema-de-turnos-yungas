@@ -38,6 +38,7 @@ export class RegistroComponent implements OnInit{
       telefono: ['',Validators.required],
       passw1: ['',Validators.required],
       passw2: ['',Validators.required],
+      mas: ['',Validators.required],
       rol:['']
       
     });
@@ -164,7 +165,7 @@ export class RegistroComponent implements OnInit{
     const PACIENTE: Paciente ={
       dni: Number(this.pacienteForm.get('dni')?.value),
       nombre: this.pacienteForm.get('nombre')?.value,
-      telefono:"54" + this.pacienteForm.get('telefono')?.value,
+      telefono:this.pacienteForm.get('mas')?.value + this.pacienteForm.get('telefono')?.value,
       passw: this.pacienteForm.get('passw1')?.value,
       strikes:0
     }
