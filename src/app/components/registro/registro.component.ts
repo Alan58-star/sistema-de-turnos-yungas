@@ -39,7 +39,8 @@ export class RegistroComponent implements OnInit{
       passw1: ['',Validators.required],
       passw2: ['',Validators.required],
       mas: ['',Validators.required],
-      rol:['']
+      rol:[''],
+      correo:['']
       
     });
 
