@@ -47,5 +47,5 @@ export const routes: Routes = [
     { path: 'reset-password', component: NewPasswordComponent },
     { path: 'reset-password/:token', component: NewPasswordComponent },
     { path: 'terminal', component:TerminalComponent ,canActivate:[loginGuardTerminal]},
-    {path: 'autogestion', component: AutogestionComponent}
+    {path: 'autogestion', component: AutogestionComponent,canActivate:[loginGuardPaciente]}
 ];

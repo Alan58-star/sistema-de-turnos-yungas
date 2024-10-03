@@ -20,12 +20,17 @@
         <input type="number" formControlName="duracion" name="duracion" id="duracion">
         <label for="consultorio">Lugar</label>
         <input type="text" formControlName="consultorio" name="consultorio" id="consultorio">
+        <label *ngIf="accion=='editar'" for="estado">Estado</label>
+        
         <select *ngIf="accion=='editar'" name="estado" id="estado" formControlName="estado" >
             <option value="Disponible" >Disponible</option>
             <option value="Cancelado" >Cancelado</option>
             <option value="Ocupado" >Ocupado</option>
             <option value="Finalizado" >Finalizado</option>
         </select>
+        <label *ngIf="accion=='agregar'" for="cantidad">Cantidad</label>
+        <input *ngIf="accion=='agregar'" type="number" formControlName="cantidad" name="cantidad" id="cantidad">
+        
         <div *ngIf="accion=='editar'" class="flex-row">
             <button type="sumbit" class="option-pill blue-button" >
                 Modificar Turno

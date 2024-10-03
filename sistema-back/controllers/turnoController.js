@@ -38,7 +38,7 @@ exports.obtenerTurno = async(req,res) => {
 // Obtener Todos los Turnos
 exports.obtenerTurnos = async (req, res) => {
     try {
-        const turnos = await Turno.find({}).populate('medico_id paciente_id especialidad_id obras_sociales');
+        const turnos = await Turno.find({}).populate('medico_id paciente_id especialidad_id obras_sociales').sort({ fecha: 1 });
         res.send(turnos);
     } catch (error) {
         res.send(error);
@@ -58,7 +58,8 @@ exports.obtenerTurnosHoy = async (req, res) => {
                 $gte: hoy, // Mayor o igual que el inicio del día
                 $lt: mañana // Menor que el inicio del siguiente día
             }
-        }).populate('medico_id paciente_id obras_sociales especialidad_id');
+        }).populate('medico_id paciente_id obras_sociales especialidad_id')
+        .sort({ fecha: 1 });
 
         res.send(turnos);
     } catch (error) {
@@ -79,7 +80,8 @@ exports.obtenerTurnosPorFecha = async (req, res) => {
                 $gt: fechaParametro, // Mayor o igual que el inicio del día
                 $lte: siguienteDia // Menor que el inicio del siguiente día
             }
-        }).populate('medico_id paciente_id obras_sociales especialidad_id');
+        }).populate('medico_id paciente_id obras_sociales especialidad_id')
+        .sort({ fecha: 1 });
 
         res.send(turnos);
     } catch (error) {
@@ -154,7 +156,8 @@ exports.obtenerTurnosPorMedico = async (req, res) => {
                     as: 'obras_sociales'
                 }
             }
-        ]);
+        ])
+        .sort({ fecha: 1 });
         res.send(turnos);
     } catch (error) {
         res.status(500).send({ message: "Error al obtener turnos por médico", error });
@@ -210,11 +213,133 @@ exports.obtenerTurnosPorPaciente = async (req, res) => {
                     as: 'obras_sociales'
                 }
             }
-        ]);
+        ]).sort({ fecha: 1 });
 
         res.send(turnos);
     } catch (error) {
         res.status(500).send({ message: "Error al obtener turnos por paciente", error });
+    }
+};
+exports.obtenerTurnosPorObraSocial = async (req, res) => {
+    try {
+        const searchTerm = req.params.termino; // Nombre parcial de la obra social
+        
+        const turnos = await Turno.aggregate([
+            {
+                $lookup: {
+                    from: 'obrasocials', // Nombre de la colección de obras sociales
+                    localField: 'obras_sociales',
+                    foreignField: '_id',
+                    as: 'obras_sociales'
+                }
+            },
+            {
+                $match: {
+                    'obras_sociales.nombreOS': { $regex: searchTerm, $options: 'i' } // Buscar en el array por nombre parcial (case insensitive)
+                }
+            },
+            {
+                $lookup: {
+                    from: 'medicos',
+                    localField: 'medico_id',
+                    foreignField: '_id',
+                    as: 'medico'
+                }
+            },
+            { $unwind: '$medico' }, // Descomponer el resultado de medico
+            {
+                $lookup: {
+                    from: 'pacientes',
+                    localField: 'paciente_id',
+                    foreignField: '_id',
+                    as: 'paciente_id'
+                }
+            },
+            { $unwind: { path: '$paciente_id', preserveNullAndEmptyArrays: true } }, // Preservar cuando no haya paciente
+            {
+                $lookup: {
+                    from: 'especialidads',
+                    localField: 'especialidad_id',
+                    foreignField: '_id',
+                    as: 'especialidad'
+                }
+            },
+            { $unwind: '$especialidad' }, // Descomponer el resultado de especialidad
+        ])
+        .sort({ fecha: 1 });
+
+        res.send(turnos);
+    } catch (error) {
+        res.status(500).send({ message: "Error al obtener turnos por obra social", error });
+    }
+};
+
+exports.obtenerTurnosPorConsultorio = async (req, res) => {
+   try {
+            const searchTerm = req.params.termino; // Número o nombre del consultorio
+            const turnos = await Turno.find({
+                consultorio: { $regex: searchTerm, $options: 'i' } // Búsqueda parcial insensible a mayúsculas/minúsculas
+            })
+            .populate('medico_id paciente_id especialidad_id obras_sociales') // Poblamos las referencias a otras colecciones
+            .sort({ fecha: 1 }); // Ordenamos los turnos por fecha
+            
+            res.send(turnos);
+        } catch (error) {
+            res.status(500).send({ message: "Error al obtener turnos por consultorio", error });
+        }
+    
+    
+};
+exports.obtenerTurnosPorEspecialidad = async (req, res) => {
+    try {
+        const searchTerm = req.params.termino; // Nombre parcial de la especialidad
+        const turnos = await Turno.aggregate([
+            {
+                $lookup: {
+                    from: 'especialidads', // Nombre de la colección de especialidades
+                    localField: 'especialidad_id',
+                    foreignField: '_id',
+                    as: 'especialidad'
+                }
+            },
+            { $unwind: '$especialidad' }, // Descomponer array de especialidad
+            {
+                $match: {
+                    'especialidad.nombreEsp': { $regex: searchTerm, $options: 'i' } // Buscar por nombre parcial insensible a mayúsculas/minúsculas
+                }
+            },
+            {
+                $lookup: {
+                    from: 'medicos',
+                    localField: 'medico_id',
+                    foreignField: '_id',
+                    as: 'medico'
+                }
+            },
+            { $unwind: '$medico' },
+            {
+                $lookup: {
+                    from: 'pacientes',
+                    localField: 'paciente_id',
+                    foreignField: '_id',
+                    as: 'paciente_id'
+                }
+            },
+            { $unwind: { path: '$paciente_id', preserveNullAndEmptyArrays: true } },
+            {
+                $lookup: {
+                    from: 'obrasocials',
+                    localField: 'obras_sociales',
+                    foreignField: '_id',
+                    as: 'obras_sociales'
+                }
+            }
+        ])
+        .sort({ fecha: 1 });
+
+        res.send(turnos);
+    } catch (error) {
+        res.status(500).send({ message: "Error al obtener turnos por especialidad", error });
     }
 };
 

@@ -11,6 +11,9 @@ router.get('/fecha/:fecha',turnoController.obtenerTurnosPorFecha);
 router.get('/medico/:termino', turnoController.obtenerTurnosPorMedico);
 // Ruta para obtener turnos por paciente (nombre o DNI)
 router.get('/paciente2/:termino', turnoController.obtenerTurnosPorPaciente);
+router.get('/obra/:termino', turnoController.obtenerTurnosPorObraSocial);
+router.get('/consultorio/:termino', turnoController.obtenerTurnosPorConsultorio);
+router.get('/especialidad/:termino', turnoController.obtenerTurnosPorEspecialidad);
 router.get('/:id',turnoController.obtenerTurno);
 router.put('/:id', turnoController.actualizarTurno);
 router.delete('/:id', turnoController.eliminarTurno);

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import {Especialidad} from '../models/especialidad';
 @Injectable({
@@ -17,10 +17,17 @@ export class EspecialidadService {
     this.especialidades = [];
    }
   getEspecialidades(){
-    return this.http.get<Especialidad[]>(this.url);
+    return this.http.get<Especialidad[]>(this.url,this.createHeader());
   }
   getEspecialidad(id:any){
-    return this.http.get<Especialidad>(`${this.url}/${id}`);
+    return this.http.get<Especialidad>(`${this.url}/${id}`,this.createHeader());
+  }
+  createHeader(){
+    return {
+      headers: new HttpHeaders({
+        'Authorization':sessionStorage.getItem("token")!
+      })
+    }
   }
 }
 
