@@ -8,7 +8,7 @@ import { Turno } from '../models/turno';
   providedIn: 'root'
 })
 export class MedicoService {
-  url='http://localhost:4000/api/medico/';
+  url='https://sistema-de-turnos-hdlh.onrender.com/api/medico/';
   
   medicos:Medico[];
   turnos:Turno[];
