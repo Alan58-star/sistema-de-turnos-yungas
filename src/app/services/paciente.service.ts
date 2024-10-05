@@ -53,11 +53,11 @@ export class PacienteService {
   }
 
   requestPasswordReset(datos:any){
-    return this.http.post<any>(`${this.url}request-password-reset`, datos,this.createHeader());
+    return this.http.post<any>(`${this.url}request-password-reset`, datos);
   }
 
   resetPassword(token: string, newPassword:string){
-    return this.http.post<any>(`${this.url}reset-password`, {token, newPassword},this.createHeader())
+    return this.http.post<any>(`${this.url}reset-password`, {token, newPassword})
   }
   resetPasswordSinToken(cPassword: string, newPassword:string, idPac:any){
     return this.http.post<any>(`${this.url}reset-sintoken`, {cPassword, newPassword,idPac},this.createHeader())

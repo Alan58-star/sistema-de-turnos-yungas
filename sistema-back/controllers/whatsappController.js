@@ -1,4 +1,5 @@
 const axios = require("axios");
+require('dotenv').config({ path: 'variables.env'});
 
 exports.sendUrlResetPassword = async(
     number,
@@ -6,13 +7,13 @@ exports.sendUrlResetPassword = async(
   ) => {
     try {
       const response = await axios.post(
-        `https://graph.facebook.com/v20.0/398388510029004/messages`,
+        `https://graph.facebook.com/v20.0/${process.env.PHONE_NUMBER_ID}/messages`,
         {
           messaging_product: "whatsapp",
           to: number,
           type: "template",
           template: {
-            name: "info_turno",
+            name: "restablecer_contrasena",
             language: {
               code: "es_AR",
             },
@@ -23,23 +24,7 @@ exports.sendUrlResetPassword = async(
                   {
                     type: "text",
                     text: url,
-                  },
-                  {
-                    type: "text",
-                    text: "prueba",
-                  },
-                  {
-                    type: "text",
-                    text: "prueba",
-                  },
-                  {
-                    type: "text",
-                    text: "prueba",
-                  },
-                  {
-                    type: "text",
-                    text: "prueba",
-                  },
+                  }
                 ],
               },
             ],
@@ -47,7 +32,7 @@ exports.sendUrlResetPassword = async(
         },
         {
           headers: {
-            Authorization: `Bearer ${process.env.TOKEN}`,
+            Authorization: `Bearer ${process.env.USER_ACCESS_TOKEN}`,
             "Content-Type": "application/json",
           },
         }

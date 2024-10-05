@@ -18,7 +18,7 @@
                     </ul>
                     <div class="flex-row">
                         <button *ngIf="canCancelTurno(turno.fecha)" class="option-pill-access red-button-access cancel-turno"
-                        [disabled]="!canCancelTurno(turno.fecha)" (click)="confirmarCancelarTurno(turno._id)">Cancelar Turno</button>
+                        [disabled]="!canCancelTurno(turno.fecha)" (click)="confirmarCancelarTurno(turno._id); cargarInfo(turno)">Cancelar Turno</button>
                     </div>
 
                     <!--  <div [ngClass]="{'hidden': isMenuHidden}">
