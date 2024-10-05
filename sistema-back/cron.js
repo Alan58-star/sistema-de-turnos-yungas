@@ -8,13 +8,13 @@ require('dotenv').config({ path: 'variables.env'});
 // console.log(turnos);
 
 
-cron.schedule("32 20 * * *", () => {
+cron.schedule("00 08 * * *", () => {
   // enviarMensajeWhatsApp();
-  // obtenerTurnos()
+  obtenerTurnos()
   // procesarTurnos();
+  eliminarTurnos()
 });
 
-// eliminarTurnos()
 
 async function enviarMensajeWhatsApp(
   number,
