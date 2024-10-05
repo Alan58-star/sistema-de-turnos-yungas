@@ -32,7 +32,11 @@
                 </div>
             </div>
         </div>
-        <div *ngIf="vacio" class="title flex-column">
-            <h1>Usted no tiene Turnos pendientes</h1>
+        <div *ngIf="vacio" class="title flex-column" style="margin-bottom: 10%;">
+            <span class="material-symbols-rounded" style="color: var(--celeste); font-size: 120px; margin-bottom: 1rem;">
+                verified
+            </span>
+            <h1>Usted está libre de turnos pendientes.</h1>
+            <h2 style="font-weight: 400;">Puede volver a autogestión si quiere.</h2>
             
         </div>
