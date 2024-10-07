@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component, CUSTOM_ELEMENTS_SCHEMA, OnInit, signal } from '@angular/core';
-import { register, SwiperContainer } from 'swiper/element';
-import { SwiperOptions } from 'swiper/types';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, OnInit} from '@angular/core';
+import { register} from 'swiper/element';
 register();
 
 @Component({
@@ -12,7 +11,8 @@ register();
   templateUrl: './carousel.component.html',
   styleUrl: './carousel.component.css'
 })
-export class CarouselComponent /*implements OnInit*/ {
+export class CarouselComponent implements OnInit {
+  i:number=0
   fotos = [
     { img: "/placeholder.jpg" },
     { img: "/placeholder2.jpg" },
@@ -20,7 +20,14 @@ export class CarouselComponent /*implements OnInit*/ {
     { img: "/placeholder4.jpg" },
     { img: "/placeholder5.jpg" },
   ];
-  
+  ngOnInit(): void {
+    setInterval(() => {
+      this.next();
+  }, 5000);
+  }
+  next() {
+    this.i = (this.i + 1) % this.fotos.length; // Incrementa el índice
+}
   /*
   swiperElement = signal<SwiperContainer | null>(null);
   
@@ -34,5 +41,6 @@ export class CarouselComponent /*implements OnInit*/ {
     this.swiperElement.set(swiperConstructor as SwiperContainer);
     this.swiperElement()?.initialize();
   }*/
+ 
 
 }

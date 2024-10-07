@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ObraSocial } from '../models/obraSocial';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
@@ -17,11 +17,17 @@ export class ObraSocialService {
     this.obras2 = [];
    }
   getObras(){
-    return this.http.get<ObraSocial[]>(this.url);
+    return this.http.get<ObraSocial[]>(this.url,this.createHeader());
   }
   getObra(id:any){
-    return this.http.get<ObraSocial>(`${this.url}/${id}`);
+    return this.http.get<ObraSocial>(`${this.url}/${id}`,this.createHeader());
   }
-
+  createHeader(){
+    return {
+      headers: new HttpHeaders({
+        'Authorization':sessionStorage.getItem("token")!
+      })
+    }
+  }
  
 }

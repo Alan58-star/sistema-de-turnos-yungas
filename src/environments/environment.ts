@@ -1,8 +1,14 @@
 export const environment = {
     'baseUrl': 'https://graph.facebook.com',
-    'Business-ID': '557605326605445',
-    'Phone-Number-ID': '398388510029004',
-    'User-Access-Token': 'EAASUrq8QlP0BOyRDAaMQiZCEplaBHzOpFim5Q0GUunv7iIx0ZC52Cw9yqLaBhvQKNS8Yb3UgZASS6GOCuqfiY8aA4vaCf3mRZCV9XyjYpA1MfNXuGyLpgrw7ONh72tutdn5x9pL0B2n2ALZBsJ30d4uxD4NNTwjeMCeikoLMcW7XZAC42ZCnKy2F2EhavzREBcI',
-    'WABA-ID': '354116141128824',
+    'Business-ID': '2264082127284354',
+    'Phone-Number-ID': '468947986293806',
+    'User-Access-Token': 'EAAwMuiHOIBMBO75KbRUZBHdOcKZCauc1Fmk77wjV2aIR8CBjrQ25jteYx59wB3MIuHuh1RggkOWBdx9ZC7NZC9wc1KSJzCxYaxe0sZBbckJiMsv8qM6Kwrx9u6tDGC6agxbBYwTPVrLmTZAZBPrdZABZB0QCDddKsRt9MJuufoxxMvu8MpRaNZBWCzzyZBnQ29oQfCyU1P8spg9ZBRzNpzdPsZA5ZBoL3tVH9QZCAQvbTIZD',
+    'WABA-ID': '447766038418607',
     'Version': 'v20.0'
 };
+
+export const baseUrl = 'https://graph.facebook.com'
+
+export const phoneNumberId = '468947986293806'
+
+export const token = 'EAAwMuiHOIBMBO75KbRUZBHdOcKZCauc1Fmk77wjV2aIR8CBjrQ25jteYx59wB3MIuHuh1RggkOWBdx9ZC7NZC9wc1KSJzCxYaxe0sZBbckJiMsv8qM6Kwrx9u6tDGC6agxbBYwTPVrLmTZAZBPrdZABZB0QCDddKsRt9MJuufoxxMvu8MpRaNZBWCzzyZBnQ29oQfCyU1P8spg9ZBRzNpzdPsZA5ZBoL3tVH9QZCAQvbTIZD'

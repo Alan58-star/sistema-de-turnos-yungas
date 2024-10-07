@@ -97,15 +97,11 @@ export class SecretariaPageComponent implements OnInit{
     const busquedaValue = this.turnoForm.get('busqueda')?.value;
     const tipoValue = this.turnoForm.get('tipo')?.value;
     
-    console.log(busquedaValue);
-    console.log(tipoValue);
-  
     if (tipoValue === 'medico') {
       // Si el tipo es 'medico', llamamos al servicio de búsqueda por médico
       this._turnoService.getTurnosPorMedico(busquedaValue).subscribe({
         next: (data) => {
           this._turnoService.turnos = data;
-          console.log('Resultados de la búsqueda por médico:', data);
         },
         error: (e) => {
           console.log('Error en la búsqueda por médico:', e);
@@ -116,13 +112,47 @@ export class SecretariaPageComponent implements OnInit{
       this._turnoService.getTurnosPorPaciente(busquedaValue).subscribe({
         next: (data) => {
           this._turnoService.turnos = data;
-          console.log('Resultados de la búsqueda por paciente:', data);
         },
         error: (e) => {
           console.log('Error en la búsqueda por paciente:', e);
         }
       });
-    } else {
+    }else if (tipoValue === 'obra') {
+        // Si el tipo es 'paciente', llamamos al servicio de búsqueda por paciente
+        this._turnoService.getTurnosPorObra(busquedaValue).subscribe({
+          next: (data) => {
+            this._turnoService.turnos = data;
+            console.log(data);
+          },
+          error: (e) => {
+            console.log('Error en la búsqueda por paciente:', e);
+          }
+      });
+    } 
+    else if (tipoValue === 'consultorio') {
+      // Si el tipo es 'paciente', llamamos al servicio de búsqueda por paciente
+      this._turnoService.getTurnosPorConsultorio(busquedaValue).subscribe({
+        next: (data) => {
+          this._turnoService.turnos = data;
+          
+        },
+        error: (e) => {
+          console.log('Error en la búsqueda por paciente:', e);
+        }
+    });
+    }else if (tipoValue === 'especialidad') {
+      // Si el tipo es 'paciente', llamamos al servicio de búsqueda por paciente
+      this._turnoService.getTurnosPorEspecialidad(busquedaValue).subscribe({
+        next: (data) => {
+          this._turnoService.turnos = data;
+          
+        },
+        error: (e) => {
+          console.log('Error en la búsqueda por paciente:', e);
+        }
+    });
+  }
+    else {
       console.log('Tipo de búsqueda no reconocido');
     }
   }
@@ -156,23 +186,22 @@ export class SecretariaPageComponent implements OnInit{
     }
   }
   
-  confirmarDarStrike(pacienteId: any) {
+  confirmarDarStrike(turnoS:any,pacienteId: any) {
     const confirmacion = window.confirm('¿Estás seguro de que deseas dar un strike a este usuario?');
     
     if (confirmacion) {
-      this.darStrike(pacienteId);
+      this.darStrike(turnoS,pacienteId);
     }
   }
-  darStrike(paciente_id:any){
-    console.log(paciente_id);
+  darStrike(turnoS:any,paciente_id:any){
     this._pacienteService.getPaciente(paciente_id).subscribe({
       next:(data) => {
         this.pacienteActu._id=data._id;
         this.pacienteActu.dni=data.dni;
         this.pacienteActu.nombre=data.nombre;
         this.pacienteActu.telefono=data.telefono;
-        this.pacienteActu.strikes=this.pacienteActu.strikes+1
-        
+        this.pacienteActu.strikes=data.strikes+1
+        console.log(this.pacienteActu.strikes)
         this._pacienteService.putPaciente(this.pacienteActu).subscribe({
           next:(data) => {
             console.log(data);
@@ -189,7 +218,9 @@ export class SecretariaPageComponent implements OnInit{
         console.log(e);
       },
       
+      
     })
+    this.asistio(turnoS);
   }
   confirmarAsistio(turno: any) {
     const confirmacion = window.confirm('¿Estás seguro de finalizar el turno?');
@@ -247,7 +278,8 @@ export class SecretariaPageComponent implements OnInit{
     this.fecha=new Date();
     this._turnoService.getTurnosHoy().subscribe({
       next:(data) => {
-        this._turnoService.turnos=data;;
+        console.log(data);
+        this._turnoService.turnos=data;
         this.mostrandoSpinner = false;
       },
       error:(e) => {

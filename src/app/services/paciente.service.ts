@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core'
 import {Paciente} from '../models/paciente'
-import { HttpClient } from '@angular/common/http'
+import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Turno } from '../models/turno';
 @Injectable({
   providedIn: 'root'
@@ -16,40 +16,40 @@ export class PacienteService {
     this.turnos=[];
    }
   getPacientes(){
-    return this.http.get<Paciente[]>(this.url);
+    return this.http.get<Paciente[]>(this.url,this.createHeader());
   }
   getUsuarios(){
-    return this.http.get<Paciente[]>(this.url+"/usuarios");
+    return this.http.get<Paciente[]>(this.url+"/usuarios",this.createHeader());
   }
   getSoloPacientes(){
-    return this.http.get<Paciente[]>(this.url+"/pacientes");
+    return this.http.get<Paciente[]>(this.url+"/pacientes",this.createHeader());
   }
   getPacientesStrikes(){
-    return this.http.get<Paciente[]>(this.url+"/ban");
+    return this.http.get<Paciente[]>(this.url+"/ban",this.createHeader());
   }
   getPaciente(id:any){
-    return this.http.get<Paciente>(`${this.url}/${id}`);
+    return this.http.get<Paciente>(`${this.url}/${id}`,this.createHeader());
   }
   getPacientesTermino(termino:any){
-    return this.http.get<Paciente[]>(`${this.url}/termino/${termino}`);
+    return this.http.get<Paciente[]>(`${this.url}/termino/${termino}`,this.createHeader());
   }
   getPacientesTerminoSec(termino:any){
-    return this.http.get<Paciente[]>(`${this.url}/terminoSec/${termino}`);
+    return this.http.get<Paciente[]>(`${this.url}/terminoSec/${termino}`,this.createHeader());
   }
   postPaciente(paciente: Paciente){
     return this.http.post<any>(this.url+'/register', paciente);
   }
   loginUsuario(formulario: any){
-    return this.http.post<any>(this.url+'/login', formulario);
+    return this.http.post<any>(this.url+'/login', formulario,this.createHeader());
   }
   deletePaciente(id:any){
-    return this.http.delete<any>(`${this.url}/${id}`);
+    return this.http.delete<any>(`${this.url}/${id}`,this.createHeader());
   }
   putPaciente(paciente: Paciente){
-    return this.http.put<any>(this.url+paciente._id, paciente);
+    return this.http.put<any>(this.url+paciente._id, paciente,this.createHeader());
   }
   getTurnosPaciente(){
-    return this.http.get<Turno[]>(`${this.url}/turnos/${sessionStorage.getItem('id')}`);
+    return this.http.get<Turno[]>(`${this.url}/turnos/${sessionStorage.getItem('id')}`,this.createHeader());
   }
 
   requestPasswordReset(datos:any){
@@ -60,6 +60,13 @@ export class PacienteService {
     return this.http.post<any>(`${this.url}reset-password`, {token, newPassword})
   }
   resetPasswordSinToken(cPassword: string, newPassword:string, idPac:any){
-    return this.http.post<any>(`${this.url}reset-sintoken`, {cPassword, newPassword,idPac})
+    return this.http.post<any>(`${this.url}reset-sintoken`, {cPassword, newPassword,idPac},this.createHeader())
+  }
+  createHeader(){
+    return {
+      headers: new HttpHeaders({
+        'Authorization':sessionStorage.getItem("token")!
+      })
+    }
   }
 }

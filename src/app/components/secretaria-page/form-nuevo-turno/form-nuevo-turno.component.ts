@@ -106,7 +106,8 @@ export class FormNuevoTurnoComponent implements OnInit , OnDestroy {
       fecha: ['', Validators.required],
       duracion: ['', Validators.required],
       consultorio: ['', Validators.required],
-      estado:['']
+      estado:[''],
+      cantidad:[1]
     })
   }
   
@@ -145,6 +146,7 @@ export class FormNuevoTurnoComponent implements OnInit , OnDestroy {
     })
 
   }
+  /*
   agregarTurno() {
     if (this.turnoForm.invalid) {
       this.toastr.error("Todos los campos deben estar completos");
@@ -198,7 +200,60 @@ export class FormNuevoTurnoComponent implements OnInit , OnDestroy {
 
     })
 
-  }
+  }*/
+    agregarTurno() {
+      if (this.turnoForm.invalid) {
+        this.toastr.error("Todos los campos deben estar completos");
+        return;
+      }
+    
+      const fechaRaw = this.turnoForm.get('fecha')?.value;
+      let fechaInicial = new Date(fechaRaw);
+      const duracion = this.turnoForm.get('duracion')?.value;
+      const cantidad = this.turnoForm.get('cantidad')?.value; // Aquí defines la cantidad de turnos que quieres crear
+    
+      for (let i = 0; i < cantidad; i++) {
+        const fechaTurno = new Date(fechaInicial); // Copia la fecha inicial
+        const TURNO: TurnoServ = {
+          medico_id: this.turnoForm.get('medico')?.value,
+          especialidad_id: this.turnoForm.get('especialidad')?.value,
+          fecha: fechaTurno,
+          duracion: duracion,
+          consultorio: this.turnoForm.get('consultorio')?.value,
+          estado: "Disponible"
+        };
+    
+        this._turnoService.postTurno(TURNO).subscribe({
+          next: (data) => {
+            this.toastr.success(`Turno ${i + 1} creado con éxito: ${data.msg}`);       
+          },
+          error: (e) => {
+            console.log(e);
+          },
+        });
+      
+        // Incrementar la fecha para el siguiente turno
+        fechaInicial.setMinutes(fechaInicial.getMinutes() + duracion);
+      }
+      this._medicoService.getMedico(this.turnoForm.get('medico')?.value).subscribe({
+        next: (data) => {
+          let medico = data
+          medico.disponibles = medico.disponibles + cantidad;
+          this._medicoService.putMedico(data).subscribe({
+            next: (data) => {
+              console.log(data);
+            },
+            error: (e) => {
+              console.log(e);
+            },
+          });
+        },
+        error: (e) => {
+          console.log(e);
+        },
+      });
+      this.router.navigateByUrl('secretaria');
+    }
  
   getEspecialidades() {
     this._especialidadService.getEspecialidades().subscribe({

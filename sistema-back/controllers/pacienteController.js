@@ -3,7 +3,6 @@ const Turno = require('../models/Turno');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const wpp = require('../controllers/whatsappController');
-const { log } = require('@angular-devkit/build-angular/src/builders/ssr-dev-server');
 require('dotenv').config();
 
 exports.crearPaciente = async(req,res) => {
@@ -382,7 +381,7 @@ exports.requestPasswordReset = async (req, res) => {
     const resetLink = `http://localhost:4200/reset-password?token=${token}`;
   
     // Envía el enlace a través de WhatsApp
-    wpp.sendUrlResetPassword(number, `Click this link to reset your password: ${resetLink}`);
+    wpp.sendUrlResetPassword(number, `${resetLink}`);
   
     res.status(200).json({
       'status': '200',

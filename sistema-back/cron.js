@@ -1,23 +1,20 @@
 const cron = require("node-cron");
 const axios = require("axios");
 const Turno = require("./models/Turno");
-
-const token =
-  "EAASUrq8QlP0BOyRDAaMQiZCEplaBHzOpFim5Q0GUunv7iIx0ZC52Cw9yqLaBhvQKNS8Yb3UgZASS6GOCuqfiY8aA4vaCf3mRZCV9XyjYpA1MfNXuGyLpgrw7ONh72tutdn5x9pL0B2n2ALZBsJ30d4uxD4NNTwjeMCeikoLMcW7XZAC42ZCnKy2F2EhavzREBcI";
-const recipientPhoneNumber = "543884796051";
+require('dotenv').config({ path: 'variables.env'});
 
 // obtenerTurnos();
 
 // console.log(turnos);
 
 
-cron.schedule("32 20 * * *", () => {
+cron.schedule("00 08 * * *", () => {
   // enviarMensajeWhatsApp();
-  // obtenerTurnos()
-  procesarTurnos();
+  obtenerTurnos()
+  // procesarTurnos();
+  eliminarTurnos()
 });
 
-// eliminarTurnos()
 
 async function enviarMensajeWhatsApp(
   number,
@@ -29,13 +26,13 @@ async function enviarMensajeWhatsApp(
 ) {
   try {
     const response = await axios.post(
-      `https://graph.facebook.com/v20.0/398388510029004/messages`,
+      `https://graph.facebook.com/v20.0/${process.env.PHONE_NUMBER_ID}/messages`,
       {
         messaging_product: "whatsapp",
         to: number,
         type: "template",
         template: {
-          name: "info_turno",
+          name: "recordatorio_turno",
           language: {
             code: "es_AR",
           },
@@ -70,7 +67,7 @@ async function enviarMensajeWhatsApp(
       },
       {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${process.env.USER_ACCESS_TOKEN}`,
           "Content-Type": "application/json",
         },
       }

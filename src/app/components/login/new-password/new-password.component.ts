@@ -67,10 +67,10 @@ export class NewPasswordComponent implements OnInit {
       .resetPassword(this.token.trim(), this.datos.value.password)
       .subscribe({
         next: (result) => {
+          this.router.navigateByUrl('/login');
           this.toastr.success(
             result.msg || 'Se envió un mensaje a su WhatsApp'
           );
-          this.router.navigateByUrl('/login');
         },
         error: (e) => {
           const errorMessage =
