@@ -1,5 +1,23 @@
-<swiper-container class="carrusel" loop="true" >
-    <swiper-slide *ngFor="let foto of fotos" class="slide"  >
-        <img src="{{foto.img}}" alt="imagen">
-    </swiper-slide>
-</swiper-container>
+<div class="carrusel">
+    <div class="navegacion flex-row">
+        <span class="material-symbols-rounded" (click)="restarIndice()">
+            chevron_left
+        </span>
+        <span class="material-symbols-rounded" (click)="sumarIndice()">
+            chevron_right
+        </span>
+    </div>
+
+    <img class="slide" [src]="fotos[indice].img">
+
+    <div class="paginas flex-row">
+        <div class="pagina" (click)="irAIndice(indiceFoto)" *ngFor="let foto of fotos, let indiceFoto = index">
+            <span class="material-symbols-rounded" *ngIf="indiceFoto === indice">
+                radio_button_unchecked
+            </span>
+            <span class="material-symbols-rounded" *ngIf="indiceFoto !== indice">
+                radio_button_checked
+            </span>
+        </div>
+    </div>
+</div>
