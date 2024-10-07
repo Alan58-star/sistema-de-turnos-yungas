@@ -21,6 +21,11 @@
     }
 }
 
+.slide{    
+    height: 320px;
+    object-fit: cover;
+}
+
 .paginas{
     padding: 1.3rem 0;
     gap: 5px;
@@ -35,6 +40,12 @@
     }
 }
 
+@media (min-width: 768px){
+    .slide{    
+        height: 600px;
+    }
+}
+
 @media(min-width: 1280px) {
     .navegacion{        
         top: 42%;
@@ -43,6 +54,7 @@
     }
 
     .slide {
+        height: 720px;
         border-radius: 20px;
     }
 
