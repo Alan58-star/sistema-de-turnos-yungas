@@ -8,7 +8,7 @@ import {Especialidad} from '../models/especialidad';
 export class EspecialidadService {
 
   
-  url='http://localhost:4000/api/especialidad/';
+  url='https://sthdlh-back.onrender.com/api/especialidad/';
   
   especialidades:Especialidad[];
   
