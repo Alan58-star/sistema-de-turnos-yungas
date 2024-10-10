@@ -1,15 +1,24 @@
 <footer *ngIf="_loginService.rolLogged() !== 'terminal'">
     <div class="flex-column">
-        <img src="logos/ministerio-lg-transp.png" alt="Logo del Ministerio de Salud y Ambiente del Gobierno de Santa Cruz" class="logo">
+        <img src="logos/logo-informatica.png" alt="Logo del Ministerio de Salud y Ambiente del Gobierno de Santa Cruz" style="max-width: 300px;">
     </div>
     <div class="flex-column">
         <h2>CONTACTO</h2>
-        <span>0297 497-4666</span>
-        <a href="mailto:hdlhsalud@hotmail.com">hdlhsalud&#64;hotmail.com</a>
-        <a href="https://www.facebook.com/hospitaldistrital.lasheras">Nuestro Facebook</a>
+        <span>0297 497-4666   Int.: 163/192</span>
+        <a href="mailto:sistemashdlh@saludsantacruz.gob.ar">sistemashdlh&#64;saludsantacruz.gob.ar</a>
+        <div class="seccion">            
+            <img src="logos/logo-facebook.svg" alt="Logo de Facebook" class="logo-svg"> 
+            <a href="https://www.facebook.com/hospitaldistrital.lasheras">
+                <span>Hospital Distrital Las Heras</span>
+            </a>
+        </div>
+        <div class="seccion">
+            <span class="material-symbols-rounded">location_on</span>
+            <span>Calle 28 de Noviembre S/N, Las Heras, Santa Cruz</span>
+        </div>
+
     </div>
     <div class="flex-column">
-        <span class="material-symbols-rounded">location_on</span>
-        <span>Calle 28 de Noviembre S/N, Las Heras, Santa Cruz</span>
+        <img src="logos/ministerio-lg-transp.png" alt="Logo del Ministerio de Salud y Ambiente del Gobierno de Santa Cruz">
     </div>
 </footer>
