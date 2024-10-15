@@ -26,6 +26,11 @@
     object-fit: cover;
 }
 
+.slider-button{
+    background-color: #0000;
+    color: #fff;
+}
+
 .paginas{
     padding: 1.3rem 0;
     gap: 5px;

@@ -3,6 +3,7 @@ h1{
 
     font-size: 3.2rem;
     text-align: center;
+    color: var(--azul);
 }
 
 h2{
@@ -18,6 +19,24 @@ span{
     text-align:center;
 }
 
+.autogestion{
+    padding: 0 0 2rem;
+    
+    background-image: url("/26807.jpg");
+    background-position: center;
+    background-size: cover;
+}
+
+.autogestion-options{
+    margin: auto;
+    padding: 2rem 0;    
+    max-width: 1200px;
+
+    border-radius: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 20px 5px #0462;
+}
+
 .title{
     width: 100%;
     margin: 0.8rem 0;
@@ -26,8 +45,7 @@ span{
 }
 
 .options{
-    margin-bottom: 2rem;
-    padding: 2rem;
+    padding: 1rem 2rem;
     width: 100%;
 
     display: flex;
@@ -38,7 +56,7 @@ span{
 @media(min-width: 768px) {
     h1{
         padding: 3rem 1rem;
-    }
+    }   
 
     .options{
         padding:2rem 8rem;
@@ -64,6 +82,10 @@ span{
 }
 
 @media(min-width: 1600px){
+    .autogestion-options{
+        max-width: 1520px;
+    }
+
     app-option-card{
         max-width: 100%;
     }

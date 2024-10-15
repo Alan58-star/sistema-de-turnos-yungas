@@ -1,23 +1,23 @@
 <div class="carrusel">
     <div class="navegacion flex-row">
-        <span class="material-symbols-rounded" (click)="restarIndice()">
+        <button class="material-symbols-rounded slider-button" (click)="restarIndice()">
             chevron_left
-        </span>
-        <span class="material-symbols-rounded" (click)="sumarIndice()">
+        </button>
+        <button class="material-symbols-rounded slider-button" (click)="sumarIndice()">
             chevron_right
-        </span>
+        </button>
     </div>
 
     <img class="slide" [src]="fotos[indice].img">
 
     <div class="paginas flex-row">
         <div class="pagina" (click)="irAIndice(indiceFoto)" *ngFor="let foto of fotos, let indiceFoto = index">
-            <span class="material-symbols-rounded" *ngIf="indiceFoto === indice">
+            <button class="material-symbols-rounded slider-button" *ngIf="indiceFoto === indice">
                 radio_button_unchecked
-            </span>
-            <span class="material-symbols-rounded" *ngIf="indiceFoto !== indice">
+            </button>
+            <button class="material-symbols-rounded slider-button" *ngIf="indiceFoto !== indice">
                 radio_button_checked
-            </span>
+            </button>
         </div>
     </div>
 </div>

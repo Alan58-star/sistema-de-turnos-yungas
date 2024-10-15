@@ -12,6 +12,12 @@ h1{
     width: 200px;
 }
 
+.especialidades-container{
+    overflow-y: scroll;
+    max-height: 500px;
+    padding: 1rem;
+}
+
 .especialidad-title{
     color: #fff;
 
