@@ -22,7 +22,7 @@ span{
 .autogestion{
     padding: 0 0 2rem;
     
-    background-image: url("/26807.jpg");
+    /*background-image: url("/26807.jpg");*/
     background-position: center;
     background-size: cover;
 }

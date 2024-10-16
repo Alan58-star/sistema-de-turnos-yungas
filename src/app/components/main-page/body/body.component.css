@@ -39,7 +39,7 @@ h3{
 .info-container{
     padding: 0 0 2rem;
 
-    background-image: url("/26807.jpg");
+    /*background-image: url("/26807.jpg");*/
     background-position: center;
     background-size: cover;
 }
@@ -47,7 +47,8 @@ h3{
 .title{    
     position: relative;
 
-    background-image: url("/26800.jpg");
+    background: linear-gradient(90deg, var(--celesteO), var(--cianO));
+    /*background-image: url("/26800.jpg");*/
     background-position: center;
     background-size: cover;
 }

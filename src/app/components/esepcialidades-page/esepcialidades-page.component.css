@@ -28,7 +28,7 @@ span{
 .especialidades-page{
     padding: 2.5rem 0;
     
-    background-image: url("/26807.jpg");
+    /*background-image: url("/26807.jpg");*/
     background-position: center;
     background-size: cover;
 }
