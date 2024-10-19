@@ -6,7 +6,7 @@ import { TurnoServ } from '../models/turnoServ';
   providedIn: 'root'
 })
 export class TurnoService {
-  url='http://localhost:4000/api/turno/';
+  url='https://sthdlh-back.onrender.com/api/turno/';
   
   turnos:any[];
   

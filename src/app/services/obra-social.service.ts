@@ -5,7 +5,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   providedIn: 'root'
 })
 export class ObraSocialService {
-  url='http://localhost:4000/api/obra/';
+  url='https://sthdlh-back.onrender.com/api/obra/';
   
   obras:ObraSocial[];
   obras1:ObraSocial[];
