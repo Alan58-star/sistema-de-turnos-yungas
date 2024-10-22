@@ -3,11 +3,12 @@ import { OptionCardComponent } from '../../ui/option-card/option-card.component'
 import { NavComponent } from '../nav/nav.component';
 import { LoginService } from '../../../services/login.service';
 import { CarouselComponent } from "../../ui/carousel/carousel.component";
+import { AutogestionComponent } from "../autogestion/autogestion.component";
 
 @Component({
   selector: 'app-body',
   standalone: true,
-  imports: [OptionCardComponent, NavComponent, CarouselComponent],
+  imports: [OptionCardComponent, NavComponent, CarouselComponent, AutogestionComponent],
   templateUrl: './body.component.html',
   styleUrl: './body.component.css'
 })

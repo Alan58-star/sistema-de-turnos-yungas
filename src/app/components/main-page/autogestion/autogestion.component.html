@@ -1,13 +1,12 @@
-<app-nav/>
-
 <div class="autogestion">
 
-    <h1>Bienvenido, {{_loginService.userLogged()}}</h1>
+    <h1 *ngIf="_loginService.userLoggedIn()">Bienvenido, {{_loginService.userLogged()}}</h1>
     
     <div class="autogestion-options">
         <div class="title flex-column">
             <h2>AUTOGESTIÓN</h2>
-            <span>Aquí puede organizar sus turnos y cambiar su contraseña.</span>
+            <span *ngIf="_loginService.userLoggedIn()">Aquí puede organizar sus turnos y cambiar su contraseña.</span>
+            <span style="color:var(--rojo)" *ngIf="!_loginService.userLoggedIn()">Primero debe iniciar sesión antes de usar alguna opción.</span>
         </div>
         
         <div class="options">
