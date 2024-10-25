@@ -381,7 +381,7 @@ exports.requestPasswordReset = async (req, res) => {
     await paciente.save();
   
     // Crea el enlace con el token
-    const resetLink = `https://sthdlh-back.onrender.com/reset-password?token=${token}`;
+    const resetLink = `https://turnos-hdlh.onrender.com/reset-password?token=${token}`;
   
     console.log("link: ", resetLink);
     
