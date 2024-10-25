@@ -4,7 +4,7 @@ import { AdminNavComponent } from "./admin-nav/admin-nav.component";
 import { RouterLink } from '@angular/router';
 import { io } from 'socket.io-client'
 import { NgIf } from '@angular/common';
-import { SocketService } from '../../services/socket.service';
+import { baseUrl } from '../../../environments/environment';
 
 @Component({
   selector: 'app-admin-page',
@@ -24,7 +24,7 @@ export class AdminPageComponent implements OnInit {
   }
 
   private initializeSocket() {
-    this.socket = io('http://localhost:4000');
+    this.socket = io(baseUrl);
 
     // Escuchar el evento 'qr' para recibir el código QR
     this.socket.on('qr', (data: string) => {
