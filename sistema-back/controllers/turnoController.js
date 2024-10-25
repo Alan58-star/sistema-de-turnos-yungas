@@ -18,7 +18,7 @@ exports.crearTurno = async (req, res) => {
 
 exports.obtenerTurno = async(req,res) => {
     try{
-        let turno =  await Turno.findById(req.params.id);
+        let turno =  await Turno.findById(req.params.id).populate('medico_id paciente_id especialidad_id');
         if(!turno){
             res.status(404).json({msg: 'No existe el paciente'});
         }

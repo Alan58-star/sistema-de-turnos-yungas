@@ -8,7 +8,7 @@
     <form action="#" class="form" [formGroup]="pacienteForm" (ngSubmit)="login()">
         
         <label for="user-dni">DNI</label>
-        <input type="number" name="user-dni" id="user-dni" formControlName="dni" required>
+        <input type="number" name="user-dni" id="user-dni" formControlName="dni" required #dniInput>
 
         <label for="user-pass">Contraseña</label>        
         <div class="flex-row">

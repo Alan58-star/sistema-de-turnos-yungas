@@ -25,7 +25,7 @@ registerLocaleData(localeEs, 'es');
 export class MisTurnosComponent implements OnInit {
   turnoCancelado: TurnoServ;
   vacio: boolean = false;
-
+  fecha: any;
   infoTurno: any = [];
 
   ngOnInit(): void {
@@ -77,9 +77,39 @@ export class MisTurnosComponent implements OnInit {
       this.cancelarTurno(turnoId);
     }
   }
+
+  formatearFecha(fechaISO: any) {
+    // Convertir la cadena ISO a un objeto Date
+    const fecha = new Date(fechaISO);
+  
+    // Definir las opciones para el formato de la fecha y la hora
+    const opcionesFecha: Intl.DateTimeFormatOptions = { day: 'numeric', month: 'long' };
+    const opcionesHora: Intl.DateTimeFormatOptions = { hour: 'numeric', minute: 'numeric', hour12: true };
+  
+    // Formatear la fecha y la hora
+    const formatoFecha = new Intl.DateTimeFormat('es-ES', opcionesFecha).format(fecha);
+    const formatoHora = new Intl.DateTimeFormat('es-ES', opcionesHora).format(fecha);
+  
+    return `${formatoFecha}, ${formatoHora}`.toString();
+  }
+
   cancelarTurno(idTurno: any) {
     this._turnoService.getTurno(idTurno).subscribe({
       next: (data) => {
+        let fecha = this.formatearFecha(data.fecha);
+        this._whatsappService
+          .cancelarTurno(
+            sessionStorage.getItem('telefono')!,
+            sessionStorage.getItem('nombre')!,
+            fecha,
+            data.medico_id.nombre,
+            data.consultorio!,
+            data.especialidad_id.nombreEsp
+          )
+          .subscribe((result) => {
+            console.log(result);
+          });
+
         this.turnoCancelado.medico_id = data.medico_id;
         this.turnoCancelado.fecha = data.fecha;
         this.turnoCancelado.consultorio = data.consultorio;
@@ -102,23 +132,6 @@ export class MisTurnosComponent implements OnInit {
       next: (actua) => {
         if (actua.status == '2') {
           this.toastr.success('Turno cancelado!');
-          this._whatsappService
-            .apointmentCancellationByPatient(
-              sessionStorage.getItem('telefono')!,
-              sessionStorage.getItem('nombre')!,
-              this.infoTurno.fecha,
-              `${this.infoTurno.medico_id.apellido} ${this.infoTurno.medico_id.nombre}`,
-              this.infoTurno.consultorio,
-              this.infoTurno.especialidad_id.nombreEsp 
-            )
-            .subscribe({
-              next: (data) => {
-                console.log(data);
-              },
-              error: (e) => {
-                console.log(e);
-              },
-            });
           this.cargarTurnos();
         } else {
           this.toastr.error('Error');

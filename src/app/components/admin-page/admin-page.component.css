@@ -25,12 +25,28 @@ h1{
     box-shadow: 0 0 10px 10px #fafafa;
 }
 
+.menu-qr{
+    padding: 1rem 0;
+    border: solid 1px var(--gris);
+    border-radius: 10px;
+    box-shadow: 0 0 10px 10px #fafafa;
+}
+
 .menu-title{
     padding: 0 0 2rem;
 
     font-size: 36px;
     font-weight: 800;
     text-align: center;
+}
+
+.menu-title-qr{
+    padding: 0 0 2rem;
+    
+    font-size: 36px;
+    font-weight: 800;
+    text-align: center;
+
 }
 
 .user-label{

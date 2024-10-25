@@ -183,7 +183,7 @@ export class FormTurnoComponent implements OnInit {
         if (actua.status == '2') {
           this.toastr.success('Turno agendado!');
           this._whatsappService
-            .sendTurnMessage(
+            .sendInfoTurno(
               sessionStorage.getItem('telefono')!,
               sessionStorage.getItem('nombre')!,
               this.fechaTurno.toString(),

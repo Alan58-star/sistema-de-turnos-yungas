@@ -2,6 +2,15 @@
 <div class="admin-page">
 
     <div class="title-container">
+        <h2 class="menu-title-qr" *ngIf="loading">Cargando el código QR, por favor espere...</h2>
+        <img src="rings.svg" *ngIf="loading" alt="Cargando..." class="loading-icon" style="width: 300px; height: auto;"/>
+    
+        <h2 class="menu-title-qr" *ngIf="!loading && qrCodeUrl">Por favor escanee el código QR desde su WhatsApp</h2>
+        <img *ngIf="!loading && qrCodeUrl" [src]="qrCodeUrl" alt="QR Code" style="width: 500px; height: auto;"/>
+    </div>
+    
+
+    <div class="title-container">
         <h1>Administración</h1>
         <span>Se recomienda el uso de una <b>computadora</b>.</span>            
     </div>

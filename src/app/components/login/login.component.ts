@@ -1,4 +1,4 @@
-import { Component, Injectable, OnInit } from '@angular/core';
+import { Component, Injectable, OnInit, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
 import { RouterLink,Router,ActivatedRoute } from '@angular/router';
 
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validator, Validators } from '@angular/forms';
@@ -15,7 +15,8 @@ import { CommonModule } from '@angular/common';
   styleUrl: './login.component.css'
 })
 
-export class LoginComponent implements OnInit{
+export class LoginComponent implements OnInit, AfterViewInit{
+  @ViewChild('dniInput') dniInput!: ElementRef;
   pacienteForm:FormGroup;
   passwd: boolean = false;
   constructor(private fb:FormBuilder, public _pacienteService: PacienteService,private toastr: ToastrService,private router:Router,private route:ActivatedRoute, public _loginService:LoginService){
@@ -28,6 +29,9 @@ export class LoginComponent implements OnInit{
   }
   ngOnInit(): void {
     
+  }
+  ngAfterViewInit() {
+    this.dniInput.nativeElement.focus(); // Poner el foco en el input
   }
   login(){
    

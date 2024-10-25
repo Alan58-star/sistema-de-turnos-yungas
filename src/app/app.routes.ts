@@ -27,6 +27,7 @@ export const routes: Routes = [
         canActivate:[loginGuardAdmin]
     },
     {path: 'especialidades', component:EsepcialidadesPageComponent,canActivate:[loginGuardPaciente]},
+    {path: 'autogestion', component:AutogestionComponent,canActivate:[loginGuardPaciente]},
     {path: 'admin/medico-list', component:MedicosListComponent,canActivate:[loginGuardAdmin]},
     {path: 'admin/medico-form', component:MedicoFormComponent,canActivate:[loginGuardAdmin]},
     {path: 'admin/medico-form/:id', component:MedicoFormComponent,canActivate:[loginGuardAdmin]},

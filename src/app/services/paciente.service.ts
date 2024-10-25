@@ -6,7 +6,7 @@ import { Turno } from '../models/turno';
   providedIn: 'root'
 })
 export class PacienteService {
-  url='https://sthdlh-back.onrender.com/api/paciente/';
+  url='http://localhost:4000/api/paciente';
   
   pacientes:Paciente[];
   turnos:Turno[];
@@ -53,11 +53,11 @@ export class PacienteService {
   }
 
   requestPasswordReset(datos:any){
-    return this.http.post<any>(`${this.url}request-password-reset`, datos);
+    return this.http.post<any>(`${this.url}/request-password-reset`, datos);
   }
 
   resetPassword(token: string, newPassword:string){
-    return this.http.post<any>(`${this.url}reset-password`, {token, newPassword})
+    return this.http.post<any>(`${this.url}/reset-password`, {token, newPassword})
   }
   resetPasswordSinToken(cPassword: string, newPassword:string, idPac:any){
     return this.http.post<any>(`${this.url}reset-sintoken`, {cPassword, newPassword,idPac},this.createHeader())

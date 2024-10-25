@@ -1,7 +1,7 @@
-const Paciente = require('../models/Paciente');
-const Turno = require('../models/Turno');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const Paciente = require('../models/Paciente');
+const Turno = require('../models/Turno');
 const wpp = require('../controllers/whatsappController');
 require('dotenv').config();
 
@@ -355,6 +355,9 @@ exports.requestPasswordReset = async (req, res) => {
     const { dni, number } = req.body;
     const paciente = await Paciente.findOne({ dni });
   
+    console.log("DNI: ", dni);
+    console.log("Number: ", number);
+    
     if (!paciente) {
       return res.status(404).json({
         'status': '404',
@@ -380,7 +383,11 @@ exports.requestPasswordReset = async (req, res) => {
     // Crea el enlace con el token
     const resetLink = `http://localhost:4200/reset-password?token=${token}`;
   
+    console.log("link: ", resetLink);
+    
     // Envía el enlace a través de WhatsApp
+    console.log("Se esta por enviar el mensaje");
+    
     wpp.sendUrlResetPassword(number, `${resetLink}`);
   
     res.status(200).json({

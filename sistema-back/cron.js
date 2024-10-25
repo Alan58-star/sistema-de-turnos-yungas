@@ -1,86 +1,14 @@
 const cron = require("node-cron");
-const axios = require("axios");
 const Turno = require("./models/Turno");
+const wpp = require('./controllers/whatsappController');
 require('dotenv').config({ path: 'variables.env'});
 
-// obtenerTurnos();
-
-// console.log(turnos);
-
-
 cron.schedule("00 08 * * *", () => {
-  // enviarMensajeWhatsApp();
   obtenerTurnos()
-  // procesarTurnos();
+  procesarTurnos();
   eliminarTurnos()
 });
 
-
-async function enviarMensajeWhatsApp(
-  number,
-  nombre,
-  fecha,
-  doctor,
-  consultorio,
-  especialidad
-) {
-  try {
-    const response = await axios.post(
-      `https://graph.facebook.com/v20.0/${process.env.PHONE_NUMBER_ID}/messages`,
-      {
-        messaging_product: "whatsapp",
-        to: number,
-        type: "template",
-        template: {
-          name: "recordatorio_turno",
-          language: {
-            code: "es_AR",
-          },
-          components: [
-            {
-              type: "body",
-              parameters: [
-                {
-                  type: "text",
-                  text: nombre,
-                },
-                {
-                  type: "text",
-                  text: fecha,
-                },
-                {
-                  type: "text",
-                  text: doctor,
-                },
-                {
-                  type: "text",
-                  text: consultorio,
-                },
-                {
-                  type: "text",
-                  text: especialidad,
-                },
-              ],
-            },
-          ],
-        },
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${process.env.USER_ACCESS_TOKEN}`,
-          "Content-Type": "application/json",
-        },
-      }
-    );
-
-    console.log("Mensaje enviado exitosamente:", response.data);
-  } catch (error) {
-    console.error(
-      "Error enviando el mensaje:",
-      error.response?.data || error.message
-    );
-  }
-}
 
 async function obtenerTurnos() {
   try {
@@ -109,7 +37,7 @@ async function procesarTurnos() {
         if (turnos[i].medico_id != null) {
           console.log(turnos[i]);
           
-          enviarMensajeWhatsApp(
+          wpp.recordatorio(
             turnos[i].paciente_id.telefono,
             turnos[i].paciente_id.nombre,
             turnos[i].fecha,

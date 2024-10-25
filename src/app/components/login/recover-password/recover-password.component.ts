@@ -28,9 +28,13 @@ export class RecoverPasswordComponent {
   }
 
   sendMessage() {
-    this.datos.value.number = '54' + this.datos.value.number;
+    this.datos.value.number = '549' + this.datos.value.number;
+    console.log(this.datos.value.number);
+    
     this.pacienteService.requestPasswordReset(this.datos.value).subscribe({
       next: (result) => {
+        console.log(result);
+        
         this.toastr.success(result.msg || 'Se envió un mensaje a su WhatsApp');
         this.router.navigateByUrl('/')
       },
