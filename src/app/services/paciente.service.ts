@@ -2,11 +2,12 @@ import { Injectable } from '@angular/core'
 import {Paciente} from '../models/paciente'
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Turno } from '../models/turno';
+import { baseUrl } from '../../environments/environment';
 @Injectable({
   providedIn: 'root'
 })
 export class PacienteService {
-  url='http://localhost:4000/api/paciente';
+  url=`${baseUrl}/api/paciente`;
   
   pacientes:Paciente[];
   turnos:Turno[];

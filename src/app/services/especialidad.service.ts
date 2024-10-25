@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import {Especialidad} from '../models/especialidad';
+import { baseUrl } from '../../environments/environment';
 @Injectable({
   providedIn: 'root'
 })
 export class EspecialidadService {
 
   
-  url='https://sthdlh-back.onrender.com/api/especialidad/';
+  url=`${baseUrl}/api/especialidad/`;
   
   especialidades:Especialidad[];
   
