@@ -7,13 +7,13 @@ footer{
     gap: 3rem;
     align-items: center;
     
-    background-color: var(--azul);
+    background-color: var(--verde);
     
     text-align: center;
 }
 
 footer *{
-    color: var(--celeste);
+    color: #fff;
     padding: .5rem;
 }
 
@@ -24,7 +24,7 @@ footer *{
 
 .logo-svg{
     max-width: 40px;
-    filter: invert(67%) sepia(15%) saturate(1289%) hue-rotate(177deg) brightness(96%) contrast(78%);
+    filter: brightness(100%);
 }
 
 @media(min-width: 1280px) {

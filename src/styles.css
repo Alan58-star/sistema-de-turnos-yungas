@@ -3,29 +3,29 @@
 @import "../node_modules/ngx-toastr/toastr.css";
 
 :root {
-    --negro: #343434;
-    --gris: #d2d2de;
-    --azul: #252C61;
-    --celeste: #7ca5dc;
-    --cian: #99E1DE;
-    --verde: #11b67c;
-    --amarillo: #eec937;
-    --naranja: #e89b0b;
-    --rojo: #ff4470;
+    --negro: #302f2f;
+    --gris: #dedee2;
+    --azul: #4b45b9;
+    --celeste: #65c3ee;
+    --cian: #70eeb7;
+    --verde: #84bf44;
+    --amarillo: #eeee37;
+    --naranja: #ea7f39;
+    --rojo: #ff4444;
     
     --cianC: #a3ffe3;
-    --celesteC: #c1ebff;
-    --verdeC: #ccffcc;
+    --celesteC: #b2ebff;
+    --verdeC: #daffcc;
     --amarilloC: #fffccd;
-    --rojoC: #ffd8df;
+    --rojoC: #ffd8d8;
         
-    --azulO: #1b214b;
+    --azulO: #202d92;
     --grisO: #a0a1a7;
-    --celesteO: #4c63a9;
+    --celesteO: #3f6ca7;
     --cianO: #046068;
-    --verdeO: #109f51;
-    --amarilloO: #fffccd;
-    --rojoO: #411d1d;
+    --verdeO: #17800f;
+    --amarilloO: #927f47;
+    --rojoO: #671111;
 }
 
 * {
@@ -39,7 +39,7 @@
 }
 
 a{
-    color: var(--celeste);
+    color: var(--verde);
     font-weight: 600;
 }
 
@@ -97,7 +97,7 @@ button {
   background-color: var(--rojo);
 }
 .toast-info {
-  background-color: var(--celesteO);
+  background-color: var(--celeste);
 }
 .toast-warning {
   background-color: var(--amarillo);
@@ -128,7 +128,7 @@ input[type=text]:hover, input[type=number]:hover, input[type=password]:hover, in
 }
 
 input[type=text]:focus, input[type=number]:focus, input[type=password]:focus, input[type=email]:focus{
-    outline: solid 3px var(--celeste);
+    outline: solid 3px var(--verde);
 }
 
 select:focus{
@@ -229,9 +229,9 @@ input[type="date"]{
 
 .blue-button{
     background-color:var(--celesteC);
-    color: var(--celesteO);
+    color: var(--azul);
     * {         
-        color: var(--celesteO);
+        color: var(--azul);
     }
 }
 
