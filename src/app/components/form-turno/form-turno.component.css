@@ -47,12 +47,12 @@ label {
 }
 
 .card-input-element:checked+.card-input {
-    outline: solid 4px var(--verde);
-    background-color: var(--verdeC);
+    outline: solid 4px var(--amarillo);
+    background-color: var(--amarilloC);
 
     .turno-titulo-text,
     .turno-text {
-        color: #058824;
+        color: var(--naranja);
     }
 }
 
